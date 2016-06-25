@@ -1,0 +1,25 @@
+
+
+// ----- ----- ----- ----- //
+// ----- Breakpoints ----- //
+// ----- ----- ----- ----- //
+@mixin hide-for($size) {
+  @media screen and (min-width: #{$size}) {
+    display: none;
+  }
+}
+@mixin show-for($size) {
+  @media screen and (min-width: #{$size}) {
+    display: block;
+  }
+}
+
+// Generate the actual CSS classes
+@each $name, $size in $breakpoints {
+  .hide-for-#{$name} {
+    @include hide-for($size);
+  }
+  .show-for-#{$name} {
+    @include show-for($size);
+  }
+}
