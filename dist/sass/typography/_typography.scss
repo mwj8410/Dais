@@ -1,0 +1,11 @@
+@mixin font($fontName) {
+    @each $property, $value in map-get($fontPalettes, $fontName) {
+        #{$property}: $value
+    }
+}
+
+@mixin typeset($name) {
+    @each $property, $value in map-get($typeSets, $name) {
+        #{$property}: $value
+    }
+}

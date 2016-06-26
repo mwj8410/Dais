@@ -1,5 +1,10 @@
 @import 'main';
 
 html {
-    background: palette(example, two);
+    background: color (example, two);
+}
+
+h1 {
+    @include font (openSansBoldItallic);
+    @include typeset (mainHeading);
 }

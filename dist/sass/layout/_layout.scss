@@ -1,0 +1,12 @@
+// ----- ----- ----- ----- //
+// -----   Origins   ----- //
+// ----- ----- ----- ----- //
+@mixin origin-center() {
+  transform-origin: -50% -50%;
+}
+@mixin origin-top-middle() {
+  transform-origin: -50% 0%;
+}
+@mixin origin-bottom-middle() {
+  transform-origin: -50% -100%;
+}

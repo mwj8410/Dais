@@ -39,4 +39,14 @@
     display: block; } }
 
 html {
-  background: green; }
+  background: color example, two; }
+
+h1 {
+  import: "https://fonts.googleapis.com/css?family=Open+Sans";
+  font-family: "Open Sans";
+  font-style: italic;
+  font-weight: 600;
+  color: #f0f;
+  font-size: 72px;
+  letter-spacing: -0.5px;
+  line-height: 72px; }

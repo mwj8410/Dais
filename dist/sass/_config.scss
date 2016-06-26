@@ -2,6 +2,7 @@
 // ----- ----- ----- ----- //
 // -----   Layout    ----- //
 // ----- ----- ----- ----- //
+$includeBreakpointClasses: false;
 $breakpoints: (
   small: 0,
   medium: 640px,
@@ -14,10 +15,32 @@ $breakpoints: (
 // ----- ----- ----- ----- //
 // -----   Palette   ----- //
 // ----- ----- ----- ----- //
-$palettes: (
+$colorPalettes: (
   example: (
     one: red,
     two: green,
     three: blue
+  )
+);
+
+
+// ----- ----- ----- ----- //
+// ----- Typography  ----- //
+// ----- ----- ----- ----- //
+$fontPalettes: (
+  openSansBoldItallic: (
+    import: 'https://fonts.googleapis.com/css?family=Open+Sans',
+    font-family: 'Open Sans',
+    font-style: italic,
+    font-weight: 600
+  )
+);
+
+$typeSets: (
+  mainHeading: (
+    color: #f0f,
+    font-size: 72px,
+    letter-spacing: -0.5px,
+    line-height: 72px
   )
 );
