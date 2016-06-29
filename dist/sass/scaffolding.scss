@@ -1,3 +1,4 @@
+@import 'config';
 @import 'main';
 
 html {
@@ -5,6 +6,6 @@ html {
 }
 
 h1 {
-    @include font (openSansBoldItallic);
+    //@include font (openSansBoldItallic);
     @include typeset (mainHeading);
 }
