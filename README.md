@@ -1,5 +1,5 @@
 # sass_scaffolding
-Provides Sass utilities and structures for common style needs. 
+Provides Sass utilities and structures for common style needs.
 
 ## Scope
 This project will limit it's scope to style accessable activities. Any javascript related UI operations are outside the
@@ -18,7 +18,7 @@ Color palettes are expressed and referenced in suce a way as to be as compatible
 
 The required structure, mus be mounted in the '$colorPalettes' variable. This is a map structure where each key is
 intended to represent a named palette and each value within t hat map is a key value pair where the key is the name of
-the color name within the pallet. 
+the color name within the pallet.
 
 ```
 $colorPalettes: (
@@ -30,4 +30,38 @@ $colorPalettes: (
 );'
 ```
 
-### Typolography
+### Typography
+There are two typographic structures available for implimenting text types. There are no specific restrictions that
+enforces a that any specific declaration be placed in one structure or the other. It is, however, advised that the
+declerations be divided into one batch that defines the font and another that defines the usage of the font.
+
+The design intention is to place the definition declerations in the `$fontPallets` structure as follows:
+```
+$fontPalettes: (
+  openSansBoldItallic: (
+    font-family: 'Open Sans',
+    font-style: italic,
+    font-weight: 600
+  )
+);
+```
+
+The `$typeSets` structure is intended for usage based rules as follows:
+```
+$typeSets: (
+  mainHeading: (
+    color: #f0f,
+    font-size: 72px,
+    letter-spacing: -0.5px,
+    line-height: 72px
+  )
+);
+```
+
+Actual usage of these two structures is to referrence the `font` and `typeset` mixins as follows:
+```
+h1 {
+  @include font (openSansBoldItallic);
+  @include typeset (mainHeading);
+}
+```
