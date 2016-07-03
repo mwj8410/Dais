@@ -1,3 +1,74 @@
+.anchor-center {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%; }
+
+.anchor-line-1 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 10%; }
+
+.anchor-line-2 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 30%; }
+
+.anchor-line-3 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%; }
+
+.anchor-line-4 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 70%; }
+
+.anchor-line-5 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 90%; }
+
+.anchor-circle-1 {
+  position: absolute;
+  transform: translate(-50%, -150px) rotate(0deg);
+  transform-origin: 0% 150px; }
+  .anchor-circle-1 > div {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(-0deg); }
+
+.anchor-circle-2 {
+  position: absolute;
+  transform: translate(-50%, -150px) rotate(90deg);
+  transform-origin: 0% 150px; }
+  .anchor-circle-2 > div {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(-90deg); }
+
+.anchor-circle-3 {
+  position: absolute;
+  transform: translate(-50%, -150px) rotate(180deg);
+  transform-origin: 0% 150px; }
+  .anchor-circle-3 > div {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(-180deg); }
+
+.anchor-circle-4 {
+  position: absolute;
+  transform: translate(-50%, -150px) rotate(270deg);
+  transform-origin: 0% 150px; }
+  .anchor-circle-4 > div {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(-270deg); }
+
+.anchor-circle-5 {
+  position: absolute;
+  transform: translate(-50%, -150px) rotate(360deg);
+  transform-origin: 0% 150px; }
+  .anchor-circle-5 > div {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(-360deg); }
+
 @media screen and (min-width: 0) {
   .hide-for-small {
     display: none; } }
@@ -39,14 +110,17 @@
     display: block; } }
 
 html {
-  background: color example, two; }
+  height: 100%;
+  Width: 100%; }
 
 h1 {
-  import: "https://fonts.googleapis.com/css?family=Open+Sans";
-  font-family: "Open Sans";
-  font-style: italic;
-  font-weight: 600;
   color: #f0f;
   font-size: 72px;
   letter-spacing: -0.5px;
   line-height: 72px; }
+
+.viewport {
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 1; }

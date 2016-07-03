@@ -1,0 +1,82 @@
+
+// All top level anchors must be in a viewport of some sort
+@mixin viewport() {
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+// Center point anchor
+.anchor-center {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+// Line anchors. We assume the line is correctly positioned
+// @param $anchorCount the number of anchors to distribute along the line
+// @param $direction Optional, either horrizontal (default) or vertivle. Specifies which rules to use.
+@mixin anchors_line($anchorCount, $direction:'horizontal') {
+  @for $i from 1 through $anchorCount {
+    .anchor-line-#{$i} {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      @if $direction == 'horizontal' {
+        left: ( 100 / $anchorCount * $i ) - ( 50 / $anchorCount ) + %;
+      }
+      @else {
+        top: ( 100 / $anchorCount * $i ) - ( 50 / $anchorCount ) + %;
+      }
+    }
+  }
+}
+
+@include anchors_line(5);
+
+// Circular anchors
+// Even distribution
+// @param $anchorCount the number of anchors to distribute along the line
+// @param $radius the distance from the center point to place the anchors
+// @param $arc Optional the degree start range to distribute the points
+// @param $arc_center Optional central line used to direct the arc
+@mixin anchors_circular($anchorCount, $radius, $arc:360, $arc_center:0) {
+  @if $arc_center > 360 {
+    @debug "$arc_center exceeds 360 degrees. This is not an issue, but ill advised.";
+  }
+
+  // First, create a number line from the degree range with some padding
+  // the center point minus half the arch, plus half the total arc range over the number of anchors
+  $range_low: $arc_center - ( $arc / 2 );
+  $range_high: $arc_center + ( $arc / 2 );
+  $increment_degree: $arc / ( $anchorCount - 1 );
+
+  @for $i from 1 through $anchorCount {
+    $degree: ( 0 + ( ( $i - 1 ) * $increment_degree ) );
+
+    .anchor-circle-#{$i} {
+      position: absolute;
+
+      // Set x to the center and y to the inverse of the radius
+      // Rotate the content about the center by the degree
+      transform: translate(-50%, -#{$radius})
+                rotate(#{( 0 + ( ( $i - 1 ) * $increment_degree ) )}deg)
+          ;
+      // Move the pooint of transformation back to the center point
+      transform-origin: 0% #{$radius};
+
+      & > div {
+        position: absolute;
+
+        // Now, rotate the content by the inverse of the degree
+        // so it displays correctly
+        transform: translate(-50%, -50%)
+                rotate(-#{( 0 + ( ( $i - 1 ) * $increment_degree ) )}deg)
+          ;
+      }
+    }
+  }
+}
+
+@include anchors_circular(5, 150px, 360, 45);

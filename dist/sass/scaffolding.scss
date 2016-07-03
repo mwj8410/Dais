@@ -9,3 +9,7 @@ h1 {
   @include font (openSansBoldItallic);
   @include typeset (mainHeading);
 }
+
+.viewport {
+  @include viewport();
+}
