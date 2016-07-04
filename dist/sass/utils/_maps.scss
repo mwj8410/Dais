@@ -1,0 +1,20 @@
+// Adapted from foundation
+@function map-get-next-by-key($map, $key) {
+  $values: map-values($map);
+  $i: 1;
+  $found: false;
+  @each $val in map-keys($map) {
+    @if $found == false {
+      @if ($key == $val) {
+        $found: true;
+      }
+      $i: $i + 1;
+    }
+  }
+  @if $i > length($map) {
+    @return false;
+  }
+  @else {
+    @return nth($values, $i);
+  }
+}

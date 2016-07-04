@@ -1,25 +1,66 @@
 
-
 // ----- ----- ----- ----- //
 // ----- Breakpoints ----- //
 // ----- ----- ----- ----- //
-@mixin hide-for($size) {
-  @media screen and (min-width: #{$size}) {
-    display: none;
+@mixin hide-for($sizeName, $only:false) {
+  @if $only {
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $sizeName)};
+    @if $next-break-point-value {
+      @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) and (max-width: #{$next-break-point-value - 1}) {
+        display: none;
+      }
+    }
   }
-}
-@mixin show-for($size) {
-  @media screen and (min-width: #{$size}) {
-    display: block;
+  @else {
+    @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) {
+      display: none;
+    }
   }
 }
 
-// Generate the actual CSS classes
-@each $name, $size in $breakpoints {
-  .hide-for-#{$name} {
-    @include hide-for($size);
+@mixin show-for($sizeName, $only:false) {
+  @if $only not false {
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $sizeName)};
+    @if $next-break-point-value {
+      @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) and (max-width: #{$next-break-point-value - 1}) {
+        display: block;
+      }
+    }
   }
-  .show-for-#{$name} {
-    @include show-for($size);
+  @else {
+    @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) {
+      display: block;
+    }
+  }
+}
+
+// Creates CSS classes
+@mixin visibility-show-rules() {
+  @each $name, $size in $breakpoints {
+    .show-for-#{$name} {
+      @include show-for($name);
+    }
+
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $name)};
+    @if $next-break-point-value != 'false' {
+      .show-for-#{$name}-only {
+        @include show-for($name, only);
+      }
+    }
+  }
+}
+
+@mixin visibility-hide-rules() {
+  @each $name, $size in $breakpoints {
+    .hide-for-#{$name} {
+      @include hide-for($name);
+    }
+
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $name)};
+    @if $next-break-point-value != 'false' {
+      .show-for-#{$name}-only {
+        @include show-for($name, only);
+      }
+    }
   }
 }
