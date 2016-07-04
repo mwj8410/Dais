@@ -1,9 +1,11 @@
-# sass_scaffolding
-Provides Sass utilities and structures for common style needs.
+# UI Scaffolding
+Provides common and advanced features for use in rich User-Experience sites and web applications.
 
 ## Scope
-This project will limit it's scope to style accessable activities. Any javascript related UI operations are outside the
-scope of this project.
+This project will attempt to collect together common style, component, and utility features in Sass, Javascript, and HTML.
+At this time, no layout control library or framework like Angular or React will be in use at this time. Client side
+compatability will be limited to the most up-to-date version of each major browser. No attempt will be made to provide
+any compatability beyond this.
 
 ## Usage
 A consuming project needs to import either `scaffolding.scss` or `_main.scss` into it's sass project.

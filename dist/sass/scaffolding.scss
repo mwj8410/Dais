@@ -1,13 +1,13 @@
 @import 'config';
 @import 'main';
 
-html {
-  background: color (example, two);
+html, body {
+  height: 100%;
 }
 
 h1 {
-  @include font (openSansBoldItallic);
-  @include typeset (mainHeading);
+  @include font(openSansBoldItallic);
+  @include typeset(mainHeading);
 }
 
 .viewport {

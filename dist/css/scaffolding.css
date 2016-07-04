@@ -109,11 +109,13 @@
   .show-for-xxlarge {
     display: block; } }
 
-html {
-  height: 100%;
-  Width: 100%; }
+html, body {
+  height: 100%; }
 
 h1 {
+  font-family: "Open Sans";
+  font-style: italic;
+  font-weight: 600;
   color: #f0f;
   font-size: 72px;
   letter-spacing: -0.5px;
