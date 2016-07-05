@@ -4,7 +4,7 @@
 	"description": "Provides Sass utilities and structures for common style needs",
 	"main": "",
 	"repository": {
-		"type" : "git", 
+		"type" : "git",
 		"url" : "https://github.com/mwj8410/sass_scaffolding.git"
 	},
 	"author": "Matthew Jackson <mwj8410@gmail.com>",

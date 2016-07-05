@@ -1,6 +1,6 @@
 var gulp = require('gulp');
-var cleanCSS = require('gulp-clean-css');
-var rename = require('gulp-rename');
+// var cleanCSS = require('gulp-clean-css');
+// var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 
 gulp.task('default', ['stage'])
@@ -13,7 +13,7 @@ gulp.task('default', ['stage'])
   .task('style:stage', function () {
     return gulp.src(
       [
-        'dist/sass/**/*.scss',
+        'dist/style/**/*.scss',
       ])
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest('demo/'));
