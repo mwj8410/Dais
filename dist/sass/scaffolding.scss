@@ -3,6 +3,8 @@
 
 html, body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -13,12 +15,6 @@ h1 {
 .viewport {
   @include viewport();
 }
-
-// @include anchors_line(5);
-// @include anchors_circular(5, 150px, 360, 45);
-
-// @include visibility-show-rules();
-// @include visibility-hide-rules();
 
 .container {
   @include content-container();

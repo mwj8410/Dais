@@ -7,8 +7,8 @@ gulp.task('default', ['stage'])
 
   // Composit Tasks
   .task('watch', ['style:stage', 'style:watch'])
-  .task('build', ['style:stage', 'style:minify' ])
-  
+  .task('build', ['style:stage' ])
+
   // Styles
   .task('style:stage', function () {
     return gulp.src(
@@ -16,19 +16,7 @@ gulp.task('default', ['stage'])
         'dist/sass/**/*.scss',
       ])
       .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('dist/css/'));
-  })
-  .task('style:minify', function () {
-    return gulp.src(
-      [
-        'dist/css/*.css',
-        '!dist/css/*-min.css'
-      ])
-      .pipe(cleanCSS())
-      .pipe(rename(function (path) {
-        path.basename += "-min";
-      }))
-      .pipe(gulp.dest('dist/css/'));
+      .pipe(gulp.dest('demo/'));
   })
   .task('style:watch', function () {
     gulp.watch('dist/**/*.scss', ['style:stage']);
