@@ -1,4 +1,4 @@
-# UI Scaffolding
+# Dais
 Provides common and advanced features for use in rich User-Experience sites and web applications.
 
 ## Scope
