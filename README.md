@@ -1,4 +1,6 @@
 # Dais
+Dais: a raised platform in a large room or hall that people stand on when performing or speaking to an audience.
+
 Provides common and advanced features for use in rich User-Experience sites and web applications.
 
 ## Scope
