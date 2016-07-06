@@ -10,10 +10,18 @@ any compatability beyond this.
 ## Usage
 A consuming project needs to import either `scaffolding.scss` or `_main.scss` into it's sass project.
 Alternatively, if only portions of the project are needed, each individual module of the library may be imported as needed.
-All configuration and modification should be conducted by importing and altering the values in `_config.scss`, then importing `_main.scss`.
-In the case of individual modules, only the associated sections indicated by comments in the `_config.scss` file. Further documentation to follow.
+All configuration and modification should be conducted by importing and altering the values in `_config.scss`, then
+importing `_main.scss`. In the case of individual modules, only the associated sections indicated by comments in the
+`_config.scss` file. Further documentation to follow.
 
 ### Layout
+In progress.
+
+There are two obvious approaches: static diminsion elements or flex elements. Either way, a direction must be selected,
+verticle or horizontal.
+
+An additional method is possible that involves tiling. If this is in use, then a tile bust know how many cells in a
+single direction that it will make use of. It, under no circumstance, can make use of a non-rectagular shape of cells.
 
 ### Palette
 Color palettes are expressed and referenced in suce a way as to be as compatible as plausable with known UI/UX terminology.
