@@ -16,6 +16,9 @@ All configuration and modification should be conducted by importing and altering
 importing `_main.scss`. In the case of individual modules, only the associated sections indicated by comments in the
 `_config.scss` file. Further documentation to follow.
 
+
+## Style
+
 ### Layout
 In progress.
 
@@ -24,6 +27,12 @@ verticle or horizontal.
 
 An additional method is possible that involves tiling. If this is in use, then a tile bust know how many cells in a
 single direction that it will make use of. It, under no circumstance, can make use of a non-rectagular shape of cells.
+
+#### Containers
+A container is a class that wraps content in some sort of treatment. The most common type is a simple `.container`.
+
+This class is informed by the configuration list `$containerBreakpoints` which indicates which breakpints represent
+container width limits.
 
 ### Palette
 Color palettes are expressed and referenced in suce a way as to be as compatible as plausable with known UI/UX terminology.
@@ -77,3 +86,12 @@ h1 {
   @include typeset (mainHeading);
 }
 ```
+
+## Components
+Each component consist of the minimum required parts of an html snippet, a javascript file, and styling files.
+
+All styling will be expressed in two structures. One set or style rules provides needed behavior, while the other provides
+theaming rules.
+
+### Containers
+#### Collapsible

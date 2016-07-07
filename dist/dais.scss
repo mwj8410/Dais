@@ -1,5 +1,9 @@
-@import 'config';
-@import 'main';
+//Style Imports
+@import 'style/config';
+@import 'style/main';
+
+// Component Imports
+@import 'components/importer';
 
 html, body {
   height: 100%;

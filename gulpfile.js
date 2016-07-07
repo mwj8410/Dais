@@ -13,7 +13,8 @@ gulp.task('default', ['stage'])
   .task('style:stage', function () {
     return gulp.src(
       [
-        'dist/style/**/*.scss',
+        'dist/**/*.scss',
+        '!dist/components/**/*.scss'
       ])
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest('demo/'));
