@@ -10,14 +10,14 @@ compatability will be limited to the most up-to-date version of each major brows
 any compatability beyond this.
 
 ## Usage
-A consuming project needs to import either `scaffolding.scss` or `_main.scss` into it's sass project.
+A consuming project needs to import either `dais.scss` or `_main.scss` into it's sass project.
 Alternatively, if only portions of the project are needed, each individual module of the library may be imported as needed.
 All configuration and modification should be conducted by importing and altering the values in `_config.scss`, then
 importing `_main.scss`. In the case of individual modules, only the associated sections indicated by comments in the
 `_config.scss` file. Further documentation to follow.
 
 
-## Style
+### Style
 
 ### Layout
 In progress.
@@ -87,11 +87,11 @@ h1 {
 }
 ```
 
-## Components
+### Components
 Each component consist of the minimum required parts of an html snippet, a javascript file, and styling files.
 
 All styling will be expressed in two structures. One set or style rules provides needed behavior, while the other provides
 theaming rules.
 
-### Containers
-#### Collapsible
+#### Containers
+##### Collapsible
