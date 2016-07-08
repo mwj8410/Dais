@@ -1,25 +1,11 @@
-// Creates CSS classes
-// @mixin content-container() {
-//   margin-left: auto;
-//   margin-right: auto;
-//   // snag the first breakpoint size
-//   max-width: nth(nth($breakpoints, 2), 2);
-
-//   // We index at 2 to skip the
-//   @for $i from 3 through length($breakpoints) - 1 {
-//     @media screen and (min-width: #{nth(nth($breakpoints, $i), 2)}) {
-//       max-width: nth(nth($breakpoints, $i), 2);
-//     }
-//   }
-// }
-
+// ----- ----- ----- ----- //
+// -----  Container  ----- //
+// ----- ----- ----- ----- //
 
 @mixin content-container() {
   margin-left: auto;
   margin-right: auto;
-
   max-width: #{map-get($breakpoints, nth($containerBreakpoints, 1))};
-  // @debug #{map-get($breakpoints, nth($containerBreakpoints, 1))};
 
   @for $i from 2 through length($containerBreakpoints) {
     @media screen and (min-width: #{map-get($breakpoints, nth($containerBreakpoints, $i))}) {

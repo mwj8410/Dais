@@ -2,7 +2,7 @@
 // ----- ----- ----- ----- //
 // -----   Layout    ----- //
 // ----- ----- ----- ----- //
-$includeBreakpointClasses: false;
+
 $breakpoints: (
   small: 0,
   medium: 640px,
@@ -16,10 +16,12 @@ $containerBreakpoints: (
   large
 );
 
+$column_count: 12;
 
 // ----- ----- ----- ----- //
 // -----   Palette   ----- //
 // ----- ----- ----- ----- //
+
 $colorPalettes: (
   example: (
     one: red,
@@ -32,6 +34,7 @@ $colorPalettes: (
 // ----- ----- ----- ----- //
 // ----- Typography  ----- //
 // ----- ----- ----- ----- //
+
 $fontPalettes: (
   openSansBoldItallic: (
     font-family: 'Open Sans',
