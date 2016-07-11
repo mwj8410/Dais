@@ -1,3 +1,7 @@
+// ----- ----- ----- ----- //
+// ----- Typography  ----- //
+// ----- ----- ----- ----- //
+
 @mixin font($fontName) {
     @each $property, $value in map-get($fontPalettes, $fontName) {
         #{$property}: $value
