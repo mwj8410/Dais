@@ -1,7 +1,7 @@
+// ----- ----- ----- ----- //
+// ----- Visibility  ----- //
+// ----- ----- ----- ----- //
 
-// ----- ----- ----- ----- //
-// ----- Breakpoints ----- //
-// ----- ----- ----- ----- //
 @mixin hide-for($sizeName, $only:false) {
   @if $only {
     $next-break-point-value: #{map-get-next-by-key($breakpoints, $sizeName)};

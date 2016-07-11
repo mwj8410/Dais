@@ -1,21 +1,27 @@
 {
-	"name": "sass_scaffolding",
-	"version": "0.0.0",
-	"description": "Provides Sass utilities and structures for common style needs",
-	"main": "",
-	"repository": {
-		"type" : "git",
-		"url" : "https://github.com/mwj8410/sass_scaffolding.git"
-	},
 	"author": "Matthew Jackson <mwj8410@gmail.com>",
+	"dependencies": {
+		"react": "~15.1.0",
+		"react-dom": "~15.1.0"
+	},
+	"description": "Provides Sass utilities and structures for common style needs",
 	"devDependencies": {
+
 		"gulp": "3.9.1",
 		"gulp-clean-css": "2.0.9",
+		"gulp-concat-util": "0.5.5",
 		"gulp-rename": "1.2.2",
 		"gulp-sass": "2.3.1",
 		"sass-lint": "1.8.2"
 	},
+	"main": "",
+	"name": "sass_scaffolding",
+	"repository": {
+		"type" : "git",
+		"url" : "https://github.com/mwj8410/sass_scaffolding.git"
+	},
 	"scripts": {
 
-	}
+	},
+	"version": "0.0.0"
 }

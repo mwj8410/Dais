@@ -1,2 +1,5 @@
 demo/dais.css
+node_modules/
 workarea/
+
+npm_debug.log

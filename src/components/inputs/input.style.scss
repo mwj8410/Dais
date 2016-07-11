@@ -1,0 +1,42 @@
+input-container {
+  padding: 1rem;
+  position: relative;
+
+  width: 100%; // Testing value
+
+  &[required] {
+
+  }
+
+  icon {
+    display: none; // work on it
+  }
+
+  input[type="number"],
+  input[type="text"],
+  select {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+  }
+
+  label {
+    left: 1rem;
+    position: absolute;
+    top: 0;
+  }
+
+  hint {
+    bottom: 1;
+    left: 1rem;
+    position: absolute;
+  }
+  error-container {
+    position: absolute;
+    right: 1rem;
+    text-align: right;
+    top: 0;
+    width: 100%;
+  }
+
+}
