@@ -18,7 +18,7 @@ gulp.task('default', ['stage'])
         'src/components/dais.components.js'
       ])
       .pipe(concat('dais.components.js'))
-      .pipe(gulp.dest('demo/'));
+      .pipe(gulp.dest('dist/'));
   })
 
   // Styles
@@ -29,7 +29,7 @@ gulp.task('default', ['stage'])
         '!src/components/**/*.scss'
       ])
       .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('demo/'));
+      .pipe(gulp.dest('dist/'));
   })
   .task('style:watch', function () {
     gulp.watch('src/**/*.scss', ['style:stage']);
