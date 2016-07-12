@@ -2,10 +2,10 @@
 var CollapsibleContainer = React.createClass({
   render: function() {
     return (
-      <collapsible-container>
-        <div class="title-wrapper" onclick="this.classList.toggle('open')">Test Title</div>
-        <div class="content-wrapper" onclick="debugger">Test Content</div>
-      </collapsible-container>
+      React.createClass('collapsible-container', null, [
+        React.createClass('div', {class: "title-wrapper", onclick: "this.classList.toggle('open')"}, ["Test Title"]),
+        React.createClass('div', {class: "content-wrapper", onclick: "debugger"}, ["Test Content"])
+      ])
     );
   }
 });
@@ -14,24 +14,39 @@ var CollapsibleContainer = React.createClass({
 var InputContainer = React.createClass({
   render: function() {
     return (
-      <input-container>
+      React.createClass('input-container', null, [
 
-        <icon>T</icon>
-        <input type="text"></input>
-        <hint>hint text</hint>
-        <label>Label</label>
+        React.createClass('icon', null, ["T"]),
+        React.createClass('input', {type: "text"}),
+        React.createClass('hint', null, ["hint text"]),
+        React.createClass('label', null, ["Label"]),
 
-        <error-container>
-          <error-message>Error message</error-message>
-        </error-container>
+        React.createClass('error-container', null, [
+          React.createClass('error-message', null, ["Error message"])
+        ])
 
-      </input-container>
+      ])
+    );
+  }
+});
+
+/* global React */
+var Overlay = React.createClass({
+  render: function() {
+    return (
+      React.createClass('overlay')
     );
   }
 });
 
 /* global React ReactDOM */
-ReactDOM.render(
-  React.createElement(InputContainer, null),
-  document.getElementById('application-viewport')
-);
+
+// define( function (require) {
+  // var React = require('react');
+
+  ReactDOM.render(
+    React.createElement(InputContainer, null),
+    document.getElementById('application-viewport')
+  );
+
+// });
