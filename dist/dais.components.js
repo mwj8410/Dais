@@ -2,10 +2,10 @@
 var CollapsibleContainer = React.createClass({
   render: function() {
     return (
-      React.createClass('collapsible-container', null, [
-        React.createClass('div', {class: "title-wrapper", onclick: "this.classList.toggle('open')"}, ["Test Title"]),
-        React.createClass('div', {class: "content-wrapper", onclick: "debugger"}, ["Test Content"])
-      ])
+      <collapsible-container>
+        <div class="title-wrapper" onclick="this.classList.toggle('open')">Test Title</div>
+        <div class="content-wrapper" onclick="debugger">Test Content</div>
+      </collapsible-container>
     );
   }
 });
@@ -14,18 +14,18 @@ var CollapsibleContainer = React.createClass({
 var InputContainer = React.createClass({
   render: function() {
     return (
-      React.createClass('input-container', null, [
+      <input-container>
 
-        React.createClass('icon', null, ["T"]),
-        React.createClass('input', {type: "text"}),
-        React.createClass('hint', null, ["hint text"]),
-        React.createClass('label', null, ["Label"]),
+        <icon>T</icon>
+        <input type="text"></input>
+        <hint>hint text</hint>
+        <label>Label</label>
 
-        React.createClass('error-container', null, [
-          React.createClass('error-message', null, ["Error message"])
-        ])
+        <error-container>
+          <error-message>Error message</error-message>
+        </error-container>
 
-      ])
+      </input-container>
     );
   }
 });
@@ -34,7 +34,7 @@ var InputContainer = React.createClass({
 var Overlay = React.createClass({
   render: function() {
     return (
-      React.createClass('overlay')
+      <overlay></overlay>
     );
   }
 });

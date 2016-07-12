@@ -19,9 +19,9 @@ gulp.task('default', ['stage'])
         'src/components/**/*.component.js',
         'src/components/dais.components.js'
       ])
-      .pipe(jsx({
-        factory: 'React.createClass'
-      }))
+      // .pipe(jsx({
+      //   factory: 'React.createClass'
+      // }))
       .pipe(concat('dais.components.js'))
       .pipe(gulp.dest('dist/'));
   })
