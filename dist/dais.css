@@ -274,3 +274,28 @@ h1 {
     .row .column-xxlarge-12 {
       float: left;
       width: 8.33333%; } }
+
+.anchor-line-1 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 10%; }
+
+.anchor-line-2 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 30%; }
+
+.anchor-line-3 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%; }
+
+.anchor-line-4 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 70%; }
+
+.anchor-line-5 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 90%; }
