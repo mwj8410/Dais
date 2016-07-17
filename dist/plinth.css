@@ -1,0 +1,295 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 1rem; }
+
+h1 {
+  font-family: "Open Sans";
+  font-style: italic;
+  font-weight: 600;
+  color: #f0f;
+  font-size: 72px;
+  letter-spacing: -0.5px;
+  line-height: 72px; }
+
+.viewport {
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 1; }
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px; }
+  @media screen and (min-width: 1024px) {
+    .container {
+      max-width: 1024px; } }
+
+.row {
+  width: 100%; }
+  @media screen and (min-width: 0) {
+    .row .column-small-1 {
+      float: left;
+      width: 100%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-1 {
+      float: left;
+      width: 100%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-1 {
+      float: left;
+      width: 100%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-1 {
+      float: left;
+      width: 100%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-1 {
+      float: left;
+      width: 100%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-2 {
+      float: left;
+      width: 50%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-2 {
+      float: left;
+      width: 50%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-2 {
+      float: left;
+      width: 50%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-2 {
+      float: left;
+      width: 50%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-2 {
+      float: left;
+      width: 50%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-3 {
+      float: left;
+      width: 33.33333%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-3 {
+      float: left;
+      width: 33.33333%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-3 {
+      float: left;
+      width: 33.33333%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-3 {
+      float: left;
+      width: 33.33333%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-3 {
+      float: left;
+      width: 33.33333%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-4 {
+      float: left;
+      width: 25%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-4 {
+      float: left;
+      width: 25%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-4 {
+      float: left;
+      width: 25%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-4 {
+      float: left;
+      width: 25%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-4 {
+      float: left;
+      width: 25%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-5 {
+      float: left;
+      width: 20%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-5 {
+      float: left;
+      width: 20%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-5 {
+      float: left;
+      width: 20%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-5 {
+      float: left;
+      width: 20%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-5 {
+      float: left;
+      width: 20%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-6 {
+      float: left;
+      width: 16.66667%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-6 {
+      float: left;
+      width: 16.66667%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-6 {
+      float: left;
+      width: 16.66667%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-6 {
+      float: left;
+      width: 16.66667%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-6 {
+      float: left;
+      width: 16.66667%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-7 {
+      float: left;
+      width: 14.28571%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-7 {
+      float: left;
+      width: 14.28571%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-7 {
+      float: left;
+      width: 14.28571%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-7 {
+      float: left;
+      width: 14.28571%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-7 {
+      float: left;
+      width: 14.28571%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-8 {
+      float: left;
+      width: 12.5%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-8 {
+      float: left;
+      width: 12.5%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-8 {
+      float: left;
+      width: 12.5%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-8 {
+      float: left;
+      width: 12.5%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-8 {
+      float: left;
+      width: 12.5%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-9 {
+      float: left;
+      width: 11.11111%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-9 {
+      float: left;
+      width: 11.11111%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-9 {
+      float: left;
+      width: 11.11111%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-9 {
+      float: left;
+      width: 11.11111%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-9 {
+      float: left;
+      width: 11.11111%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-10 {
+      float: left;
+      width: 10%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-10 {
+      float: left;
+      width: 10%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-10 {
+      float: left;
+      width: 10%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-10 {
+      float: left;
+      width: 10%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-10 {
+      float: left;
+      width: 10%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-11 {
+      float: left;
+      width: 9.09091%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-11 {
+      float: left;
+      width: 9.09091%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-11 {
+      float: left;
+      width: 9.09091%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-11 {
+      float: left;
+      width: 9.09091%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-11 {
+      float: left;
+      width: 9.09091%; } }
+  @media screen and (min-width: 0) {
+    .row .column-small-12 {
+      float: left;
+      width: 8.33333%; } }
+  @media screen and (min-width: 640px) {
+    .row .column-medium-12 {
+      float: left;
+      width: 8.33333%; } }
+  @media screen and (min-width: 1024px) {
+    .row .column-large-12 {
+      float: left;
+      width: 8.33333%; } }
+  @media screen and (min-width: 1200px) {
+    .row .column-xlarge-12 {
+      float: left;
+      width: 8.33333%; } }
+  @media screen and (min-width: 1440px) {
+    .row .column-xxlarge-12 {
+      float: left;
+      width: 8.33333%; } }
+
+.anchor-line-1 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 10%; }
+
+.anchor-line-2 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 30%; }
+
+.anchor-line-3 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%; }
+
+.anchor-line-4 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 70%; }
+
+.anchor-line-5 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 90%; }
