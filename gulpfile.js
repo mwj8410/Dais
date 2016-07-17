@@ -1,36 +1,18 @@
-const babel = require('gulp-babel');
 const concat = require('gulp-concat-util');
 const gulp = require('gulp');
-const jsx = require('gulp-jsx');
-// const cleanCSS = require('gulp-clean-css');
-// const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 
 gulp.task('default', ['stage'])
 
   // Composit Tasks
   .task('watch', ['style:stage', 'style:watch'])
-  .task('build', ['style:stage_styles', 'style:stage_components', 'js:stage' ])
-
-  // Javascript
-  .task('js:stage', function () {
-    return gulp.src(
-      [
-        'src/components/**/*.component.js',
-        'src/components/plinth.components.js'
-      ])
-      // .pipe(jsx({
-      //   factory: 'React.createClass'
-      // }))
-      .pipe(concat('plinth.components.js'))
-      .pipe(gulp.dest('dist/'));
-  })
+  .task('build', ['style:stage_styles', 'style:stage_components'])
 
   // Styles
   .task('style:stage_styles', function () {
     return gulp.src(
       [
-        'src/style/plinth.scss',
+        'src/plinth.scss',
       ])
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest('dist/'));

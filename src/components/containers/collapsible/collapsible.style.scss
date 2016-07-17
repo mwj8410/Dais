@@ -1,9 +1,0 @@
-collapsible-container {
-  .content-wrapper {
-    height: 0;
-    overflow: hidden;
-  }
-  .title-wrapper.open ~ .content-wrapper {
-    height: auto;
-  }
-}

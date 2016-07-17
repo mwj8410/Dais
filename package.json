@@ -1,27 +1,21 @@
 {
 	"author": "Matthew Jackson <mwj8410@gmail.com>",
-	"dependencies": {
-	},
+	"dependencies": {},
 	"description": "Provides Sass utilities and structures for common style needs",
 	"devDependencies": {
 		"eslint": "2.11.1",
-		"eslint-plugin-react": "5.2.2",
 		"gulp": "3.9.1",
-		"gulp-babel": "~6.1.2",
 		"gulp-clean-css": "2.0.9",
 		"gulp-concat-util": "0.5.5",
-		"gulp-jsx": "2.0.1",
 		"gulp-rename": "1.2.2",
 		"gulp-sass": "2.3.1",
-		"react": "~15.1.0",
-		"react-dom": "~15.1.0",
 		"sass-lint": "1.8.2"
 	},
 	"main": "",
-	"name": "Dais",
+	"name": "Plinth",
 	"repository": {
 		"type" : "git",
-		"url" : "https://github.com/mwj8410/sass_scaffolding.git"
+		"url" : "https://github.com/mwj8410/Plinth.git"
 	},
 	"scripts": {
 		"eslint": "eslint src"

@@ -1,18 +1,4 @@
 module.exports = {
-  "plugins": [
-    "react"
-  ],
-  "settings": {
-    "react": {
-      "pragma": "React",  // Pragma to use, default to "React"
-      "version": "15.0" // React version, default to the latest React stable release
-    }
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "env": {
     "browser": true,
     "commonjs": true,
@@ -21,30 +7,38 @@ module.exports = {
   },
   "extends": "eslint:recommended",
   "globals": {
-    "define": false,
-  	"angular": false
+  	"angular": false,
+  	"define": false,
+  	"describe": true,
+  	"it": true
 	},
   "rules": {
-    "indent": [
-      "error",
-      2,
-      { "SwitchCase": 1 }
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "space-before-function-paren": [
-      "error"
-    ]
+    "array-bracket-spacing": [ "error", "always" ],
+    "complexity": [ "error", 10 ],
+    "eol-last": "error",
+    "indent": [ "error", 2, { "SwitchCase": 1 } ],
+    "linebreak-style": [ "error", "unix" ],
+    "max-depth": [ "error", 6 ],
+    "no-alert": "error",
+    "no-console": [ "error", { allow: ["warn", "error"] } ],
+    "no-debugger": "error",
+    "no-dupe-args": "error",
+    "no-dupe-keys": "error",
+    "no-empty": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
+    "no-multiple-empty-lines": [ "error", { "max": 1, "maxBOF": 0, "maxEOF": 1 } ],
+    "no-self-assign": "error",
+    "no-self-compare": "error",
+    "no-trailing-spaces": "error",
+    "no-unused-expressions": "error",
+    "no-useless-concat": "error",
+    "no-void": "error",
+    "radix": "error",
+    "quotes": [ "error", "single" ],
+    "semi": [ "error", "always" ],
+    "space-before-function-paren": "error",
+    "spaced-comment": [ "error", "always" ],
+    "vars-on-top": "error"
   }
 };
-
