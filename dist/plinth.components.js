@@ -1,4 +1,16 @@
 /* global React */
+var CollapsibleContainer = React.createClass({
+  render: function() {
+    return (
+      <collapsible-container>
+        <div class="title-wrapper" onclick="this.classList.toggle('open')">Test Title</div>
+        <div class="content-wrapper" onclick="debugger">Test Content</div>
+      </collapsible-container>
+    );
+  }
+});
+
+/* global React */
 var InputContainer = React.createClass({
   render: function() {
     return (
@@ -14,18 +26,6 @@ var InputContainer = React.createClass({
         </error-container>
 
       </input-container>
-    );
-  }
-});
-
-/* global React */
-var CollapsibleContainer = React.createClass({
-  render: function() {
-    return (
-      <collapsible-container>
-        <div class="title-wrapper" onclick="this.classList.toggle('open')">Test Title</div>
-        <div class="content-wrapper" onclick="debugger">Test Content</div>
-      </collapsible-container>
     );
   }
 });

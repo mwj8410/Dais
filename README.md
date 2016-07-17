@@ -1,5 +1,5 @@
-# Dais
-Dais: a raised platform in a large room or hall that people stand on when performing or speaking to an audience.
+# Plinth
+Plinth: a raised platform in a large room or hall that people stand on when performing or speaking to an audience.
 
 Provides common and advanced features for use in rich User-Experience sites and web applications.
 
@@ -10,7 +10,7 @@ compatability will be limited to the most up-to-date version of each major brows
 any compatability beyond this.
 
 ## Usage
-A consuming project needs to import either `dais.scss` or `_main.scss` into it's sass project.
+A consuming project needs to import either `Plinth.scss` or `_main.scss` into it's sass project.
 Alternatively, if only portions of the project are needed, each individual module of the library may be imported as needed.
 All configuration and modification should be conducted by importing and altering the values in `_config.scss`, then
 importing `_main.scss`. In the case of individual modules, only the associated sections indicated by comments in the

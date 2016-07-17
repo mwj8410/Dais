@@ -17,12 +17,12 @@ gulp.task('default', ['stage'])
     return gulp.src(
       [
         'src/components/**/*.component.js',
-        'src/components/dais.components.js'
+        'src/components/plinth.components.js'
       ])
       // .pipe(jsx({
       //   factory: 'React.createClass'
       // }))
-      .pipe(concat('dais.components.js'))
+      .pipe(concat('plinth.components.js'))
       .pipe(gulp.dest('dist/'));
   })
 
@@ -30,7 +30,7 @@ gulp.task('default', ['stage'])
   .task('style:stage_styles', function () {
     return gulp.src(
       [
-        'src/style/dais.scss',
+        'src/style/plinth.scss',
       ])
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest('dist/'));
@@ -38,7 +38,7 @@ gulp.task('default', ['stage'])
   .task('style:stage_components', function () {
     return gulp.src(
       [
-        'src/components/dais.components.scss',
+        'src/components/plinth.components.scss',
         '!src/components/*/*.scss'
       ])
       .pipe(sass().on('error', sass.logError))
