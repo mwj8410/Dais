@@ -2,24 +2,23 @@
 @import 'config';
 @import 'main';
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 1rem;
-}
+// html, body {
+//   height: 100%;
+//   margin: 0;
+//   padding: 1rem;
+// }
 
-h1 {
-  @include font(openSansBoldItallic);
-  @include typeset(mainHeading);
-}
+// h1 {
+//   @include font(openSansBoldItallic);
+//   @include typeset(mainHeading);
+// }
 
-.viewport {
-  @include viewport();
-}
+// .viewport {
+//   @include viewport();
+// }
 
-.container {
-  @include content-container();
-}
+// .container {
+//   @include content-container();
+// }
 
-@include grid();
-@include anchors_line(5);
+@include anchors-line(5);

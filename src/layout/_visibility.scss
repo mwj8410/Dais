@@ -2,40 +2,38 @@
 // ----- Visibility  ----- //
 // ----- ----- ----- ----- //
 
-@mixin hide-for($sizeName, $only:false) {
+@mixin hide-for($size-name, $only: false) {
   @if $only {
-    $next-break-point-value: #{map-get-next-by-key($breakpoints, $sizeName)};
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $size-name)};
     @if $next-break-point-value {
-      @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) and (max-width: #{$next-break-point-value - 1}) {
+      @media screen and (min-width: #{map-get($breakpoints, $size-name)}) and (max-width: #{$next-break-point-value - 1}) {
         display: none;
       }
     }
-  }
-  @else {
-    @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) {
+  } @else {
+    @media screen and (min-width: #{map-get($breakpoints, $size-name)}) {
       display: none;
     }
   }
 }
 
-@mixin show-for($sizeName, $only:false) {
+@mixin show-for($size-name, $only: false) {
   @if $only not false {
-    $next-break-point-value: #{map-get-next-by-key($breakpoints, $sizeName)};
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $size-name)};
     @if $next-break-point-value {
-      @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) and (max-width: #{$next-break-point-value - 1}) {
+      @media screen and (min-width: #{map-get($breakpoints, $size-name)}) and (max-width: #{$next-break-point-value - 1}) {
         display: block;
       }
     }
-  }
-  @else {
-    @media screen and (min-width: #{map-get($breakpoints, $sizeName)}) {
+  } @else {
+    @media screen and (min-width: #{map-get($breakpoints, $size-name)}) {
       display: block;
     }
   }
 }
 
 // Creates CSS classes
-@mixin visibility-show-rules() {
+@mixin visibility-show-rules {
   @each $name, $size in $breakpoints {
     .show-for-#{$name} {
       @include show-for($name);
@@ -50,7 +48,7 @@
   }
 }
 
-@mixin visibility-hide-rules() {
+@mixin visibility-hide-rules {
   @each $name, $size in $breakpoints {
     .hide-for-#{$name} {
       @include hide-for($name);

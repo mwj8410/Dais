@@ -2,14 +2,14 @@
 // ----- Containers  ----- //
 // ----- ----- ----- ----- //
 
-@mixin content-container() {
+@mixin content-container {
   margin-left: auto;
   margin-right: auto;
-  max-width: #{map-get($breakpoints, nth($containerBreakpoints, 1))};
+  max-width: #{map-get($breakpoints, nth($container-breakpoints, 1))};
 
-  @for $i from 2 through length($containerBreakpoints) {
-    @media screen and (min-width: #{map-get($breakpoints, nth($containerBreakpoints, $i))}) {
-      max-width: #{map-get($breakpoints, nth($containerBreakpoints, $i))};
+  @for $i from 2 through length($container-breakpoints) {
+    @media screen and (min-width: #{map-get($breakpoints, nth($container-breakpoints, $i))}) {
+      max-width: #{map-get($breakpoints, nth($container-breakpoints, $i))};
     }
   }
 }

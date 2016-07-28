@@ -13,8 +13,7 @@
   }
   @if $i > length($map) {
     @return false;
-  }
-  @else {
+  } @else {
     @return nth($values, $i);
   }
 }

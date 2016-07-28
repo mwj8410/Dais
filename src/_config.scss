@@ -11,22 +11,22 @@ $breakpoints: (
   xxlarge: 1440px,
 );
 
-$containerBreakpoints: (
+$container-breakpoints: (
   medium,
   large
 );
 
-$column_count: 12;
+$column-count: 12;
 
 // ----- ----- ----- ----- //
 // -----   Palette   ----- //
 // ----- ----- ----- ----- //
 
-$colorPalettes: (
+$color-palettes: (
   example: (
-    one: red,
-    two: green,
-    three: blue
+    one: #f00,
+    two: #0f0,
+    three: #00f
   )
 );
 
@@ -35,7 +35,7 @@ $colorPalettes: (
 // ----- Typography  ----- //
 // ----- ----- ----- ----- //
 
-$fontPalettes: (
+$font-palettes: (
   openSansBoldItallic: (
     font-family: 'Open Sans',
     font-style: italic,
@@ -43,7 +43,7 @@ $fontPalettes: (
   )
 );
 
-$typeSets: (
+$type-sets: (
   mainHeading: (
     color: #f0f,
     font-size: 72px,

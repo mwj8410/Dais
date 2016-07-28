@@ -2,6 +2,6 @@
 // -----   Palette   ----- //
 // ----- ----- ----- ----- //
 
-@function color ( $paletteName, $colorName ) {
-  @return map-get( map-get( $colorPalettes, $paletteName ), $colorName );
+@function color ($palette-name, $color-name) {
+  @return map-get(map-get($color-palettes, $palette-name), $color-name);
 }
