@@ -13,6 +13,11 @@
 		"Phae_guidelines": "https://github.com/Phaesynthe/Phae_guidelines.git",
 		"sass-lint": "1.8.2"
 	},
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/Phae_guidelines/.eslintrc.js"
+    ]
+  },
 	"main": "",
 	"name": "Plinth",
 	"repository": {

@@ -34,9 +34,6 @@
 // @param $arc Optional the degree start range to distribute the points
 // @param $arc-center Optional central line used to direct the arc
 @mixin anchors-circular($anchor-count, $radius, $arc: 360, $arc-center: 0) {
-  @if $arc-center > 360 {
-    // @debug '$arc-center exceeds 360 degrees. This is not an issue, but ill advised.'';
-  }
 
   // First, create a number line from the degree range with some padding
   // the center point minus half the arch, plus half the total arc range over the number of anchors
