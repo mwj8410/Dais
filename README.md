@@ -37,19 +37,21 @@ container width limits.
 ### Palette
 Color palettes are expressed and referenced in suce a way as to be as compatible as plausable with known UI/UX terminology.
 
-The required structure, mus be mounted in the '$colorPalettes' variable. This is a map structure where each key is
+The required structure, must be mounted in the '$color-palettes' variable. This is a map structure where each key is
 intended to represent a named palette and each value within t hat map is a key value pair where the key is the name of
 the color name within the pallet.
 
 ```
-$colorPalettes: (
+$color-palettes: (
   example: (
     one: red,
     two: green,
     three: blue
   )
-);'
+);
 ```
+
+The color can then be accessed using `color(example, one)`.
 
 ### Typography
 There are two typographic structures available for implimenting text types. There are no specific restrictions that
