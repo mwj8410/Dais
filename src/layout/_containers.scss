@@ -13,3 +13,37 @@
     }
   }
 }
+
+@mixin off-canvas($side) {
+  // This could also be accomplished using transform-origin
+  // at some point, this may need to be explored
+  position: fixed;
+
+  @if ($side == top) {
+    top: -100%;
+  }
+  @if($side == left) {
+    left: -100%;
+  }
+  @if($side == bottom) {
+    bottom: -100%;
+  }
+  @if($side == right) {
+    right: -100%;
+  }
+
+  &.on-canvas {
+    @if ($side == top) {
+      top: 0;
+    }
+    @if($side == left) {
+      left: 0;
+    }
+    @if($side == bottom) {
+      bottom: 0;
+    }
+    @if($side == right) {
+      right: 0;
+    }
+  }
+}

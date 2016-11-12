@@ -1,4 +1,4 @@
-// Adapted from foundation
+// Searches a map for a specific key, then returns the next item in the map or false if there are no more items.
 @function map-get-next-by-key($map, $key) {
   $values: map-values($map);
   $i: 1;

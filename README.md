@@ -35,10 +35,10 @@ This class is informed by the configuration list `$containerBreakpoints` which i
 container width limits.
 
 ### Palette
-Color palettes are expressed and referenced in suce a way as to be as compatible as plausable with known UI/UX terminology.
+Color palettes are expressed and referenced in such a way as to be as compatible as plausable with known UI/UX terminology.
 
 The required structure, must be mounted in the '$color-palettes' variable. This is a map structure where each key is
-intended to represent a named palette and each value within t hat map is a key value pair where the key is the name of
+intended to represent a named palette and each value within that map is a key value pair where the key is the name of
 the color name within the pallet.
 
 ```
