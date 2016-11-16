@@ -2,4 +2,4 @@ demo/plinth.css
 node_modules/
 workarea/
 
-npm_debug.log
+npm-debug.log

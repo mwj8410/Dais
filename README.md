@@ -1,13 +1,14 @@
 # Plinth
 Plinth: a raised platform in a large room or hall that people stand on when performing or speaking to an audience.
 
-Provides common and advanced features for use in rich User-Experience sites and web applications.
+Provides common and advanced features for use in rich User-Experience sites and web applications. The design inclines
+towards addressing style complexity that arises thought normal design churn.
 
 ## Scope
 This project will attempt to collect together common style, component, and utility features in Sass, Javascript, and HTML.
-At this time, no layout control library or framework like Angular or React will be in use at this time. Client side
-compatability will be limited to the most up-to-date version of each major browser. No attempt will be made to provide
-any compatability beyond this.
+At this time, no layout control library or framework like Angular or React will be in use. Client side compatability will
+be limited to the most up-to-date version of each major browser. No attempt will be made to provide any compatability
+beyond this.
 
 ## Usage
 A consuming project needs to import either `Plinth.scss` or `_main.scss` into it's sass project.
@@ -15,7 +16,6 @@ Alternatively, if only portions of the project are needed, each individual modul
 All configuration and modification should be conducted by importing and altering the values in `_config.scss`, then
 importing `_main.scss`. In the case of individual modules, only the associated sections indicated by comments in the
 `_config.scss` file. Further documentation to follow.
-
 
 ### Style
 
@@ -34,24 +34,46 @@ A container is a class that wraps content in some sort of treatment. The most co
 This class is informed by the configuration list `$containerBreakpoints` which indicates which breakpints represent
 container width limits.
 
-### Palette
-Color palettes are expressed and referenced in such a way as to be as compatible as plausable with known UI/UX terminology.
+### Colors
+Colors are a two layer system intended to provide the most robust expressability plausable with standardized accessors.
 
-The required structure, must be mounted in the '$color-palettes' variable. This is a map structure where each key is
-intended to represent a named palette and each value within that map is a key value pair where the key is the name of
-the color name within the pallet.
+First, provide color pallets as follows:
 
 ```
 $color-palettes: (
-  example: (
-    one: red,
-    two: green,
-    three: blue
+  grey: (
+    50: #FAFAFA,
+    100: #F5F5F5,
+    200: #EEEEEE,
+    300: #E0E0E0,
+    400: #BDBDBD,
+    500: #9E9E9E,
+    600: #757575,
+    700: #616161,
+    800: #424242,
+    900: #212121
   )
 );
 ```
 
-The color can then be accessed using `color(example, one)`.
+The idea here is to provide a lage number of defined colors to choose from for your needs. Then we reference these colors
+by usage as follows:
+
+```
+$theme-colors: (
+  container: (
+    background: (grey, 500),
+    foreground: (grey, 900),
+    highlight: (grey, 50)
+  )
+);
+```
+
+The color can then be accessed using `color(container, background)`.
+
+The thinking behind the design is that the usage of a color will alter over time, while the origional color is still in`
+use in other parts of the code. This makes usage of a single layer, or a variable based design, require larger code
+adjustments over time.
 
 ### Typography
 There are two typographic structures available for implimenting text types. There are no specific restrictions that
@@ -88,12 +110,3 @@ h1 {
   @include typeset (mainHeading);
 }
 ```
-
-### Components
-Each component consist of the minimum required parts of an html snippet, a javascript file, and styling files.
-
-All styling will be expressed in two structures. One set or style rules provides needed behavior, while the other provides
-theaming rules.
-
-#### Containers
-##### Collapsible
