@@ -1,3 +1,13 @@
 //Style Imports
 @import 'config';
-@import 'main';
+
+// Utilities must be mounted first
+@import 'utils/maps';
+
+@import 'layout/anchors';
+@import 'layout/containers';
+@import 'layout/origin';
+@import 'layout/visibility';
+
+@import 'palette/palette';
+@import 'typography/typography';

@@ -3,15 +3,9 @@
 	"dependencies": {},
 	"description": "Provides Sass utilities and structures for common style needs",
 	"devDependencies": {
-	  "docker": "1.0.0",
-		"eslint": "2.11.1",
-		"gulp": "3.9.1",
-		"gulp-clean-css": "2.0.9",
-		"gulp-concat-util": "0.5.5",
-		"gulp-rename": "1.2.2",
-		"gulp-sass": "2.3.1",
+		"eslint": "^2.11.1",
 		"Phae_guidelines": "https://github.com/Phaesynthe/Phae_guidelines.git",
-		"sass-lint": "1.8.2"
+		"sass-lint": "^1.8.2"
 	},
   "eslintConfig": {
     "extends": [
@@ -26,9 +20,8 @@
 	},
 	"sasslintConfig": "./node_modules/Phae_guidelines/.sass-lint.yml",
 	"scripts": {
-		"doc": "./node_modules/.bin/docker -o documentation -I -n -x node_modules,coverage,design_docs,documentation,testsHelpers,demo,*.md",
-    "eslint": "eslint app",
-    "sass-lint": "sass-lint 'src/**/*.scss' -v -q"
+    "lint:style": "sass-lint 'src/**/*.scss' -v -q",
+		"test": "npm run lint:style"
 	},
-	"version": "0.0.0"
+	"version": "0.1.0"
 }
