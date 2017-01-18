@@ -1,5 +1,6 @@
-//Style Imports
-@import 'config';
+// Configuration Imports
+@import 'value.config';
+@import 'theme.config';
 
 // Utilities must be mounted first
 @import 'utils/maps';

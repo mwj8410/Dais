@@ -1,0 +1,19 @@
+@import '../src/Plinth';
+
+// Layout Examples
+layout-tests {
+  visibility-tests {
+    .hide-for-breakpoint {
+      @include hide-for(small);
+    }
+    .hide-for-breakpoint-only {
+      @include hide-for(small, only);
+    }
+    .show-for-breakpoint {
+      @include show-for(small);
+    }
+    .show-for-breakpoint-only {
+      @include show-for(small, only);
+    }
+  }
+}

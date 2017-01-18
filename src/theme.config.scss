@@ -1,40 +1,24 @@
-
 // ----- ----- ----- ----- //
 // -----   Layout    ----- //
 // ----- ----- ----- ----- //
-
-$breakpoints: (
-  small: 0,
-  medium: 640px,
-  large: 1024px,
-  xlarge: 1200px,
-  xxlarge: 1440px,
-);
-
 $container-breakpoints: (
   medium,
   large
 );
 
-$column-count: 12;
-
 // ----- ----- ----- ----- //
 // -----   Palette   ----- //
 // ----- ----- ----- ----- //
-
-$color-palettes: (
-  example: (
-    one: #f00,
-    two: #0f0,
-    three: #00f
+$theme-colors: (
+  component: (
+    foreground: ( greys, 300 ),
+    background: ( greys, 900 )
   )
 );
-
 
 // ----- ----- ----- ----- //
 // ----- Typography  ----- //
 // ----- ----- ----- ----- //
-
 $font-palettes: (
   openSansBoldItallic: (
     font-family: 'Open Sans',

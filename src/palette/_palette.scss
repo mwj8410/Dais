@@ -9,7 +9,7 @@
 @function color($area, $use) {
 
   $color-description-list: map-get(
-    map-get($theme-colors, $area), // First layer of theme-colors
+    map-get($theme-colors, $area),
     $use
   );
 

@@ -1,0 +1,11 @@
+@import '../src/Plinth.scss';
+
+// Color Examples
+color-tests {
+  .color-from-palette {
+    color: palette-color(greys, 100);
+  }
+  .color-from-theme {
+    color: color(component, background);
+  }
+}
