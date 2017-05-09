@@ -7,7 +7,6 @@ module.exports = {
   },
   'extends': 'eslint:recommended',
   'globals': {
-    'angular': true,
     'after': true,
     'before': true,
     'define': false,

@@ -3,6 +3,3 @@ machine:
   node:
     version: 6.9.5
 
-  # database:
-  #   override:
-  #     - mysql -u ubuntu circle_test < my-database-setup.sql

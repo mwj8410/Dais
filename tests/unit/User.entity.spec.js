@@ -1,4 +1,4 @@
-/* global describe, it, reuire */
+/* global describe, it, require */
 const expect = require('expect');
 
 const userEntity = require('../../api/Entities/User.entity');
