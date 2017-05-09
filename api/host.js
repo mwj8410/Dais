@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const log = require('./Utilities/log');
 
-let host = express();
-let hostConfig;
+let app = express();
+let appConfig;
 let server;
 
 module.exports = {
@@ -15,14 +15,14 @@ module.exports = {
 
   initialize: config => {
     if (!config) {
-      log.error('Host', 'initialize', 'The host module requires that a configuration object be provided.');
+      log.error('Host', 'initialize', 'The app module requires that a configuration object be provided.');
       return;
     }
-    hostConfig = config;
+    appConfig = config;
 
-    host.use(bodyParser.json());
-    host.use(bodyParser.text());
-    host.use((req, res, next) => {
+    app.use(bodyParser.json());
+    app.use(bodyParser.text());
+    app.use((req, res, next) => {
       // These need to be made available in configuration
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,PATCH,PUT,POST,DELETE');
@@ -34,8 +34,8 @@ module.exports = {
 
   listen: () => {
     // Retain a reference to the started application, so it can be closed later.
-    server = host.listen(hostConfig.port, () => {
-      log.info('Host', 'listen', `listening on port: ${hostConfig.port}.`);
+    server = app.listen(appConfig.port, () => {
+      log.info('Host', 'listen', `listening on port: ${appConfig.port}.`);
     });
   },
 
@@ -43,24 +43,24 @@ module.exports = {
     routeList.forEach(route => {
       switch (route[1]) {
         case 'GET':
-          host.get(`${hostConfig.baseUrl}${route[0]}`, route[2]);
+          app.get(`${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'POST':
-          host.post(`${hostConfig.baseUrl}${route[1]}`, route[2]);
+          app.post(`${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'PUT':
-          host.put(`${hostConfig.baseUrl}${route[1]}`, route[2]);
+          app.put(`${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'PATCH':
-          host.patch(`${hostConfig.baseUrl}${route[1]}`, route[2]);
+          app.patch(`${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'DELETE':
-          host.delete(`${hostConfig.baseUrl}${route[1]}`, route[2]);
+          app.delete(`${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         default:
           break;
       }
-      log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} ${route[0]}.`);
+      log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} ${route[0]}`);
     });
   }
 };

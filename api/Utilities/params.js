@@ -2,6 +2,7 @@
 
 module.exports = {
   extract: (req, whiteList) => {
+    // TODO: extend to coerce values to correct data types: ['valueName', 'dataType', required flag ]
     let output = {};
 
     // First, we extract the path parameters

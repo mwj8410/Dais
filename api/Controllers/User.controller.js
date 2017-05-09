@@ -13,15 +13,16 @@ module.exports = {
   get: (req, res) => {
     let values = params.extract(req, [ 'userId' ]);
 
-    if (values) {
+    const result = User.getById(Number(values.userId));
+    if (!result) {
+      return res.status(403).send();
     }
-    console.log(values);
-    res.status(200).send();
+    res.status(200).send(result);
   },
 
   login: (req, res) => {
     let values = params.extract(req, [ 'userId' ]);
-
-    res.status(200).send();
+    // validate user
+    res.status(200).send(values);
   }
 };

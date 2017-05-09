@@ -5,7 +5,7 @@ const host = require('../api/host')
 const log = require('../api/Utilities/log');
 
 before(done => {
-  // log.setLevel('silent');
+  log.setLevel('silent');
   require('../api/api');
   setTimeout(done, 200);
 });
@@ -20,7 +20,7 @@ describe('Testing Framework', () => {
   });
 });
 
-// Actual Tests
+// API Tests
 // Unit
 require('./unit/User.controller.spec.js');
 
