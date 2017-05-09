@@ -1,0 +1,36 @@
+@import '../value.config';
+@import '../utils/_maps';
+
+// ----- ----- ----- ----- //
+// ----- Visibility  ----- //
+// ----- ----- ----- ----- //
+
+@mixin hide-for($size-name, $only: false) {
+  @if $only {
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $size-name)};
+    @if $next-break-point-value {
+      @media screen and (min-width: #{map-get($breakpoints, $size-name)}) and (max-width: #{$next-break-point-value - 1}) {
+        display: none;
+      }
+    }
+  } @else {
+    @media screen and (min-width: #{map-get($breakpoints, $size-name)}) {
+      display: none;
+    }
+  }
+}
+
+@mixin show-for($size-name, $only: false) {
+  @if $only {
+    $next-break-point-value: #{map-get-next-by-key($breakpoints, $size-name)};
+    @if $next-break-point-value {
+      @media screen and (min-width: #{map-get($breakpoints, $size-name)}) and (max-width: #{$next-break-point-value - 1}) {
+        display: block;
+      }
+    }
+  } @else {
+    @media screen and (min-width: #{map-get($breakpoints, $size-name)}) {
+      display: block;
+    }
+  }
+}

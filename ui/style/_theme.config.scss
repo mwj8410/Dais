@@ -1,0 +1,37 @@
+// ----- ----- ----- ----- //
+// -----   Layout    ----- //
+// ----- ----- ----- ----- //
+$container-breakpoints: (
+  medium,
+  large
+);
+
+// ----- ----- ----- ----- //
+// -----   Palette   ----- //
+// ----- ----- ----- ----- //
+$theme-colors: (
+  component: (
+    foreground: ( greys, 300 ),
+    background: ( greys, 900 )
+  )
+);
+
+// ----- ----- ----- ----- //
+// ----- Typography  ----- //
+// ----- ----- ----- ----- //
+$font-palettes: (
+  openSansBoldItallic: (
+    font-family: 'Open Sans',
+    font-style: italic,
+    font-weight: 600
+  )
+);
+
+$type-sets: (
+  mainHeading: (
+    color: #f0f,
+    font-size: 72px,
+    letter-spacing: -0.5px,
+    line-height: 72px
+  )
+);
