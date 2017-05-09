@@ -7,7 +7,7 @@ module.exports = {
     // First, we extract the path parameters
     Object.keys(req.params).forEach(key => {
       if (whiteList.indexOf(key) > -1) {
-       output[key] = req.params[key];
+        output[key] = req.params[key];
       }
     });
 

@@ -1,0 +1,40 @@
+{
+  "name": "maidbot_demo",
+  "private": false,
+  "version": "0.1.0",
+  "description": "A ",
+  "keywords": [],
+  "dependencies": {
+    "async": "^2.0.1",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "colors": "^1.1.2",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^3.17.1",
+    "expect": "^1.20.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0",
+    "supertest": "^3.0.0"
+  },
+  "engines": {
+    "node": "6.x",
+    "npm": "4.x"
+  },
+  "scripts": {
+    "lint": "eslint ./api",
+    "posttest": "npm run lint",
+    "start": "node ./api/api.js",
+    "test": "istanbul cover _mocha -- tests/test.config.js tests/**/*.js --timeout 30000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "wrong"
+  },
+  "author": "Matthew W. Jackson <mwj8410@gmail.com>",
+  "license": ""
+}

@@ -1,11 +1,22 @@
 /* global describe, it, reuire */
 
 const expect = require('expect');
-const supertest = require('supertest');
+const st = require('supertest');
 
-let request = supertest('http://localhost:24601');
+let request = st('http://localhost:24601');
 
 describe('Controller >> User:', () => {
+
+  describe('create', () => {
+    it('does not allow creation', done => {
+      request.post('/user')
+      .send({})
+      .end((err, response) => {
+        expect(response.status).toBe(401);
+        done();
+      });
+    });
+  });
 
   describe('get', () => {
 
