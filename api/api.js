@@ -12,4 +12,5 @@ host.initialize({
   baseUrl: ''
 });
 host.mountRoutes(routes);
+host.mountStatic('./.tmp/');
 host.listen();

@@ -62,5 +62,14 @@ module.exports = {
       }
       log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} ${route[0]}`);
     });
+  },
+
+  mountStatic: staticContentPath => {
+    console.log();
+    app.use('/app/', express.static(staticContentPath));
+    app.get('/', (req, res) => {
+      res.redirect('/app/index.html');
+    });
+    log.info('Host', 'mountStatic', `mounted handler static files: '/app/' provides files located at ${staticContentPath}`);
   }
 };

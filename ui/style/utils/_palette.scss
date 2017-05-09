@@ -10,7 +10,6 @@
 }
 
 @function color($area, $use) {
-
   $color-description-list: map-get(
       map-get($theme-colors, $area),
       $use

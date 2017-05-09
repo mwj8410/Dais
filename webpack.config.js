@@ -51,7 +51,8 @@ module.exports = {
 
     // Copy static Assets
     new CopyWebpackPlugin([
-      { from: 'ui/assets', to: 'assets/' }
+      { from: 'ui/assets', to: 'assets/' },
+      { from: 'ui/index.html', to: 'index.html' }
     ])
 
     // Minify HTML
