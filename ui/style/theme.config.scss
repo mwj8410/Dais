@@ -10,9 +10,16 @@ $container-breakpoints: (
 // -----   Palette   ----- //
 // ----- ----- ----- ----- //
 $theme-colors: (
+  backdrop: (
+    background: ( black, 100 )
+  ),
   container: (
-    foreground: ( greys, 300 ),
-    background: ( greys, 900 )
+    background: ( grey, 900 ),
+    border: ( blue, 600 ),
+    border-error: ( red, 300 ),
+    back-shadow: ( blue, 900 ),
+    back-shadow-error: ( red, 900 ),
+    foreground: ( white, 100 )
   )
 );
 

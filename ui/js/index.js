@@ -1,1 +1,0 @@
-import '../style/body.scss';

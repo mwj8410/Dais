@@ -4,13 +4,12 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    'index': './ui/js/index.js'
+    'index': './ui/js/index.jsx'
   },
   output: {
     path: path.resolve('.tmp'),
@@ -24,6 +23,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: { presets: [ 'es2015' ] }
+      },
+
+      // Jsx React Files
+      {
+        test: /\.jsx?/,
+        loader: 'babel-loader',
+        query: { presets:[ 'react', 'es2015' ] }
       },
 
       // Scss files
