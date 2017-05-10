@@ -65,7 +65,6 @@ module.exports = {
   },
 
   mountStatic: staticContentPath => {
-    console.log();
     app.use('/app/', express.static(staticContentPath));
     app.get('/', (req, res) => {
       res.redirect('/app/index.html');

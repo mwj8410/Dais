@@ -4,6 +4,8 @@ const log = require('../Utilities/log');
 const db = require('../DataStore/User.datastore');
 // const saltRounds = 10; // would be used if we set a password
 
+// TODO: should always trip internal and sensitive fields before transmitting externally
+
 module.exports = {
   getById: id => {
     const results = db.filter(user => user.id === id);

@@ -11,7 +11,7 @@ module.exports = {
   },
 
   get: (req, res) => {
-    let values = params.extract(req, [ 'userId' ]);
+    const values = params.extract(req, [ 'userId' ]);
 
     const result = User.getById(Number(values.userId));
     if (!result) {
@@ -21,8 +21,12 @@ module.exports = {
   },
 
   login: (req, res) => {
-    let values = params.extract(req, [ 'userId' ]);
-    // validate user
-    res.status(200).send(values);
+    const values = params.extract(req, [ 'user', 'password' ]);
+    const user = User.validateByPassword(values.user, values.password);
+
+    if (!user) {
+      return res.status(401).send();
+    }
+    res.status(200).send(user);
   }
 };

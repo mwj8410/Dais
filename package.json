@@ -47,7 +47,7 @@
     "npm": "4.x"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "./node_modules/.bin/webpack",
     "start": "node ./api/api.js",
     "test": "npm run test:js && npm run test:lint && npm run test:style",
     "test:js": "istanbul cover _mocha -- tests/test.config.js tests/**/*.js --timeout 30000",

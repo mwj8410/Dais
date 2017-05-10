@@ -29,4 +29,18 @@
     padding: 4px 8px;
     width: 95%;
   }
+
+  button {
+    padding: 8px;
+    border-radius: 8px;
+    float: right;
+  }
+
+  div.error {
+    color: color(container, border-error);
+    display: none;
+  }
+  &.error div.error {
+    display: block;
+  }
 }
