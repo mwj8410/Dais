@@ -29,7 +29,7 @@ describe('Controller >> User:', () => {
   describe('validateByPassword', () => {
 
     it('is exists', () => {
-      expect(typeof userEntity.validateByPassword).toBe('function')
+      expect(typeof userEntity.validateByPassword).toBe('function');
     });
 
     it('returns a user when provided with a valid credential and password', () => {

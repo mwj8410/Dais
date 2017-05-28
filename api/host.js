@@ -13,6 +13,8 @@ module.exports = {
     server.close();
   },
 
+  getAppInstance: () => app,
+
   initialize: config => {
     if (!config) {
       log.error('Host', 'initialize', 'The app module requires that a configuration object be provided.');
@@ -24,7 +26,7 @@ module.exports = {
     app.use(bodyParser.text());
     app.use((req, res, next) => {
       // These need to be made available in configuration
-      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', 'http://localhost/');
       res.header('Access-Control-Allow-Methods', 'GET,PATCH,PUT,POST,DELETE');
       res.header('Access-Control-Allow-Headers', 'Content-Type');
       next();
