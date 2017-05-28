@@ -42,6 +42,7 @@
     "expect": "^1.20.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "newman": "^3.6.0",
     "sinon": "^2.1.0",
     "supertest": "^3.0.0"
   },
@@ -52,8 +53,9 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack",
     "start": "node ./api/api.js",
-    "test": "npm run test:js && npm run lint && echo '✔  Your jsx code looks good.'",
-    "test:js": "istanbul cover _mocha -- tests/test.config.js tests/**/*.js --timeout 30000",
+    "test": "npm run test:js && npm run test:apie2e && npm run lint && echo '✔  Your code looks good.'",
+    "test:js": "istanbul cover _mocha -- tests/api.unit.config.js tests/**/*.js --timeout 30000",
+    "test:apie2e": "node ./tests/api.e2e.config.js",
     "lint": "npm run lint:js && npm run lint:jsx && npm run lint:style",
     "lint:js": "eslint ./api",
     "lint:jsx": "eslint --config ./.eslintrc.jsx.json ./ui/**/*.jsx",

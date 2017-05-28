@@ -1,7 +1,7 @@
 /* global after, describe, it, require */
 
 const expect = require('expect');
-const host = require('../api/host')
+const host = require('../api/host');
 const log = require('../api/Utilities/log');
 
 before(done => {

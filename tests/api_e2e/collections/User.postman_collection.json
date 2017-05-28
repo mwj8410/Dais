@@ -1,0 +1,37 @@
+{
+  "variables": [],
+  "info": {
+    "name": "User",
+    "_postman_id": "438cec29-6297-6de7-da62-46a1b807b243",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+
+              "var data = JSON.parse(responseBody);",
+              "tests[\"provides a user Id\"] = typeof data.id === 'number';"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "localhost:24601/v1/user/1",
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "description": ""
+      },
+      "response": []
+    }
+  ]
+}
