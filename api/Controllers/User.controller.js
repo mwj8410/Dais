@@ -1,5 +1,4 @@
 /* global module, require */
-
 const params = require('../Utilities/params');
 
 const User = require('../Entities/User.entity');

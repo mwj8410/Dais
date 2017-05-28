@@ -1,8 +1,8 @@
 {
-  "name": "maidbot_demo",
+  "name": "plinth",
   "private": false,
   "version": "0.1.0",
-  "description": "A Demo",
+  "description": "A seed project for a variety of web applications",
   "keywords": [],
   "dependencies": {
     "async": "^2.0.1",
@@ -35,7 +35,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
-    "eslint": "^3.17.1",
+    "eslint": "^3.19.1",
     "expect": "^1.20.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
@@ -43,7 +43,7 @@
     "supertest": "^3.0.0"
   },
   "engines": {
-    "node": "6.x",
+    "node": "7.x",
     "npm": "4.x"
   },
   "scripts": {
