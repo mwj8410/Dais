@@ -45,24 +45,24 @@ module.exports = {
     routeList.forEach(route => {
       switch (route[1]) {
         case 'GET':
-          app.get(`${appConfig.baseUrl}${route[0]}`, route[2]);
+          app.get(`/${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'POST':
-          app.post(`${appConfig.baseUrl}${route[0]}`, route[2]);
+          app.post(`/${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'PUT':
-          app.put(`${appConfig.baseUrl}${route[0]}`, route[2]);
+          app.put(`/${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'PATCH':
-          app.patch(`${appConfig.baseUrl}${route[0]}`, route[2]);
+          app.patch(`/${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         case 'DELETE':
-          app.delete(`${appConfig.baseUrl}${route[0]}`, route[2]);
+          app.delete(`/${appConfig.baseUrl}${route[0]}`, route[2]);
           break;
         default:
           break;
       }
-      log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} ${route[0]}`);
+      log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} /${appConfig.baseUrl}/${route[0]}`);
     });
   },
 

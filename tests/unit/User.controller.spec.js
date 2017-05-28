@@ -3,7 +3,9 @@
 const expect = require('expect');
 const st = require('supertest');
 
-let request = st('http://localhost:24601');
+const apiConfig = require('../../config/application.config').api;
+
+let request = st(`http://localhost:24601/${apiConfig.baseUrl}`);
 
 describe('Controller >> User:', () => {
 

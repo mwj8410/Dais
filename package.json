@@ -33,9 +33,12 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-react": "^7.0.1",
     "expect": "^1.20.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
@@ -49,10 +52,12 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack",
     "start": "node ./api/api.js",
-    "test": "npm run test:js && npm run test:lint && npm run test:style",
+    "test": "npm run test:js && npm run lint && echo '✔  Your jsx code looks good.'",
     "test:js": "istanbul cover _mocha -- tests/test.config.js tests/**/*.js --timeout 30000",
-    "test:lint": "eslint ./api",
-    "test:style": "sass-lint './src/**/*.scss' -v -q"
+    "lint": "npm run lint:js && npm run lint:jsx && npm run lint:style",
+    "lint:js": "eslint ./api",
+    "lint:jsx": "eslint --config ./.eslintrc.jsx.json ./ui/**/*.jsx",
+    "lint:style": "sass-lint './src/**/*.scss' -v -q"
   },
   "repository": {
     "type": "git",

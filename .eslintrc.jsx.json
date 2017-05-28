@@ -1,0 +1,57 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalDecorators": true,
+      "experimentalObjectRestSpread": true
+    },
+    "sourceType": "module"
+  },
+  "extends": "google",
+  "rules": {
+    "constructor-super": "warn",
+    "comma-dangle": [ "error", "never" ],
+    "curly": 0,
+    "eol-last": [ "error", "always" ],
+    "eqeqeq": [ "warn", "always" ],
+    "indent": [ "error", 2],
+    "jsx-quotes": [ "error", "prefer-single" ],
+    "max-len": 0,
+    "no-const-assign": "error",
+    "no-invalid-this": 0,
+    "no-this-before-super": "warn",
+    "no-trailing-spaces": "error",
+    "no-undef": "warn",
+    "no-unreachable": "error",
+    "no-unused-vars": "warn",
+    "no-useless-call": "warn",
+    "no-useless-constructor": "warn",
+    "object-curly-spacing": [ "error", "always", { "objectsInObjects": false } ],
+    "prefer-rest-params": 1,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "require-jsdoc": 0,
+    "semi": [ "error", "never" ],
+    "strict": 0,
+    "template-curly-spacing": [ "error", "never" ],
+    "valid-jsdoc": "error",
+    "valid-typeof": "warn"
+  },
+  "plugins": [
+    "react"
+  ],
+  "settings": {
+    "react": {
+      "createClass": "createClass",
+      "pragma": "React",
+      "version": "15.0"
+    }
+  }
+}

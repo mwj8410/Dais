@@ -11,8 +11,8 @@ module.exports = {
 
   get: (req, res) => {
     const values = params.extract(req, [ 'userId' ]);
-
     const result = User.getById(Number(values.userId));
+
     if (!result) {
       return res.status(403).send();
     }

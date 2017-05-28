@@ -3,7 +3,7 @@ const expect = require('expect');
 
 const userEntity = require('../../api/Entities/User.entity');
 
-describe('Controller >> User:', () => {
+describe('Entity >> User:', () => {
 
   describe('getById', () => {
 
