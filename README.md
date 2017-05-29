@@ -10,7 +10,7 @@ What this does not include that I would have liked to get in is:
 2. UI usin React-Router
 - [x] Swagger Documentation engine
 4. Full unit tests
-5. Newman Tests
+- [x] Newman Tests
 6. Docker config
 7. CI process
 8. MySQL Database project
