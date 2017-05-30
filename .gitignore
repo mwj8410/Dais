@@ -6,6 +6,7 @@
 # Testing Output #
 ##################
 /coverage
+/reports
 
 ###################
 # Node.js and NPM #

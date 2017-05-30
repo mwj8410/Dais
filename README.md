@@ -66,16 +66,24 @@ All code provided in fully tested with unit tests, end-to-end tests, and code qu
 
 What this does not include that I would have liked to get in is:
 
-1. UI using Redux
-2. UI usin React-Router
+- [ ] UI using Redux
+- [ ] UI using React-Router
 - [x] Swagger Documentation engine
-4. Full unit tests
+- [ ] Full unit tests
 - [x] Newman Tests
-6. Docker config
-7. CI process
-8. MySQL Database project
-9. Redis Session storage
-10. Neo4J and/or MongoDB connection
+- [ ] Docker config
+- [ ] CI process
+- [ ] MySQL Database project
+- [ ] Redis Session storage
+- [ ] RethinkDB connection
+- [ ] Webpack Hot-reload
+- [x] Static module generation
+- [ ] Server rendered views
+- [x] Newman Testing
+- [x] Scss font and theme
+- [ ] Scss grid
+- [ ] Scss advanced calculation
+- [ ] Scss animation tooling
 
 ### Local Run
 `npm install` or `yarn install`

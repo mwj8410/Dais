@@ -37,6 +37,7 @@
     "babel-eslint": "^7.2.3",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "es6-plato": "^1.0.14",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-react": "^7.0.1",
@@ -53,6 +54,7 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack",
+    "code:health": "./node_modules/.bin/es6-plato -r -d ./coverage/plato ./api -e .eslintrc.json",
     "start": "node ./api/api.js",
     "test": "npm run test:js && npm run test:apie2e && npm run lint && echo '✔  Your code looks good.'",
     "test:js": "istanbul cover _mocha -- tests/api.unit.config.js tests/**/*.js --timeout 30000",

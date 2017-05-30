@@ -22,6 +22,4 @@ describe('Testing Framework', () => {
 
 // API Tests
 // Unit
-require('./unit/User.controller.spec.js');
-
-// Integration
+require('./api_unit/User.controller.spec.js');
