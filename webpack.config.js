@@ -4,6 +4,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
 
@@ -57,22 +58,25 @@ module.exports = {
 
     // Copy static Assets
     new CopyWebpackPlugin([
-      { from: 'ui/assets', to: 'assets/' },
-      { from: 'ui/index.html', to: 'index.html' }
-    ])
+      { from: 'ui/assets', to: 'assets/' }
+      // ,
+      // { from: 'ui/index.html', to: 'index.html' }
+    ]),
 
     // Minify HTML
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   inject: false,
-    //   minify: {
-    //     collapseWhitespace: true,
-    //     removeComments: true,
-    //     removeRedundantAttributes: true,
-    //     removeScriptTypeAttributes: true,
-    //     removeStyleLinkTypeAttributes: true
-    //   },
-    //   template: 'src/index.html'
-    // })
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      inject: false,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true
+      },
+      moduleName: 'index',
+      template: 'views/module.ejs',
+      title: 'Plinth Main'
+    })
   ]
 };

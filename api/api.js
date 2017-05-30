@@ -11,6 +11,8 @@ log.info('API', 'main', 'startup sequence beginning.');
 
 host.initialize(apiConfig);
 host.mountRoutes(routes);
+
+// TODO: Only allow in development mode
 host.mountStatic('./.tmp/');
 
 // Initialize swagger if the API process is not started in production mode.
