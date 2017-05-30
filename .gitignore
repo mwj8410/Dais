@@ -19,6 +19,6 @@ npm-debug.log
 #################
 # IDE Specifics #
 #################
-.idea
-.netbeans
+/.idea
+/.netbeans
 nbproject

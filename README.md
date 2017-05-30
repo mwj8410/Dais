@@ -1,4 +1,4 @@
-# Plinth
+# Plinth [![CircleCI](https://circleci.com/gh/mwj8410/Plinth/tree/development.svg?style=svg)](https://circleci.com/gh/mwj8410/Plinth/tree/development)
 *noun* A heavy base supporting a statue or vase. The lower square slab at the base of a column.
 
 This project is intended to provide a base starting point for a wide range of web application needs. The underlying concept is that a portion of many applications is identicle from application to application depending on the technology and hosting services being used. As such, this project's aim is to provide a strong starting point that includes much of that common code for specific technologies and services.
