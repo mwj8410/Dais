@@ -9,7 +9,7 @@ module.exports = {
     res.status(401).send();
   },
 
-  csrf: (req, res) => {
+  csrf: () => {
     // use: csurf
   },
 
