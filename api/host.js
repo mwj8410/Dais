@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const fs = require('fs');
 const log = require('./Utilities/log');
-const path = require('path');
 
 let app = express();
 let appConfig;
