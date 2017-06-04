@@ -5,15 +5,15 @@ const log = require('./Utilities/log');
 const routes = require('./routes');
 
 const apiConfig = require('../config/application.config').api;
-const swagger = require('../utility/swagger/swagger');
+const swagger = require('./Utilities/swagger/swagger');
 
 log.info('API', 'main', 'startup sequence beginning.');
 
 host.initialize(apiConfig);
 host.mountRoutes(routes);
 
-// TODO: Only allow in development mode
 host.mountStatic('./.tmp/');
+host.mountViews('index');
 
 // Initialize swagger if the API process is not started in production mode.
 if (process.env.NODE_ENV !== 'production') {

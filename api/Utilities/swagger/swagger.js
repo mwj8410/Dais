@@ -2,11 +2,11 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-const log = require('../../api/Utilities/log');
+const log = require('../log');
 
 const swaggerURIPath = '/swagger';
 
-let swaggerConfig = require('../../config/swagger.config.js');
+let swaggerConfig = require('../../../config/swagger.config.js');
 
 const flatten = arr => arr.reduce((acc, val) =>
   acc.concat(Array.isArray(val) ? flatten(val) : val), []);

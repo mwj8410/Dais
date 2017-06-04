@@ -2,7 +2,9 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const fs = require('fs');
 const log = require('./Utilities/log');
+const path = require('path');
 
 let app = express();
 let appConfig;
@@ -26,7 +28,7 @@ module.exports = {
     app.use(bodyParser.text());
     app.use((req, res, next) => {
       // These need to be made available in configuration
-      res.header('Access-Control-Allow-Origin', 'http://localhost/');
+      res.header('Access-Control-Allow-Origin', appConfig.origins);
       res.header('Access-Control-Allow-Methods', 'GET,PATCH,PUT,POST,DELETE');
       res.header('Access-Control-Allow-Headers', 'Content-Type');
       next();
@@ -62,15 +64,40 @@ module.exports = {
         default:
           break;
       }
-      log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} /${appConfig.baseUrl}/${route[0]}`);
+      log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} /${appConfig.baseUrl}${route[0]}`);
     });
   },
 
   mountStatic: staticContentPath => {
     app.use('/app/', express.static(staticContentPath));
-    app.get('/', (req, res) => {
-      res.redirect('/app/index.html');
-    });
     log.info('Host', 'mountStatic', `mounted handler static files: '/app/' provides files located at ${staticContentPath}`);
+  },
+
+  mountViews: rootRedirectView => {
+    app.set('view engine', 'ejs');
+
+    if (rootRedirectView) {
+      app.get('/', (req, res) => {
+        res.redirect(`/view/${rootRedirectView}`);
+      });
+      log.info('Host', 'mountViews', '`/` with redirect to /view/index');
+    }
+
+    // console.log(fs.readdirSync('./views/pages/'));
+
+    fs.readdirSync('./views/pages/')
+    .filter(contentItem => /^.*\.ejs$/.test(contentItem))
+    .forEach(view => {
+      const viewName = view.split('.')[0]; // Get the first part of the file name
+      app.get(`/view/${viewName}/*`, (req, res) => {
+        // TODO: get the path parameters and use any part after the viewName to fetch records
+        // from the configured view database.
+        return res.render(`pages/${viewName}`);
+      });
+
+      //
+      log.info('Host', 'mountViews', `\`/view/${viewName}\` to \`./views/pages/${viewName}.ejs\``);
+    });
+
   }
 };
