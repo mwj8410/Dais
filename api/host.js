@@ -77,12 +77,10 @@ module.exports = {
 
     if (rootRedirectView) {
       app.get('/', (req, res) => {
-        res.redirect(`/view/${rootRedirectView}`);
+        res.redirect(`/view/${rootRedirectView}/`);
       });
       log.info('Host', 'mountViews', '`/` with redirect to /view/index');
     }
-
-    // console.log(fs.readdirSync('./views/pages/'));
 
     fs.readdirSync('./views/pages/')
     .filter(contentItem => /^.*\.ejs$/.test(contentItem))
@@ -94,7 +92,6 @@ module.exports = {
         return res.render(`pages/${viewName}`);
       });
 
-      //
       log.info('Host', 'mountViews', `\`/view/${viewName}\` to \`./views/pages/${viewName}.ejs\``);
     });
 
