@@ -75,10 +75,10 @@ What this does not include that I would have liked to get in is:
 - [ ] CI process
 - [ ] MySQL Database project
 - [ ] Redis Session storage
-- [ ] RethinkDB connection
+- [ ] MongoDB connection
 - [ ] Webpack Hot-reload
 - [x] Static module generation
-- [ ] Server rendered views
+- [x] Server rendered views
 - [x] Newman Testing
 - [x] Scss font and theme
 - [ ] Scss grid

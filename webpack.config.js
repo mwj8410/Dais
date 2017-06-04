@@ -10,7 +10,8 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    'index': './ui/js/index.jsx'
+    // Each discrete module that is to be build should be listed here
+    'login': './ui/modules/login/login.jsx'
   },
   output: {
     path: path.resolve('.tmp'),
@@ -77,6 +78,13 @@ module.exports = {
       moduleName: 'index',
       template: 'views/module.ejs',
       title: 'Plinth Main'
-    })
-  ]
+    }),
+
+  ],
+  resolve: {
+    alias: {
+      Component: path.resolve(__dirname, './ui/components/'),
+      Style: path.resolve(__dirname, './ui/style/')
+    }
+  }
 };

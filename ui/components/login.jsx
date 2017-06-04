@@ -1,4 +1,4 @@
-import '../../style/components/login.scss';
+import 'Style/components/login.scss';
 
 import React, { Component } from 'react/dist/react'
 

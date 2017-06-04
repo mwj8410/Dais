@@ -1,4 +1,4 @@
-import '../../style/components/backdrop.scss';
+import 'Style/components/backdrop.scss';
 
 import React, { Component } from 'react/dist/react'
 
