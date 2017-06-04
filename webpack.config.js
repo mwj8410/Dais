@@ -64,9 +64,9 @@ module.exports = {
       // { from: 'ui/index.html', to: 'index.html' }
     ]),
 
-    // Minify HTML
+    // Construct the HTML files for the UI modules.
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: 'login.html',
       inject: false,
       minify: {
         collapseWhitespace: true,
@@ -75,10 +75,10 @@ module.exports = {
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true
       },
-      moduleName: 'index',
+      moduleName: 'login',
       template: 'views/module.ejs',
-      title: 'Plinth Main'
-    }),
+      title: 'Plinth Login'
+    })
 
   ],
   resolve: {

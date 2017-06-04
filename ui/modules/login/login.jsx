@@ -12,6 +12,6 @@ window.addEventListener('load', () => {
       <Backdrop />
       <Login />
     </div>,
-    document.querySelector('#application-viewport')
+    document.querySelector('#main-viewport')
   )
 })
