@@ -3,6 +3,12 @@
 
 This project is intended to provide a base starting point for a wide range of web application needs. The underlying concept is that a portion of many applications is identicle from application to application depending on the technology and hosting services being used. As such, this project's aim is to provide a strong starting point that includes much of that common code for specific technologies and services.
 
+Very little of this project is developed within the context of this project. As other efforts utilize technology in a powerful, widely applicable, way that code is then translated into this project to ease future development with similar requirements and expectations.
+
+It is assumed that any project using this code as a seed project will remove large sections of it that don't make sense for with that project's needs. For example, it is the opinion of this engineer that static file hosting and API logic concerns should not co-exist in the same server instance. Static assets should be developed and maintained in the way outlined in this project, but final serving to a client system is best done with a technology focused on that requirement. Similarly, server rendered page templates should not co-exist with general API concerns.
+
+If a single product requires all three types of artifacts, it is advisable to explore dividing the product into at least three different constituent projects.
+
 ## Features ##
 ### API or Server-Side logic ###
 `./api/*`
@@ -10,9 +16,8 @@ This project is intended to provide a base starting point for a wide range of we
 This provides a lightweight pattern on top of express for expressing routes associated with Controllers, interfacing with Entities, and interacting with a Data Access Layer.
 
 Built in Database access (will) includes:
-* MySQL
 * Redis
-* RethinkDB
+* MongoDB
 
 Initial routes and controllers (will be) in place for `/user/` with methods for:
 * Create, Read, and Update operations (update is limited to self).
@@ -22,9 +27,6 @@ Initial routes and controllers (will be) in place for `/user/` with methods for:
 * Logout
 
 An additional set of routes will be available that expresses socket based connections for a chat server.
-
-### MySQL Database Project ###
-This project will express a database project.
 
 ### Static File Server ###
 This is intended only for local development, and should not be considered for production uses. 
@@ -55,6 +57,15 @@ All code provided in fully tested with unit tests, end-to-end tests, and code qu
 * Newman
 * Selenium
 
+## Special Topics ##
+
+### Databases ###
+During the initial formative phases of this project, it was the intention to provide structures for interacting with a MySQL database in a project style. This was fully explored and eventually dismissed.
+
+The reasoning behind this is that the tooling available to MySQL databases within a Node environment does not allow for the level of advanced interaction that is required for a fully version controlled database project.
+
+Specificall, the migration tools available do not retain a constant definition of the current version of the database able to be rebuilt at any time and attempts to develop a solution that addresses this concern struggle with the need to execute several statements in a single command. This is an entirely possible ask, but that ask exceed the intended scope of this project.
+
 ### Additional Tooling ###
 * Swagger API documentation
 
@@ -73,7 +84,6 @@ What this does not include that I would have liked to get in is:
 - [x] Newman Tests
 - [ ] Docker config
 - [ ] CI process
-- [ ] MySQL Database project
 - [ ] Redis Session storage
 - [ ] MongoDB connection
 - [ ] Webpack Hot-reload
