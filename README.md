@@ -77,8 +77,13 @@ Specificall, the migration tools available do not retain a constant definition o
 
 What this does not include that I would have liked to get in is:
 
-- [ ] UI using Redux
-- [ ] UI using React-Router
+- [ ] Remove Static file server
+- [ ] Remove All Non EJS UI
+- [ ] Trim all UI requirements down to assume that a UI heavy project will provide those itself.
+
+- [ ] Break Existing UI out into a different project
+- [ ] Move this project into Phaesynthe ownership
+
 - [x] Swagger Documentation engine
 - [ ] Full unit tests
 - [x] Newman Tests
@@ -86,14 +91,9 @@ What this does not include that I would have liked to get in is:
 - [ ] CI process
 - [ ] Redis Session storage
 - [ ] MongoDB connection
-- [ ] Webpack Hot-reload
 - [x] Static module generation
 - [x] Server rendered views
 - [x] Newman Testing
-- [x] Scss font and theme
-- [ ] Scss grid
-- [ ] Scss advanced calculation
-- [ ] Scss animation tooling
 
 ### Local Run
 `npm install` or `yarn install`
