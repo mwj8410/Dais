@@ -9,10 +9,6 @@ module.exports = {
     res.status(401).send();
   },
 
-  csrf: () => {
-    // use: csurf
-  },
-
   get: (req, res) => {
     const values = params.extract(req, [ 'userId' ]);
     const result = User.getById(Number(values.userId));

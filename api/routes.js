@@ -1,6 +1,6 @@
 /* global module, require */
 
-const User = require('./Controllers/User.controller');
+const User = require('./RestHandlers/User.controller');
 
 module.exports = [
 

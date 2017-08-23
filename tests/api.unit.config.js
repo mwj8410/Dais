@@ -1,3 +1,4 @@
+/* global after, before */
 require('babel-polyfill');
 
 import Log from '../api/Utilities/log';

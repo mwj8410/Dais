@@ -1,4 +1,10 @@
 export default {
+  /**
+   * A utility function for extracting and type transformation of request parameters.
+   * @param {object} values the parameters as passed by express
+   * @param {Array} whiteList a list of parameter description objects expressing all allowed parameters. `{ valueName: 'label', dataType: 'string', required: true }`
+   * @returns {object} constructed from the whitelisted parameters provided
+   */
   extract: (values, whiteList) => {
     let output = {};
     let error = false;
