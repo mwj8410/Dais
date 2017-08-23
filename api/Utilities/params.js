@@ -1,23 +1,26 @@
-/* global module */
-
-module.exports = {
-  extract: (req, whiteList) => {
-    // TODO: extend to coerce values to correct data types: ['valueName', 'dataType', required flag ]
+export default {
+  extract: (values, whiteList) => {
     let output = {};
+    let error = false;
 
-    // First, we extract the path parameters
-    Object.keys(req.params).forEach(key => {
-      if (whiteList.indexOf(key) > -1) {
-        output[key] = req.params[key];
+    whiteList.forEach(item => {
+      if (item.required && typeof values[item.valueName] === 'undefined' ) {
+        error = true;
+      }
+      if (typeof values[item.valueName] !== 'undefined') {
+        switch (item.dataType) {
+          case 'number':
+            output[item.valueName] = Number(values[item.valueName]);
+            break;
+          default:
+            output[item.valueName] = values[item.valueName];
+        }
       }
     });
 
-    // Next, we extract the query parameters
-    Object.keys(req.query).forEach(key => {
-      if (whiteList.indexOf(key) > -1) {
-        output[key] = req.query[key];
-      }
-    });
+    if (error === true) {
+      return false;
+    }
 
     return output;
   }

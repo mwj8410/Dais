@@ -1,8 +1,8 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
 
-const log = require('../log');
+import Log from '../log';
 
 const swaggerURIPath = '/swagger';
 
@@ -15,9 +15,9 @@ const walkSync = dir => fs.readdirSync(dir)
   .map(file => fs.statSync(path.join(dir, file)).isDirectory()
     ? walkSync(path.join(dir, file)) : path.join(dir, file).replace(/\\/g, '/'));
 
-module.exports = {
+const Swagger = {
   host: app => {
-    log.info('Swagger', 'host', `Mounting '${swaggerURIPath}/discover' and '${swaggerURIPath}/*'.`);
+    Log.info('Swagger', 'host', `Mounting '${swaggerURIPath}/discover' and '${swaggerURIPath}/*'.`);
     // Host the Swagger configuration
     app.get(`${swaggerURIPath}/discover` , (req, res) => res.send(swaggerConfig));
 
@@ -27,28 +27,30 @@ module.exports = {
 
   initialize: path => {
     const fileNames = flatten(walkSync(path)).filter(fileName => /\.swagger\.js$/i.test(fileName));
-    // collectDefinitionFiles(path);
 
     fileNames.forEach(definitionFileName => {
       const definition = require(definitionFileName);
-      if (definition.paths) {
-        Object.keys(definition.paths).forEach(uri => {
+
+      if (definition.default && definition.default.paths) {
+        Object.keys(definition.default.paths).forEach(uri => {
           // If the uri is not yet registered in the definition, register it.
           if (typeof swaggerConfig.paths[uri] === 'undefined') {
             swaggerConfig.paths[uri] = {};
           }
 
-          Object.assign(swaggerConfig.paths[uri], definition.paths[uri]);
-          log.info('Swagger', 'initialize', `Mounted Swagger path '${uri}' with methods: ${Object.keys(definition.paths[uri])}`);
+          Object.assign(swaggerConfig.paths[uri], definition.default.paths[uri]);
+          Log.info('Swagger', 'initialize', `Mounted Swagger path '${uri}' with methods: ${Object.keys(definition.default.paths[uri])}`);
         });
       }
 
       // Now, create any model definitions provided
-      if (definition.definitions) {
-        Object.assign(swaggerConfig.definitions, definition.definitions);
-        log.info('Swagger', 'initialize', `Mounted Swagger definitions for: ${Object.keys(definition.definitions)}`);
+      if (definition.default.definitions) {
+        Object.assign(swaggerConfig.definitions, definition.default.definitions);
+        Log.info('Swagger', 'initialize', `Mounted Swagger definitions for: ${Object.keys(definition.default.definitions)}`);
       }
     });
 
   }
 };
+
+export default Swagger;

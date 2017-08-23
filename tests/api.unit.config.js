@@ -1,25 +1,14 @@
-/* global after, describe, it, require */
+require('babel-polyfill');
 
-const expect = require('expect');
-const host = require('../api/host');
-const log = require('../api/Utilities/log');
+import Log from '../api/Utilities/log';
+Log.setLevel('silent'); // Doing this first
 
-before(done => {
-  log.setLevel('silent');
+import host from '../api/host';
+
+before(() => {
   require('../api/api');
-  setTimeout(done, 200);
+  global.application = host.getAppInstance();
 });
 
-after(() => {
-  host.close();
-});
+// Manually include each test set here
 
-describe('Testing Framework', () => {
-  it('launches the application for testing', () => {
-    expect(true).toBe(true);
-  });
-});
-
-// API Tests
-// Unit
-require('./api_unit/User.controller.spec.js');

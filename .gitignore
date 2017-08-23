@@ -1,24 +1,55 @@
-/.tmp
-/logs
+# ##### ##### ##### ##### #
+#  Application Specifics  #
+# ##### ##### ##### ##### #
 
 
-##################
-# Testing Output #
-##################
-/coverage
-/reports
-
-###################
-# Node.js and NPM #
-###################
-/node_modules
-.node_history
-npm-debug.log
+# ##### ##### ##### ##### #
+#           Logs          #
+# ##### ##### ##### ##### #
+logs
 *.log
+*.log.*
+npm-debug.log*
 
-#################
-# IDE Specifics #
-#################
-/.idea
-/.netbeans
+
+# ##### ##### ##### ##### #
+#      Runtime Data       #
+# ##### ##### ##### ##### #
+pids
+*.pid
+*.seed
+
+
+# ##### ##### ##### ##### #
+#    Testing and Cache    #
+# ##### ##### ##### ##### #
+.node_repl_history
+.npm
+.nyc_output
+.tmp
+coverage
+lib-cov
+
+
+# ##### ##### ##### ##### #
+#          Build          #
+# ##### ##### ##### ##### #
+build/*
+
+
+# ##### ##### ##### ##### #
+#         Packages        #
+# ##### ##### ##### ##### #
+node_modules
+jspm_packages
+.node_repl_history
+.npm
+
+
+# ##### ##### ##### ##### #
+#           IDEs          #
+# ##### ##### ##### ##### #
+.idea
+.netbeans
 nbproject
+.vscode

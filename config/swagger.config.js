@@ -1,4 +1,4 @@
-const appConfig = require('./application.config');
+import * as Config from './application.config';
 const packageRef = require('../package.json');
 
 /**
@@ -9,13 +9,13 @@ module.exports = {
   swagger: '2.0',
   info: {
     version: packageRef.version,
-    title: appConfig.internalName,
+    title: Config.internalName,
     license: {
       name: packageRef.license
     }
   },
-  host: 'petstore.swagger.io', // TODO: correct
-  basePath: appConfig.api.baseUrl,
+  host: 'localhost:24601', // TODO: correct. Should pull from api origin
+  basePath: Config.api.baseUrl,
   schemes: [ 'http' ],
   consumes: [ 'application/json' ],
   produces: [ 'application/json' ],
@@ -39,6 +39,26 @@ module.exports = {
           type: 'integer',
           format: 'int32'
         },
+        message: {
+          type: 'string'
+        }
+      }
+    },
+    ServerError: {
+      required: [
+        'message'
+      ],
+      properties: {
+        message: {
+          type: 'string'
+        }
+      }
+    },
+    Unauthorized: {
+      required: [
+        'message'
+      ],
+      properties: {
         message: {
           type: 'string'
         }
