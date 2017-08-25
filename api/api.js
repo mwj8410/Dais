@@ -1,19 +1,17 @@
 /* global process, require */
+
 // Libraries
-const host = require('./host');
-const log = require('./Utilities/log');
-const routes = require('./routes');
+import host from './host';
+import Log from './Utilities/log';
+import routes from './routes';
 
-const apiConfig = require('../config/application.config').api;
-const swagger = require('./Utilities/swagger/swagger');
+import * as Config from '../config/application.config';
+import swagger from './Utilities/swagger/swagger';
 
-log.info('API', 'main', 'startup sequence beginning.');
+Log.info('Authentication MicroService', 'main', 'startup sequence beginning.');
 
-host.initialize(apiConfig);
+host.initialize(Config.api);
 host.mountRoutes(routes);
-
-host.mountStatic('./.tmp/');
-host.mountViews('index');
 
 // Initialize swagger if the API process is not started in production mode.
 if (process.env.NODE_ENV !== 'production') {

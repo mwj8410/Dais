@@ -1,13 +1,32 @@
 # Plinth [![CircleCI](https://circleci.com/gh/mwj8410/Plinth/tree/development.svg?style=svg)](https://circleci.com/gh/mwj8410/Plinth/tree/development) ![Dependencies](https://david-dm.org/mwj8410/Plinth.svg)
 *noun* A heavy base supporting a statue or vase. The lower square slab at the base of a column.
 
-This project is intended to provide a base starting point for a wide range of web application needs. The underlying concept is that a portion of many applications is identicle from application to application depending on the technology and hosting services being used. As such, this project's aim is to provide a strong starting point that includes much of that common code for specific technologies and services.
+This project is intended to provide a basis for rapid web-service development. The underlying concept is that a portion of web-service is solving identical problems as any other web service. This is the basic reasoning behind framework offering within the web-service technology space. Those frameworks, however, do not evolve along with the solutions that utilize them, and thus, end up getting in the way of problem solving.
+
+This project is intended to provide a base starting point for a wide range of web application needs. The underlying concept is that a portion of many applications is identical from application to application depending on the technology and hosting services being used. As such, this project's aim is to provide a strong starting point that includes much of that common code for specific technologies and services.
 
 Very little of this project is developed within the context of this project. As other efforts utilize technology in a powerful, widely applicable, way that code is then translated into this project to ease future development with similar requirements and expectations.
 
-It is assumed that any project using this code as a seed project will remove large sections of it that don't make sense for with that project's needs. For example, it is the opinion of this engineer that static file hosting and API logic concerns should not co-exist in the same server instance. Static assets should be developed and maintained in the way outlined in this project, but final serving to a client system is best done with a technology focused on that requirement. Similarly, server rendered page templates should not co-exist with general API concerns.
+It is assumed that any project using this code as a seed project will remove or refactor large sections that don't make sense for that project's needs. 
 
-If a single product requires all three types of artifacts, it is advisable to explore dividing the product into at least three different constituent projects.
+## Getting Started ##
+
+1. Clone this repo into the folder where you wish to begin developing.
+2. Then delete the `.git` folder.
+3. `git init`
+4. Edit `package.json`, each file in `./config/`, and this file to remove all `Plinth` identification.
+5. Joy.
+
+## Concepts ##
+### Data Sources ###
+At first glance, and perhaps for a while, this may seem synonymous with a database. The scope of this project does not permit a full demonstration of the difference, but leveraging this concept can greatly simplify some projects.
+ 
+First, don't think of a database as a database. Instead, think of it as a data source.
+
+ToDo: Complete this section
+
+### Configuration ###
+
 
 ## Features ##
 ### API or Server-Side logic ###
@@ -56,15 +75,6 @@ All code provided in fully tested with unit tests, end-to-end tests, and code qu
 * Mocha
 * Newman
 * Selenium
-
-## Special Topics ##
-
-### Databases ###
-During the initial formative phases of this project, it was the intention to provide structures for interacting with a MySQL database in a project style. This was fully explored and eventually dismissed.
-
-The reasoning behind this is that the tooling available to MySQL databases within a Node environment does not allow for the level of advanced interaction that is required for a fully version controlled database project.
-
-Specificall, the migration tools available do not retain a constant definition of the current version of the database able to be rebuilt at any time and attempts to develop a solution that addresses this concern struggle with the need to execute several statements in a single command. This is an entirely possible ask, but that ask exceed the intended scope of this project.
 
 ### Additional Tooling ###
 * Swagger API documentation

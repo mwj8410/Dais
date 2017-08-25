@@ -4,7 +4,7 @@
  *
  */
 
-import db from '../Connections/Mongo.datastore';
+import db from '../Connections/Mongo.datasource';
 import * as StandardResponses from './standardResponses';
 import Log from './log';
 
@@ -42,6 +42,7 @@ function RouteSecurity (profiles, handler) {
   if (!profiles || profiles.length === 0) {
     return handler;
   }
+  // ToDo: remove the asyn usage. It causes trouble at this moment.
 
   // This is a little tricky
   // Return a function that has the `profiles` array and the `handler` function in scope

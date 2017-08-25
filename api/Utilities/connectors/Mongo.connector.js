@@ -18,7 +18,6 @@ const connectToMongo = (dbUrl) => {
         return reject(err);
       }
       Log.info('Mongo', 'Client Startup', 'Connected to remote resource.');
-
       return resolve(dbInstance);
     });
   });
@@ -29,9 +28,9 @@ const connectToMongo = (dbUrl) => {
  * exists already or not.
  *
  * @param {string} connectionName The internal name for the connection
- * @return {object} An open connection to the indicated MongoDb resource
+ * @return {Promise} Establishes an open connection to the indicated MongoDb resource
  */
-async function GetConnect (connectionName) {
+const MongoConnector = (connectionName) => {
   const dbConfig = DbConfig[connectionName];
   const dbUrl = `mongodb://${dbConfig.url}:${dbConfig.port}/${dbConfig.database}`;
 
@@ -39,9 +38,15 @@ async function GetConnect (connectionName) {
     return openConnections[connectionName];
   }
 
-  let currentConnection = await connectToMongo(dbUrl);
-  openConnections[connectionName] = currentConnection;
-  return currentConnection;
-}
+  return connectToMongo(dbUrl)
+    .then(dbConnection => {
+      openConnections[connectionName] = dbConnection;
+      return dbConnection;
+    })
+    .catch(error => {
+      Log.error('MongoConnector', 'Connector', `Encountered an error while connecting to the remote resource.\n${error}`);
+      return error;
+    });
+};
 
-export default GetConnect;
+export default MongoConnector;

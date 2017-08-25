@@ -14,7 +14,7 @@ module.exports = {
       name: packageRef.license
     }
   },
-  host: 'localhost:24601', // TODO: correct. Should pull from api origin
+  host: `${Config.api.url}:${Config.api.port}`,
   basePath: Config.api.baseUrl,
   schemes: [ 'http' ],
   consumes: [ 'application/json' ],
@@ -25,10 +25,10 @@ module.exports = {
 
   // Populated dynamically in the swagger initialization process.
   definitions: {
-
     // Any definition listed here should be considered applicable for global use. Standard response objects that are used
     // across the API portion should be described here, while module specific patterns should be described in the
     // corresponding module.
+    // ToDo: refence the application standard response definitions
     Error: {
       required: [
         'code',
@@ -49,6 +49,10 @@ module.exports = {
         'message'
       ],
       properties: {
+        code: {
+          type: 'integer',
+          format: 'int32'
+        },
         message: {
           type: 'string'
         }
@@ -59,6 +63,10 @@ module.exports = {
         'message'
       ],
       properties: {
+        code: {
+          type: 'integer',
+          format: 'int32'
+        },
         message: {
           type: 'string'
         }

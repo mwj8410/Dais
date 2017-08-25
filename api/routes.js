@@ -1,11 +1,12 @@
 /* global module, require */
 
-const User = require('./RestHandlers/User.controller');
+const User = require('./RestHandlers/User.handler');
 
 module.exports = [
 
-  [ '/user/:userId', 'GET', User.get, [] ],
+  [ '/user/:id', 'GET', User.get, [] ],
+  [ '/user/:id', 'DELETE', User.update, [] ],
   [ '/user/', 'POST', User.create, [] ],
-  [ '/user/login', 'POST', User.login, [] ]
+  [ '/user/:id', 'PUT', User.update, [] ]
 
 ];

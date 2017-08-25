@@ -1,77 +1,71 @@
-module.exports = {
+export default {
   paths: {
-    '/pets': {
-      get: {
-        summary: 'List all pets',
-        operationId: 'listPets',
-        tags: [ 'pets' ],
-        parameters: [
-          {
-            name: 'limit',
-            in: 'query',
-            description: 'How many items to return at one time (max 100)',
-            required: false,
-            type: 'integer',
-            format: 'int32'
-          }
-        ],
-        responses: {
-          200: {
-            description: 'An paged array of pets',
-            headers: {
-              'x-next': {
-                type: 'string',
-                description: 'A link to the next page of responses'
-              }
-            },
-            schema: {
-              $ref: '#/definitions/Pets'
-            }
-          },
-          default: {
-            description: 'unexpected error',
-            schema: {
-              $ref: '#/definitions/Error'
-            }
-          }
-        }
-      },
+    '/user': {
       post: {
-        summary: 'Create a pet',
-        operationId: 'createPets',
-        tags: [ 'pets' ],
-        responses: {
-          201: {
-            description: 'Null response'
-          },
-          default: {
-            description: 'unexpected error',
-            schema: {
-              $ref: '#/definitions/Error'
-            }
-          }
-        }
-      }
-    },
-    '/pets/{petId}': {
-      get: {
-        summary: 'Info for a specific pet',
-        operationId: 'showPetById',
-        tags: [ 'pets' ],
+        summary: 'Create a new user record',
+        operationId: 'createUser',
+        tags: [ 'user' ],
         parameters: [
           {
-            name: 'petId',
-            in: 'path',
+            name: 'sourceToken',
+            in: 'formData',
+            description: 'A token used to validate the sending origin.',
             required: true,
-            description: 'The id of the pet to retrieve',
-            type: 'string'
+            type: 'string',
+            default: '1234567812345678123456781234567812345678123456781234567812345678'
+          },
+          {
+            name: 'credential',
+            in: 'formData',
+            description: 'A token used to validate the sending origin.',
+            required: true,
+            type: 'string',
+            default: 'user@test.com'
+          },
+          {
+            name: 'passCode',
+            in: 'formData',
+            description: 'A pass code that is presumed to be associated with the id provided.',
+            required: true,
+            type: 'string',
+            default: 'user@test.com'
           }
         ],
         responses: {
           200: {
-            description: 'Expected response to a valid request',
+            description: 'The information contained in the request passed authentication and resolved to a user universal id.',
             schema: {
-              $ref: '#/definitions/Pets'
+              $ref: '#/definitions/PersonId'
+            }
+          },
+          401: {
+            description: 'The requesting system is not authorized to make requests with this service.',
+            schema: {
+              $ref: '#/definitions/Unauthorized'
+            }
+          },
+          404: {
+            description: 'The credentials provided did not map to any credential on record.',
+            schema: {
+              $ref: '#/definitions/Error'
+            }
+          },
+          409: {
+            description: 'The entity described in the request is refused.',
+            schema: {
+              $ref: '#/definitions/Error'
+            }
+          },
+          422: {
+            description: 'The request is valid, but incomplete or incorrect in some way.',
+            schema: {
+              $ref: '#/definitions/Error'
+            }
+          },
+          500: {
+            description: 'There has been an internal error that cannot be resolved.',
+            schema: {
+              $ref: '#/definitions/ServerError'
             }
           },
           default: {
@@ -85,25 +79,12 @@ module.exports = {
     }
   },
   definitions: {
-    Pet: {
-      required: [ 'id', 'name' ],
+    PersonId: {
+      required: [ 'id' ],
       properties: {
         id: {
-          type: 'integer',
-          format: 'int64'
-        },
-        name: {
-          type: 'string'
-        },
-        tag: {
           type: 'string'
         }
-      }
-    },
-    Pets: {
-      type: 'array',
-      items: {
-        $ref: '#/definitions/Pet'
       }
     }
   }

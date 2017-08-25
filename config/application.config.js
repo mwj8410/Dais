@@ -1,4 +1,5 @@
 export const api = {
+  url: process.env.HOST_URL,
   origins: process.env.NODE_ENV === 'production' ?
     process.env.CORS_ORIGINS :
     `${process.env.CORS_ORIGINS},${
@@ -6,7 +7,7 @@ export const api = {
         'http://localhost',
         'https://localhost'
       ].join(',')
-      }`
+    }`
   ,
 
   // When in production mode, we want to expose the standard port, otherwise, expose the development port
