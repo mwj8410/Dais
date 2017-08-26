@@ -3,12 +3,13 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import session from 'express-session';
+const MongoStore = require('connect-mongo')(session);
 
 import RouteSecurity from './Utilities/RouteSecurity/routeSecurity.index';
 import Log from './Utilities/log';
+import * as Config from '../config/application.config';
 
 let app = express();
-let appConfig;
 let server;
 
 export default {
@@ -18,28 +19,24 @@ export default {
 
   getAppInstance: () => app,
 
-  initialize: (config) => {
-    if (!config) {
-      Log.error('Host', 'initialize', 'The app module requires that a configuration object be provided.');
-      return;
-    }
-    appConfig = config;
-    console.log(appConfig);
-
+  initialize: () => {
     // Add Session
     // ToDo: connect a session data store ... likely Mongo
-    let sessionsettings = {
-      secret: appConfig.sessionSecret,
+    let sessionSettings = {
       cookie: {},
       resave: false,
-      saveUninitialized: true
+      saveUninitialized: true,
+      secret: Config.Session.sessionSecret,
+      store: new MongoStore({
+        url: `mongodb://${Config.Session.url}/?authSource=${Config.Session.database}&w=1`
+      })
     };
 
     if (app.get('env') === 'production') {
       app.set('trust proxy', 1); // trust first proxy
-      sessionsettings.cookie.secure = true; // serve secure cookies
+      sessionSettings.cookie.secure = true; // serve secure cookies
     }
-    app.use(session(sessionsettings));
+    app.use(session(sessionSettings));
     // Finish Session
 
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,7 +44,7 @@ export default {
     app.use(bodyParser.text());
     app.use((req, res, next) => {
       // These need to be made available in configuration
-      res.header('Access-Control-Allow-Origin', appConfig.origins);
+      res.header('Access-Control-Allow-Origin', Config.api.origins);
       res.header('Access-Control-Allow-Methods', 'GET,PATCH,PUT,POST,DELETE');
       res.header('Access-Control-Allow-Headers', 'Content-Type');
       next();
@@ -56,8 +53,8 @@ export default {
 
   listen: () => {
     // Retain a reference to the started application, so it can be closed later.
-    server = app.listen(appConfig.port, () => {
-      Log.info('Host', 'listen', `listening on port: ${appConfig.port}.`);
+    server = app.listen(Config.api.port, () => {
+      Log.notice('Host', 'listen', `listening on port: ${Config.api.port}.`);
     });
   },
 

@@ -11,12 +11,16 @@ export const api = {
   ,
 
   // When in production mode, we want to expose the standard port, otherwise, expose the development port
-  port: process.env.NODE_ENV === 'production' ? 80 : process.env.DEV_PORT,
-
-  // Session settings
-  sessionSecret: 'keyboard kitty' // ToDo: place in env variable
+  port: process.env.NODE_ENV === 'production' ? 80 : process.env.DEV_PORT
 };
 
-export const externalName = 'Plinth MicroService';
-
 export const internalName = 'Plinth MicroService';
+
+export const Session = {
+  // Currently configures for the `connect-mongo` session store
+  database:process.env.SESSION_DB,
+  sessionSecret: process.env.SESSION_SECRET,
+  url: process.env.SESSION_URL,
+  user: process.env.SESSION_USER,
+  password: process.env.SESSION_PASSWORD
+};
