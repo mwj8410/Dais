@@ -8,6 +8,7 @@ module.exports = [
   [ '/user/:id', 'DELETE', User.update, [ 'loggedIn' ] ],
   [ '/user/:id', 'PUT', User.update, [ 'loggedIn' ] ],
   [ '/user/', 'POST', User.create, [] ],
-  [ '/user/login', 'POST', User.login, [] ]
+  [ '/user/login', 'POST', User.login, [] ],
+  [ '/user/logout', 'POST', User.logout, [] ]
 
 ];

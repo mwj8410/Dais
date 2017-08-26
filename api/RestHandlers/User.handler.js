@@ -55,6 +55,12 @@ module.exports = {
       });
   },
 
+  logout: (req, res) => {
+    req.session.destroy(() => {
+      return res.status(200).send();
+    });
+  },
+
   patch: (req, res) => {
     return res.status(200).send();
   },

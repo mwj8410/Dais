@@ -21,7 +21,6 @@ export default {
 
   initialize: () => {
     // Add Session
-    // ToDo: connect a session data store ... likely Mongo
     let sessionSettings = {
       cookie: {},
       resave: false,
