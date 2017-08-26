@@ -2,8 +2,9 @@
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import session from 'express-session';
 
-import RouteSecurity from './Utilities/routeSecurity';
+import RouteSecurity from './Utilities/RouteSecurity/routeSecurity.index';
 import Log from './Utilities/log';
 
 let app = express();
@@ -23,6 +24,23 @@ export default {
       return;
     }
     appConfig = config;
+    console.log(appConfig);
+
+    // Add Session
+    // ToDo: connect a session data store ... likely Mongo
+    let sessionsettings = {
+      secret: appConfig.sessionSecret,
+      cookie: {},
+      resave: false,
+      saveUninitialized: true
+    };
+
+    if (app.get('env') === 'production') {
+      app.set('trust proxy', 1); // trust first proxy
+      sessionsettings.cookie.secure = true; // serve secure cookies
+    }
+    app.use(session(sessionsettings));
+    // Finish Session
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -54,24 +72,24 @@ export default {
     routeList.forEach(route => {
       switch (route[1]) {
         case 'GET':
-          app.get(`/${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.get(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'POST':
-          app.post(`/${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.post(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'PUT':
-          app.put(`/${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.put(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'PATCH':
-          app.patch(`/${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.patch(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'DELETE':
-          app.delete(`/${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.delete(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         default:
           break;
       }
-      Log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} /${route[0]}`);
+      Log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} /rest${route[0]}`);
     });
   }
 };

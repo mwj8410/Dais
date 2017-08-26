@@ -6,7 +6,7 @@
 // ToDo: full unit testing
 
 import Log from '../Utilities/log';
-import MongoConnector from '../Utilities/connectors/Mongo.connector';
+import MongoConnector from '../Utilities/Connectors/Mongo.connector';
 
 // corresponds to an entry in `./config/connectionSources.config.js`
 const connectionName = 'mongo';

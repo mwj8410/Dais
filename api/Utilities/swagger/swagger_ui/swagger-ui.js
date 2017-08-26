@@ -4,7 +4,7 @@
  * @link http://swagger.io
  * @license Apache-2.0
  */
-(function(){/* jshint ignore:start */ 
+(function(){/* jshint ignore:start */
  {(function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['apikey_auth'] = template({"1":function(container,depth0,helpers,partials,data) {
@@ -114,7 +114,7 @@ templates['content_type'] = template({"1":function(container,depth0,helpers,part
 
   return "<label data-sw-translate for=\""
     + ((stack1 = (helpers.escape || (depth0 && depth0.escape) || alias2).call(alias1,(depth0 != null ? depth0.contentTypeId : depth0),{"name":"escape","hash":{},"data":data})) != null ? stack1 : "")
-    + "\">Response Content Type</label>\n<select name=\"contentType\" id=\""
+    + "\">RouteSecurity Content Type</label>\n<select name=\"contentType\" id=\""
     + ((stack1 = (helpers.escape || (depth0 && depth0.escape) || alias2).call(alias1,(depth0 != null ? depth0.contentTypeId : depth0),{"name":"escape","hash":{},"data":data})) != null ? stack1 : "")
     + "\">\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.produces : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
@@ -294,7 +294,7 @@ templates['operation'] = template({"1":function(container,depth0,helpers,partial
 },"9":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
-  return "          <div class=\"response-class\">\n            <h4><span data-sw-translate>Response Class</span> (<span data-sw-translate>Status</span> "
+  return "          <div class=\"response-class\">\n            <h4><span data-sw-translate>RouteSecurity Class</span> (<span data-sw-translate>Status</span> "
     + ((stack1 = (helpers.escape || (depth0 && depth0.escape) || helpers.helperMissing).call(alias1,(depth0 != null ? depth0.successCode : depth0),{"name":"escape","hash":{},"data":data})) != null ? stack1 : "")
     + ")</h4>\n              "
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.successDescription : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -326,11 +326,11 @@ templates['operation'] = template({"1":function(container,depth0,helpers,partial
 },"15":function(container,depth0,helpers,partials,data) {
     return "          <h4 data-sw-translate>Parameters</h4>\n          <table class='fullwidth parameters'>\n          <thead>\n            <tr>\n            <th style=\"width: 100px; max-width: 100px\" data-sw-translate>Parameter</th>\n            <th style=\"width: 310px; max-width: 310px\" data-sw-translate>Value</th>\n            <th style=\"width: 200px; max-width: 200px\" data-sw-translate>Description</th>\n            <th style=\"width: 100px; max-width: 100px\" data-sw-translate>Parameter Type</th>\n            <th style=\"width: 220px; max-width: 230px\" data-sw-translate>Data Type</th>\n            </tr>\n          </thead>\n          <tbody class=\"operation-params\">\n\n          </tbody>\n          </table>\n";
 },"17":function(container,depth0,helpers,partials,data) {
-    return "          <div style='margin:0;padding:0;display:inline'></div>\n          <h4 data-sw-translate>Response Messages</h4>\n          <table class='fullwidth response-messages'>\n            <thead>\n            <tr>\n              <th data-sw-translate>HTTP Status Code</th>\n              <th data-sw-translate>Reason</th>\n              <th data-sw-translate>Response Model</th>\n              <th data-sw-translate>Headers</th>\n            </tr>\n            </thead>\n            <tbody class=\"operation-status\">\n            </tbody>\n          </table>\n";
+    return "          <div style='margin:0;padding:0;display:inline'></div>\n          <h4 data-sw-translate>RouteSecurity Messages</h4>\n          <table class='fullwidth response-messages'>\n            <thead>\n            <tr>\n              <th data-sw-translate>HTTP Status Code</th>\n              <th data-sw-translate>Reason</th>\n              <th data-sw-translate>RouteSecurity Model</th>\n              <th data-sw-translate>Headers</th>\n            </tr>\n            </thead>\n            <tbody class=\"operation-status\">\n            </tbody>\n          </table>\n";
 },"19":function(container,depth0,helpers,partials,data) {
     return "";
 },"21":function(container,depth0,helpers,partials,data) {
-    return "          <div class='sandbox_header'>\n            <input class='submit' type='submit' value='Try it out!' data-sw-translate/>\n            <a href='#' class='response_hider' style='display:none' data-sw-translate>Hide Response</a>\n            <span class='response_throbber' style='display:none'></span>\n          </div>\n";
+    return "          <div class='sandbox_header'>\n            <input class='submit' type='submit' value='Try it out!' data-sw-translate/>\n            <a href='#' class='response_hider' style='display:none' data-sw-translate>Hide RouteSecurity</a>\n            <span class='response_throbber' style='display:none'></span>\n          </div>\n";
 },"23":function(container,depth0,helpers,partials,data) {
     return "          <h4 data-sw-translate>Request Headers</h4>\n          <div class='block request_headers'></div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -379,7 +379,7 @@ templates['operation'] = template({"1":function(container,depth0,helpers,partial
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isReadOnly : depth0),{"name":"if","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data})) != null ? stack1 : "")
     + "        </form>\n        <div class='response' style='display:none'>\n          <h4 class='curl'>Curl</h4>\n          <div class='block curl'></div>\n          <h4 data-sw-translate>Request URL</h4>\n          <div class='block request_url'></div>\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showRequestHeaders : depth0),{"name":"if","hash":{},"fn":container.program(23, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "          <h4 data-sw-translate>Response Body</h4>\n          <div class='block response_body'></div>\n          <h4 data-sw-translate>Response Code</h4>\n          <div class='block response_code'></div>\n          <h4 data-sw-translate>Response Headers</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n";
+    + "          <h4 data-sw-translate>RouteSecurity Body</h4>\n          <div class='block response_body'></div>\n          <h4 data-sw-translate>RouteSecurity Code</h4>\n          <div class='block response_code'></div>\n          <h4 data-sw-translate>RouteSecurity Headers</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n";
 },"useData":true});
 templates['param'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -685,7 +685,7 @@ templates['resource'] = template({"1":function(container,depth0,helpers,partials
     + ((stack1 = (helpers.sanitize || (depth0 && depth0.sanitize) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.url : depth0),{"name":"sanitize","hash":{},"data":data})) != null ? stack1 : "")
     + "' data-sw-translate>Raw</a>\n    </li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, buffer = 
+    var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, buffer =
   "<div class='heading'>\n  <h2>\n    <a href='#!/"
     + ((stack1 = (helpers.sanitize || (depth0 && depth0.sanitize) || alias2).call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"sanitize","hash":{},"data":data})) != null ? stack1 : "")
     + "' class=\"toggleEndpointList\" data-id=\""
@@ -732,7 +732,7 @@ templates['response_content_type'] = template({"1":function(container,depth0,hel
 
   return "<label data-sw-translate for=\""
     + alias4(((helper = (helper = helpers.responseContentTypeId || (depth0 != null ? depth0.responseContentTypeId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"responseContentTypeId","hash":{},"data":data}) : helper)))
-    + "\">Response Content Type</label>\n<select name=\"responseContentType\" id=\""
+    + "\">RouteSecurity Content Type</label>\n<select name=\"responseContentType\" id=\""
     + alias4(((helper = (helper = helpers.responseContentTypeId || (depth0 != null ? depth0.responseContentTypeId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"responseContentTypeId","hash":{},"data":data}) : helper)))
     + "\">\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.produces : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
@@ -797,7 +797,7 @@ templates['status_code'] = template({"1":function(container,depth0,helpers,parti
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.headers : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </tbody>\n  </table>\n</td>";
 },"useData":true});
-})();} 
+})();}
  /* jshint ignore:end */
 'use strict';
 
@@ -6674,7 +6674,7 @@ Model.prototype.createJSONSample = Model.prototype.getSampleValue = function (mo
 
   modelsToIgnore[this.name] = this;
 
-  // Response support
+  // RouteSecurity support
   if (this.examples && _.isPlainObject(this.examples) && this.examples['application/json']) {
     this.definition.example = this.examples['application/json'];
 
@@ -20457,7 +20457,7 @@ function params(str){
 };
 
 /**
- * Initialize a new `Response` with the given `xhr`.
+ * Initialize a new `RouteSecurity` with the given `xhr`.
  *
  *  - set flags (.ok, .error, etc)
  *  - parse header
@@ -20652,7 +20652,7 @@ Response.prototype.toError = function(){
 };
 
 /**
- * Expose `Response`.
+ * Expose `RouteSecurity`.
  */
 
 request.Response = Response;
@@ -20935,7 +20935,7 @@ Request.prototype._appendQueryString = function(){
 
 /**
  * Initiate request, invoking callback `fn(res)`
- * with an instanceof `Response`.
+ * with an instanceof `RouteSecurity`.
  *
  * @param {Function} fn
  * @return {Request} for chaining
@@ -24707,7 +24707,7 @@ SwaggerUi.partials.signature = (function () {
 
     modelsToIgnore[value.name] = value;
 
-    // Response support
+    // RouteSecurity support
     if (value.examples && _.isPlainObject(value.examples)) {
       value = _.cloneDeep(value);
       var keys = Object.keys(value.examples);
@@ -24861,7 +24861,7 @@ SwaggerUi.partials.signature = (function () {
     return result;
   };
   */
-  
+
   var getPrefix = function (name, xml) {
     var result = name || '';
 
@@ -24999,7 +24999,7 @@ SwaggerUi.partials.signature = (function () {
 
     if (namespace) {
       attrs.push(namespace);
-    }   
+    }
 
     if (!properties && !additionalProperties) { return getErrorMessage(); }
 
@@ -25044,10 +25044,10 @@ SwaggerUi.partials.signature = (function () {
     var output, index;
     config = config || {};
     config.modelsToIgnore = config.modelsToIgnore || [];
-   
+
     var descriptor = _.isString($ref) ? getDescriptorByRef($ref, name, models, config)
         : getDescriptor(name, definition, models, config);
-    
+
     if (!descriptor) {
       return getErrorMessage();
     }
@@ -25098,7 +25098,7 @@ SwaggerUi.partials.signature = (function () {
     else {
         name = name || model.name;
     }
-    
+
     if (config.modelsToIgnore.indexOf($ref) > -1) {
       type = 'loop';
       config.loopTo = modelType;
@@ -25109,7 +25109,7 @@ SwaggerUi.partials.signature = (function () {
     if (!model.definition) {
       return null;
     }
-    return new Descriptor(name, type, model.definition, models, config);    
+    return new Descriptor(name, type, model.definition, models, config);
   }
 
   function getDescriptor (name, definition, models, config){

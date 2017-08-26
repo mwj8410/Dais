@@ -4,9 +4,10 @@ const User = require('./RestHandlers/User.handler');
 
 module.exports = [
 
-  [ '/user/:id', 'GET', User.get, [] ],
-  [ '/user/:id', 'DELETE', User.update, [] ],
+  [ '/user/:id', 'GET', User.get, [ 'loggedIn' ] ],
+  [ '/user/:id', 'DELETE', User.update, [ 'loggedIn' ] ],
+  [ '/user/:id', 'PUT', User.update, [ 'loggedIn' ] ],
   [ '/user/', 'POST', User.create, [] ],
-  [ '/user/:id', 'PUT', User.update, [] ]
+  [ '/user/login', 'POST', User.login, [] ]
 
 ];

@@ -11,7 +11,10 @@ export const api = {
   ,
 
   // When in production mode, we want to expose the standard port, otherwise, expose the development port
-  port: process.env.NODE_ENV === 'production' ? 80 : process.env.DEV_PORT
+  port: process.env.NODE_ENV === 'production' ? 80 : process.env.DEV_PORT,
+
+  // Session settings
+  sessionSecret: 'keyboard kitty' // ToDo: place in env variable
 };
 
 export const externalName = 'Plinth MicroService';
