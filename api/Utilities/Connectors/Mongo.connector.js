@@ -6,7 +6,7 @@ let MongoClient = MongoDb.MongoClient;
 let openConnections = {};
 
 /**
- * Used internally to establish the actual connection to Mongo
+ * Used internally to establish the actual connection to MongoDatasource
  * @param {string} dbUrl the full URI with DB, user name, and password used to connect to the MongoDb
  * @returns {Promise}
  */
@@ -14,10 +14,10 @@ const connectToMongo = (dbUrl) => {
   return new Promise((resolve, reject) => {
     MongoClient.connect(dbUrl, (err, dbInstance) => {
       if (err) {
-        Log.error('Mongo', 'Client Startup', `Encountered an error while connecting to the remote resource.\n${err}`);
+        Log.error('MongoDatasource', 'Client Startup', `Encountered an error while connecting to the remote resource.\n${err}`);
         return reject(err);
       }
-      Log.info('Mongo', 'Client Startup', 'Connected to remote resource.');
+      Log.info('MongoDatasource', 'Client Startup', 'Connected to remote resource.');
       return resolve(dbInstance);
     });
   });

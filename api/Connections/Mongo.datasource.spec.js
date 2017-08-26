@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 import MongoDataSource from './Mongo.datasource';
 
-describe('Data Source: Mongo', () => {
+describe('Data Source: MongoDatasource', () => {
 
   before(done => {
     MongoDataSource.connect().then(() => {
@@ -127,7 +127,7 @@ describe('Data Source: Mongo', () => {
       expect(MongoDataSource.getRawConnection).to.be.a('function');
     });
 
-    it('provides a Mongo database connection', () => {
+    it('provides a MongoDatasource database connection', () => {
       let rawCon = MongoDataSource.getRawConnection();
 
       expect(rawCon).to.be.a('object');

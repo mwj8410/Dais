@@ -8,6 +8,8 @@
 import Log from '../Utilities/log';
 import MongoConnector from '../Utilities/Connectors/Mongo.connector';
 
+import MongoDataSourceSchema from '../../Database/MongoDataSource/MongoDataSource.schema';
+
 // corresponds to an entry in `./config/connectionSources.config.js`
 const connectionName = 'mongo';
 
@@ -21,7 +23,9 @@ const MongoDataSource = {
   connect: () => {
     return MongoConnector(connectionName)
       .then(dbConnection => {
+        Log.notice('MongoDataSource', 'connect', 'Connected to remote data source: MongoDataSource');
         db = dbConnection;
+        MongoDataSource.initializeDatabase();
       });
   },
 
@@ -36,10 +40,10 @@ const MongoDataSource = {
     db.collection(collectionName).insertOne(values, (error, response) => {
       if (error) {
         if (error.message.indexOf('duplicate key error collection') >= 0) {
-          Log.info('Mongo Connection', 'Create', 'Attempt to create a duplicate entry.', error);
+          Log.warning('MongoDataSource Connection', 'Create', `Attempt to create a duplicate entry.${error}`);
           return callback(error);
         }
-        Log.error('Mongo Connection', 'Create', 'Encountered an error creating a record.', error);
+        Log.error('MongoDataSource Connection', 'Create', 'Encountered an error creating a record.', error);
         return callback(error);
       }
       callback(undefined, response.ops);
@@ -48,7 +52,7 @@ const MongoDataSource = {
 
   /**
    * Used to fetch records from a collection.
-   * @param {string} collectionName Indicates the name of the Mongo collection
+   * @param {string} collectionName Indicates the name of the MongoDatasource collection
    * @param {object} criteria the search criteria
    * @param {function} callback Error first method to be called with results.
    */
@@ -60,10 +64,58 @@ const MongoDataSource = {
 
   /**
    * Used to fetch the actual connection to mongo. Primarily for use in testing to provide a stub-able interface.
-   * @returns {object} a raw connection the the Mongo instance.
+   * @returns {object} a raw connection the the MongoDatasource instance.
    */
   getRawConnection: () => {
     return db;
+  },
+
+  /**
+   * Checks that the database expresses the expected collections and creates them if not.
+   */
+  initializeDatabase: () => {
+    db.collections((error, collections) => {
+      let collectionNames;
+      if (error) {
+        Log.error('MongoDataSource', 'initializeDatabase', 'Encountered an error while fetching existing collections.', error);
+        return callback(error);
+      }
+      collectionNames = collections.map(item => item.s.name);
+
+      let actions = [];
+
+      MongoDataSourceSchema.forEach(collection => {
+        // If the collection does not exist
+        if (collectionNames.indexOf(collection.collectionName) < 0) {
+          // The collection does not exist and needs to be created.
+          actions.push(
+            new Promise((resolve, reject) => {
+              db.createCollection(collection.collectionName, (error, collection) => {
+                if (error) {
+                  Log.error('MongoDataSource', 'initializeDatabase', 'Encountered an error while creating a collection.', error);
+                  return reject(error);
+                }
+                Log.notice('MongoDataSource', 'initializeDatabase', `Created '${collection.collectionName}' collection`);
+                // Consider adding logic to create database indexes.
+                return resolve();
+              });
+            }) // Closes Promise
+          );
+        }
+      });
+
+      if (actions.length === 0 ) {
+        return;
+      }
+      Promise.all(actions)
+        .then(() => {
+          Log.notice('MongoDataSource', 'initializeDatabase', 'Data Source Initialization completed.');
+        })
+        .catch(error => {
+          // Consider downgrading the error message to a warning because the error should have already been logged
+          Log.error('MongoDataSource', 'initializeDatabase', 'Encountered an error during Data Source initialization.', error);
+        });
+    });
   },
 
   /**
@@ -79,10 +131,10 @@ const MongoDataSource = {
       .update(criteria, updateObject, error => {
         if (error) {
           if (error.message.indexOf('duplicate key error collection') >= 0) {
-            Log.info('Mongo Connection', 'Create', `Attempt to create a duplicate entry.\n${error}`);
+            Log.info('MongoDataSource Connection', 'Create', `Attempt to create a duplicate entry.\n${error}`);
             return callback(error);
           }
-          Log.error('Mongo Connection', 'Create', 'Encountered an error creating a record.', error);
+          Log.error('MongoDataSource Connection', 'Create', 'Encountered an error creating a record.', error);
           return callback(error);
         }
 

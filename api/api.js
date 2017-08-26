@@ -11,6 +11,7 @@ Log.info('Authentication MicroService', 'main', 'startup sequence beginning.');
 
 host.initialize();
 host.mountRoutes(routes);
+host.connectDataSource();
 
 // Initialize swagger if the API process is not started in production mode.
 if (process.env.NODE_ENV !== 'production') {

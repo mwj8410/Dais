@@ -5,6 +5,8 @@ import express from 'express';
 import session from 'express-session';
 const MongoStore = require('connect-mongo')(session);
 
+import MongoDataSource from './Connections/Mongo.datasource';
+
 import RouteSecurity from './Utilities/RouteSecurity/routeSecurity.index';
 import Log from './Utilities/log';
 import * as Config from '../config/application.config';
@@ -15,6 +17,10 @@ let server;
 export default {
   close: () => {
     server.close();
+  },
+
+  connectDataSource: () => {
+    MongoDataSource.connect();
   },
 
   getAppInstance: () => app,
