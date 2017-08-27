@@ -2,7 +2,6 @@
  * Provides a connection into a specific data source using a specified connector.
  */
 
-// ToDo: establish a migration pattern
 // ToDo: full unit testing
 
 import Log from '../Utilities/log';
