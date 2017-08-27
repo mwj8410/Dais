@@ -31,6 +31,7 @@ const connectToMongo = (dbUrl) => {
  * @return {Promise} Establishes an open connection to the indicated MongoDb resource
  */
 const MongoConnector = (connectionName) => {
+  console.log(DbConfig);
   const dbConfig = DbConfig[connectionName];
   const dbUrl = `mongodb://${dbConfig.url}:${dbConfig.port}/${dbConfig.database}`;
 

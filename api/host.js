@@ -10,6 +10,7 @@ const MongoDataSource = require('./Connections/Mongo.datasource');
 const RouteSecurity = require('./Utilities/RouteSecurity/routeSecurity.index');
 const Log = require('./Utilities/log');
 const Config = require('../config/application.config');
+console.log(Config);
 
 let app = express();
 let server;
@@ -62,13 +63,6 @@ module.exports = {
       Log.notice('Host', 'listen', `listening on port: ${Config.api.port}.`);
     });
   },
-
-  // mountGraphQlRoute: () => {
-  //   app.use('/graphql', graphqlHTTP({
-  //     schema: schema,
-  //     graphiql: true,
-  //   }));
-  // },
 
   mountRoutes: routeList => {
     routeList.forEach(route => {

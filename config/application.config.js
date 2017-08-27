@@ -1,6 +1,8 @@
-module.exports = {
+let api = {
   api: {
     url: process.env.HOST_URL,
+
+    // Used in Cors configuration
     origins: process.env.NODE_ENV === 'production' ?
       process.env.CORS_ORIGINS :
       `${process.env.CORS_ORIGINS},${
@@ -27,3 +29,13 @@ module.exports = {
   }
 
 };
+
+// Process local values
+try {
+  let localConfig = require('./local.config');
+  Object.keys(localConfig.api).forEach(configKey => {
+    api[configKey] = Object.assign({}, api[configKey], localConfig.api[configKey]);
+  });
+} catch (ex) {}
+
+module.exports = api;
