@@ -2,6 +2,9 @@
 const Log = require('../api/Utilities/log');
 Log.setLevel('silent'); // Doing this first
 
+console.log(process.env);
+console.log(process.env.MONGO_URL);
+
 const host = require('../api/host');
 
 before(() => {
