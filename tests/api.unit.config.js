@@ -1,8 +1,4 @@
 /* global after, before */
-require('babel-polyfill');
-
-require('dotenv').config({ path: '../.env' });
-
 const Log = require('../api/Utilities/log');
 Log.setLevel('silent'); // Doing this first
 

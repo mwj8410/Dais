@@ -3,7 +3,7 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
 
-import MongoDataSource from './Mongo.datasource';
+const MongoDataSource = require('./Mongo.datasource');
 
 describe('Data Source: MongoDatasource', () => {
 
