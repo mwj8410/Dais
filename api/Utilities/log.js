@@ -90,4 +90,4 @@ const Log = {
   }
 };
 
-export default Log;
+module.exports = Log;

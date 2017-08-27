@@ -4,10 +4,10 @@
 
 // ToDo: full unit testing
 
-import Log from '../Utilities/log';
-import MongoConnector from '../Utilities/Connectors/Mongo.connector';
+const Log = require('../Utilities/log');
+const MongoConnector = require('../Utilities/Connectors/Mongo.connector');
 
-import MongoDataSourceSchema from '../../Database/MongoDataSource/MongoDataSource.schema';
+const MongoDataSourceSchema = require('../../Database/MongoDataSource/MongoDataSource.schema');
 
 // corresponds to an entry in `./config/connectionSources.config.js`
 const connectionName = 'mongo';
@@ -143,4 +143,4 @@ const MongoDataSource = {
 
 };
 
-export default MongoDataSource;
+module.exports = MongoDataSource;

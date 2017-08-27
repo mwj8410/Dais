@@ -1,6 +1,6 @@
 /* global after, before, describe, it */
 
-import { expect } from 'chai';
+const expect = require('chai').expect;
 const sinon = require('sinon');
 
 import MongoDataSource from './Mongo.datasource';

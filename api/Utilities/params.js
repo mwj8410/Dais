@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   /**
    * A utility function for extracting and type transformation of request parameters.
    * @param {object} values the parameters as passed by express

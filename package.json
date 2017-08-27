@@ -23,8 +23,7 @@
     "express": "^4.15.2",
     "express-session": "^1.15.5",
     "moment": "^2.18.1",
-    "mongodb": "^2.2.30",
-    "semver": "^5.4.1"
+    "mongodb": "^2.2.30"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -50,7 +49,7 @@
     "lint": "npm run lint:js",
     "lint:js": "eslint ./api",
     "test": "npm run test:unit && npm run lint && echo '✔  Your code looks good.'",
-    "test:unit": "nyc --reporter=lcov --require babel-core/register mocha tests/api.unit.config.js --timeout 30000 --require dotenv/config dotenv_config_path=./local.env && nyc report",
+    "test:unit": "nyc --reporter=lcov --require babel-core/register mocha tests/api.unit.config.js --timeout 30000 && nyc report",
     "test:e2e": "node ./tests/api.e2e.config.js"
   },
   "repository": {

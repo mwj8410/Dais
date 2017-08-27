@@ -1,11 +1,11 @@
 /* global process, require */
 
 // Libraries
-import host from './host';
-import Log from './Utilities/log';
-import routes from './routes';
+const host = require('./host');
+const Log = require('./Utilities/log');
+const routes = require('./routes');
 
-import swagger from './Utilities/swagger/swagger';
+const swagger = require('./Utilities/swagger/swagger');
 
 Log.info('Authentication MicroService', 'main', 'startup sequence beginning.');
 

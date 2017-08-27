@@ -1,20 +1,20 @@
 /* global module, process, require */
 
-import bodyParser from 'body-parser';
-import express from 'express';
-import session from 'express-session';
+const bodyParser = require('body-parser');
+const express = require('express');
+const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-import MongoDataSource from './Connections/Mongo.datasource';
+const MongoDataSource = require('./Connections/Mongo.datasource');
 
-import RouteSecurity from './Utilities/RouteSecurity/routeSecurity.index';
-import Log from './Utilities/log';
-import * as Config from '../config/application.config';
+const RouteSecurity = require('./Utilities/RouteSecurity/routeSecurity.index');
+const Log = require('./Utilities/log');
+const Config = require('../config/application.config');
 
 let app = express();
 let server;
 
-export default {
+module.exports = {
   close: () => {
     server.close();
   },

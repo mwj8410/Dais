@@ -1,6 +1,6 @@
-import MongoDb from 'mongodb';
-import DbConfig from '../../../config/connectionSources.config';
-import Log from '../log';
+const MongoDb = require('mongodb');
+const DbConfig = require('../../../config/connectionSources.config');
+const Log = require('../log');
 
 let MongoClient = MongoDb.MongoClient;
 let openConnections = {};
@@ -49,4 +49,4 @@ const MongoConnector = (connectionName) => {
     });
 };
 
-export default MongoConnector;
+module.exports = MongoConnector;

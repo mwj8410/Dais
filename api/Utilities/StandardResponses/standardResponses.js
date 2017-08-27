@@ -6,22 +6,25 @@
  * @type {{code: number, message: string}}
  */
 
-export const conflict = {
-  code: 409,
-  message: 'The content of the request is in conflict with underlying systems.'
-};
+module.exports = {
 
-export const malformed = {
-  code: 422,
-  message: 'The content of the request is malformed or invalid in some way. Please correct before trying again.'
-};
+  conflict: {
+    code: 409,
+    message: 'The content of the request is in conflict with underlying systems.'
+  },
 
-export const server = {
-  code: 500,
-  message: 'The server has experienced an irrecoverable error.'
-};
+  malformed: {
+    code: 422,
+    message: 'The content of the request is malformed or invalid in some way. Please correct before trying again.'
+  },
 
-export const unAuthorized = {
-  code: 401,
-  message: 'Request not authorized.'
+  server: {
+    code: 500,
+    message: 'The server has experienced an irrecoverable error.'
+  },
+
+  unAuthorized: {
+    code: 401,
+    message: 'Request not authorized.'
+  }
 };

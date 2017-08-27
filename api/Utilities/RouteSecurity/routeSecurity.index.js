@@ -1,8 +1,8 @@
-import Log from '../log';
-import * as StandardResponses from '../StandardResponses/standardResponses';
+const Log = require('../log');
+const StandardResponses = require('../StandardResponses/standardResponses');
 
 // Security Profiles
-import loggedIn from './loggedIn.security';
+const loggedIn = require('./loggedIn.security');
 
 const securityProfiles = {
   loggedIn: loggedIn
@@ -46,4 +46,4 @@ const RouteSecurity = (profiles, handler) => {
   };
 };
 
-export default RouteSecurity;
+module.exports = RouteSecurity;

@@ -2,12 +2,12 @@
 
 // import { graphql } from 'graphql';
 
-import params from '../Utilities/params';
-import * as StandardResponses from '../Utilities/StandardResponses/standardResponses';
+const params = require('../Utilities/params');
+const StandardResponses = require('../Utilities/StandardResponses/standardResponses');
 
 // import schema from '../GraphQL/schema.index';
 
-import * as UserController from '../Controllers/User.controller';
+const UserController = require('../Controllers/User.controller');
 
 module.exports = {
 

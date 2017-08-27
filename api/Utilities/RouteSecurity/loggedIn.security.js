@@ -1,4 +1,4 @@
-import Log from '../log';
+const Log = require('../log');
 
 const loggedIn = req => new Promise((resolve) => {
   // Verify that the session
@@ -9,4 +9,4 @@ const loggedIn = req => new Promise((resolve) => {
   return resolve(true);
 });
 
-export default loggedIn;
+module.exports = loggedIn;

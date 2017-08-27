@@ -1,8 +1,8 @@
-import express from 'express';
-import fs from 'fs';
-import path from 'path';
+const express = require('express');
+const fs = require( 'fs');
+const path = require('path');
 
-import Log from '../log';
+const Log = require('../log');
 
 const swaggerURIPath = '/swagger';
 
@@ -44,13 +44,14 @@ const Swagger = {
       }
 
       // Now, create any model definitions provided
-      if (definition.default.definitions) {
-        Object.assign(swaggerConfig.definitions, definition.default.definitions);
-        Log.info('Swagger', 'initialize', `Mounted Swagger definitions for: ${Object.keys(definition.default.definitions)}`);
+      // console.log('test', definition);
+      if (definition.definitions) {
+        Object.assign(swaggerConfig.definitions, definition.definitions);
+        Log.info('Swagger', 'initialize', `Mounted Swagger definitions for: ${Object.keys(definition.definitions)}`);
       }
     });
 
   }
 };
 
-export default Swagger;
+module.exports = Swagger;

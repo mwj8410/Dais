@@ -1,4 +1,4 @@
-import * as Config from './application.config';
+const Config = require('./application.config');
 const packageRef = require('../package.json');
 
 /**

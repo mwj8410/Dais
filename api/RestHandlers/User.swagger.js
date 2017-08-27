@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   paths: {
     '/user': {
       post: {

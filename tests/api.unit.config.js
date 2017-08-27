@@ -1,10 +1,12 @@
 /* global after, before */
 require('babel-polyfill');
 
-import Log from '../api/Utilities/log';
+require('dotenv').config({ path: '../.env' });
+
+const Log = require('../api/Utilities/log');
 Log.setLevel('silent'); // Doing this first
 
-import host from '../api/host';
+const host = require('../api/host');
 
 before(() => {
   // Required by unit tests to gain access to the express server for request testing

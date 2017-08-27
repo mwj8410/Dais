@@ -7,4 +7,4 @@ const MongoDataSourceSchema = [
   }
 ];
 
-export default MongoDataSourceSchema;
+module.exports = MongoDataSourceSchema;

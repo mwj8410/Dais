@@ -1,4 +1,4 @@
-import Log from '../log';
+const Log = require('../log');
 
 // ToDo install `npm install csrf`
 // Generate a token
@@ -23,4 +23,4 @@ const csrf = req => new Promise((resolve) => {
 
 });
 
-export default csrf;
+module.exports = csrf;
