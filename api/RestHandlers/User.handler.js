@@ -1,16 +1,24 @@
 /* global module, require */
 
-import { graphql } from 'graphql';
+// import { graphql } from 'graphql';
 
 import params from '../Utilities/params';
 import * as StandardResponses from '../Utilities/StandardResponses/standardResponses';
 
-import schema from '../GraphQL/schema.index';
+// import schema from '../GraphQL/schema.index';
+
+import * as UserController from '../Controllers/User.controller';
 
 module.exports = {
 
   create: (req, res) => {
-    return res.status(200).send();
+    UserController.create((error, newUser) => {
+      if (error) {
+        // check the error to see if we can decide what to tell the client
+        return res.status(500).send(StandardResponses.server);
+      }
+      return res.status(200).send(newUser);
+    });
   },
 
   delete: (req, res) => {
@@ -49,10 +57,10 @@ module.exports = {
       return res.status(422).send(StandardResponses.malformed);
     }
 
-    graphql(schema, '{ user(id:"a") { id, name } }')
-      .then((response) => {
-        return res.status(200).send(response);
-      });
+    // graphql(schema, '{ user(id:"a") { id, name } }')
+    //   .then((response) => {
+    //     return res.status(200).send(response);
+    //   });
   },
 
   logout: (req, res) => {
