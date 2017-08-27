@@ -10,7 +10,7 @@ let ConnectionSources = {
 try {
   let localConfig = require('./local.config');
   Object.keys(localConfig.connectionSources).forEach(configKey => {
-    ConnectionSources[configKey] = Object.assign({}, ConnectionSources[configKey], localConfig.api[configKey]);
+    ConnectionSources[configKey] = Object.assign({}, ConnectionSources[configKey], localConfig.connectionSources[configKey]);
   });
 } catch (ex) {}
 

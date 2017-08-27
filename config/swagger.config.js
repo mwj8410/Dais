@@ -1,4 +1,4 @@
-const Config = require('./application.config');
+const config = require('./application.config');
 const packageRef = require('../package.json');
 
 /**
@@ -9,13 +9,13 @@ module.exports = {
   swagger: '2.0',
   info: {
     version: packageRef.version,
-    title: Config.internalName,
+    title: config.internalName,
     license: {
       name: packageRef.license
     }
   },
-  host: `${Config.api.url}:${Config.api.port}`,
-  basePath: Config.api.baseUrl,
+  host: `${config.host.url}:${config.host.port}`,
+  basePath: config.host.baseUrl,
   schemes: [ 'http' ],
   consumes: [ 'application/json' ],
   produces: [ 'application/json' ],

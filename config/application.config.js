@@ -1,5 +1,5 @@
 let api = {
-  api: {
+  host: {
     url: process.env.HOST_URL,
 
     // Used in Cors configuration
@@ -19,7 +19,7 @@ let api = {
 
   internalName: 'Plinth MicroService',
 
-  Session: {
+  session: {
     // Currently configures for the `connect-mongo` session store
     database: process.env.SESSION_DB,
     sessionSecret: process.env.SESSION_SECRET,

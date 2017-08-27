@@ -9,32 +9,44 @@ const MongoDataSource = require('./Connections/Mongo.datasource');
 
 const RouteSecurity = require('./Utilities/RouteSecurity/routeSecurity.index');
 const Log = require('./Utilities/log');
-const Config = require('../config/application.config');
-console.log(Config);
+const config = require('../config/application.config');
 
 let app = express();
 let server;
 
 module.exports = {
+  /**
+   * Instructs the server to stop listening and shut down.
+   */
   close: () => {
     server.close();
   },
 
+  /**
+   * Connects to all automatically connected data sources
+   */
   connectDataSource: () => {
     MongoDataSource.connect();
   },
 
+  /**
+   * Retrieves the running instance of the Express application. This is mostly needed for unit testing.
+   * @return {object} Express application instance.
+   */
   getAppInstance: () => app,
 
+  /**
+   * Prepares the Express application instance to host the service.
+   */
   initialize: () => {
     // Add Session
     let sessionSettings = {
       cookie: {},
       resave: false,
       saveUninitialized: true,
-      secret: Config.Session.sessionSecret,
+      secret: config.session.sessionSecret,
       store: new MongoStore({
-        url: `mongodb://${Config.Session.url}/?authSource=${Config.Session.database}&w=1`
+        url: `mongodb://${config.session.url}/?authSource=${config.session.database}&w=1`
       })
     };
 
@@ -50,20 +62,28 @@ module.exports = {
     app.use(bodyParser.text());
     app.use((req, res, next) => {
       // These need to be made available in configuration
-      res.header('Access-Control-Allow-Origin', Config.api.origins);
+      res.header('Access-Control-Allow-Origin', config.host.origins);
       res.header('Access-Control-Allow-Methods', 'GET,PATCH,PUT,POST,DELETE');
       res.header('Access-Control-Allow-Headers', 'Content-Type');
       next();
     });
   },
 
+  /**
+   * Instructs the express application to begin listening. Functionally, starts the server.
+   */
   listen: () => {
     // Retain a reference to the started application, so it can be closed later.
-    server = app.listen(Config.api.port, () => {
-      Log.notice('Host', 'listen', `listening on port: ${Config.api.port}.`);
+    server = app.listen(config.host.port, () => {
+      Log.notice('Host', 'listen', `listening on port: ${config.host.port}.`);
     });
   },
 
+  /**
+   * Instructs the initialized express application instance to mount the provided routes using associated
+   * security handlers and route handlers.
+   * @param {Array} routeList List of route objects.
+   */
   mountRoutes: routeList => {
     routeList.forEach(route => {
       switch (route[1]) {

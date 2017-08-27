@@ -1,11 +1,7 @@
 /* global module, require */
 
-// import { graphql } from 'graphql';
-
 const params = require('../Utilities/params');
 const StandardResponses = require('../Utilities/StandardResponses/standardResponses');
-
-// import schema from '../GraphQL/schema.index';
 
 const UserController = require('../Controllers/User.controller');
 
@@ -42,8 +38,6 @@ module.exports = {
       return res.status(422).send(StandardResponses.malformed);
     }
 
-    console.log(values);
-
     return res.status(200).send();
   },
 
@@ -57,10 +51,7 @@ module.exports = {
       return res.status(422).send(StandardResponses.malformed);
     }
 
-    // graphql(schema, '{ user(id:"a") { id, name } }')
-    //   .then((response) => {
-    //     return res.status(200).send(response);
-    //   });
+    res.status(200).send();
   },
 
   logout: (req, res) => {

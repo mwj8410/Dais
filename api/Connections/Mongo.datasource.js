@@ -77,7 +77,7 @@ const MongoDataSource = {
       let collectionNames;
       if (error) {
         Log.error('MongoDataSource', 'initializeDatabase', 'Encountered an error while fetching existing collections.', error);
-        return callback(error);
+        return;
       }
       collectionNames = collections.map(item => item.s.name);
 
