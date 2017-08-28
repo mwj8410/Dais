@@ -1,4 +1,4 @@
-/* global after, before */
+/* global after, before, require */
 const Log = require('../api/Utilities/log');
 Log.setLevel('silent'); // Doing this first
 
@@ -12,4 +12,4 @@ before(() => {
 
 // Manually include each test set here
 require('../api/Connections/Mongo.datasource.spec');
-
+require('../api/Controllers/User.controller.spec');

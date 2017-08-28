@@ -16,8 +16,8 @@ const typeCheck = require('../Utilities/typeCheck');
 const userFields = [
   // Automatically created:
   { valueName: 'id', dataType: 'uuid4', required: true, autoCreated: true },
-  { valueName: 'createAt', dataType: 'date', required: true, autoCreated: true },
-  { valueName: 'updatedAt', dataType: 'date', required: true, autoCreated: true },
+  { valueName: 'createDate', dataType: 'date', required: true, autoCreated: true },
+  { valueName: 'updatedDate', dataType: 'date', required: true, autoCreated: true },
 
   { valueName: 'email', dataType: 'email', required: true },
 
@@ -56,7 +56,7 @@ module.exports = {
     userFields
       .filter((field) => field.autoCreated !== true && field.required === false)
       .forEach((field) => {
-        if (typeCheck(values[field.valueName], field) !== true) {
+        if (values[field.valueName] && typeCheck(values[field.valueName], field) !== true) {
           fieldErrors.push(`Invalid ${field.valueName}`);
         }
       });
@@ -76,15 +76,18 @@ module.exports = {
 
     // Default each value
     newUser.id = uuidv4();
-    newUser.createdAt = new Date();
-    newUser.ubdatedAt = new Date();
+    newUser.createdDate = new Date();
+    newUser.updatedDate = new Date();
 
     if (typeof newUser.active === 'undefined') {
       newUser.active = true;
     }
 
     // The record should be ready to pass off to the database
-    MongoDataSource.create(collectionName, values, (error, newRecord) => {
+    MongoDataSource.create(collectionName, newUser, (error, newRecord) => {
+      if (error) {
+        return callback(error);
+      }
       // Filter out non-public values
       return callback(undefined, newRecord);
     });

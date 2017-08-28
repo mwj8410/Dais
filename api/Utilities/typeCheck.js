@@ -18,7 +18,7 @@ const genericTypes = [
  */
 const typeCheck = (value, typeDefinition) => {
   // If the typeDefinition indicates a generic dataType
-  if (genericTypes.indexOf(typeDefinition.dataType)) {
+  if (genericTypes.indexOf(typeDefinition.dataType) >= 0) {
     // Then simply check it
     return typeDefinition.dataType === typeof value;
   }
