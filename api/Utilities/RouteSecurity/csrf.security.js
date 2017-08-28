@@ -5,7 +5,7 @@ const Log = require('../log');
 // save it to the session
 // save the secret to the session
 
-const csrf = req => new Promise((resolve) => {
+const csrf = (req) => new Promise((resolve) => {
   // There is a provided csrf-token
   if (!req.headers['x-csrf-token']) {
     return resolve(false);

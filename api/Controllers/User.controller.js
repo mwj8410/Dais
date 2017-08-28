@@ -41,8 +41,8 @@ module.exports = {
 
     userFields
     // Id is created during this process, so ignore it
-      .filter(field => field.autoCreated !== true && field.required)
-      .forEach(field => {
+      .filter((field) => field.autoCreated !== true && field.required)
+      .forEach((field) => {
         if (typeof values[field.valueName] === 'undefined') {
           fieldErrors.push(`Missing ${field.valueName}`);
           return;
@@ -54,8 +54,8 @@ module.exports = {
       });
 
     userFields
-      .filter(field => field.autoCreated !== true && field.required === false)
-      .forEach(field => {
+      .filter((field) => field.autoCreated !== true && field.required === false)
+      .forEach((field) => {
         if (typeCheck(values[field.valueName], field) !== true) {
           fieldErrors.push(`Invalid ${field.valueName}`);
         }
@@ -69,8 +69,8 @@ module.exports = {
     }
 
     userFields
-      .filter(field => field.autoCreated !== true)
-      .forEach(field => {
+      .filter((field) => field.autoCreated !== true)
+      .forEach((field) => {
         newUser[field.valueName] = values[field.valueName];
       });
 

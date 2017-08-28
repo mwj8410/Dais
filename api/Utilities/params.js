@@ -9,7 +9,7 @@ module.exports = {
     let output = {};
     let error = false;
 
-    whiteList.forEach(item => {
+    whiteList.forEach((item) => {
       if (item.required && typeof values[item.valueName] === 'undefined' ) {
         error = true;
       }

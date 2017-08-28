@@ -82,7 +82,7 @@ const Log = {
    * Configures what level of messages to show.
    * @param {string} levelName
    */
-  setLevel: levelName => {
+  setLevel: (levelName) => {
     let levelCode = levels[levelName];
     if (typeof levelCode === 'undefined') {
       levelCode = levels['all'];

@@ -19,12 +19,12 @@ const RouteSecurity = (profiles, handler) => {
   return (req, res) => {
     let actions = [];
 
-    profiles.forEach(profile => {
+    profiles.forEach((profile) => {
       actions.push(securityProfiles[profile](req));
     });
 
     Promise.all(actions)
-      .then(results => {
+      .then((results) => {
         if (results.indexOf(false) >= 0) {
           Log.security(
             'RouteSecurity',
@@ -34,7 +34,7 @@ const RouteSecurity = (profiles, handler) => {
           return res.status(401).send(StandardResponses.unAuthorized);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         Log.error(
           'RouteSecurity',
           'resolver',

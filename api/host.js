@@ -84,8 +84,8 @@ module.exports = {
    * security handlers and route handlers.
    * @param {Array} routeList List of route objects.
    */
-  mountRoutes: routeList => {
-    routeList.forEach(route => {
+  mountRoutes: (routeList) => {
+    routeList.forEach((route) => {
       switch (route[1]) {
         case 'GET':
           app.get(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));

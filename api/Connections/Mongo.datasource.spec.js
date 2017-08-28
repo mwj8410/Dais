@@ -7,7 +7,7 @@ const MongoDataSource = require('./Mongo.datasource');
 
 describe('Data Source: MongoDatasource', () => {
 
-  before(done => {
+  before((done) => {
     MongoDataSource.connect().then(() => {
       done();
     });
@@ -18,12 +18,12 @@ describe('Data Source: MongoDatasource', () => {
       expect(MongoDataSource.create).to.be.a('function');
     });
 
-    it('calls the correct collection and inserts the correct record', done => {
+    it('calls the correct collection and inserts the correct record', (done) => {
       let db = MongoDataSource.getRawConnection();
       let calledCollection;
       let calledValues;
 
-      sinon.stub(db, 'collection').callsFake(collectionName => {
+      sinon.stub(db, 'collection').callsFake((collectionName) => {
         calledCollection = collectionName;
         return {
           insertOne: (values, cb) => {
@@ -33,7 +33,7 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
-      MongoDataSource.create('test', { value: 'record' }, err => {
+      MongoDataSource.create('test', { value: 'record' }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('undefined');
@@ -44,7 +44,7 @@ describe('Data Source: MongoDatasource', () => {
       });
     });
 
-    it('reports duplicate key errors', done => {
+    it('reports duplicate key errors', (done) => {
       let db = MongoDataSource.getRawConnection();
 
       sinon.stub(db, 'collection').callsFake(() => {
@@ -57,7 +57,7 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
-      MongoDataSource.create('test', { value: 'record' }, err => {
+      MongoDataSource.create('test', { value: 'record' }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('Error');
@@ -66,7 +66,7 @@ describe('Data Source: MongoDatasource', () => {
       });
     });
 
-    it('reports other errors', done => {
+    it('reports other errors', (done) => {
       let db = MongoDataSource.getRawConnection();
 
       sinon.stub(db, 'collection').callsFake(() => {
@@ -77,7 +77,7 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
-      MongoDataSource.create('test', { value: 'record' }, err => {
+      MongoDataSource.create('test', { value: 'record' }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('Error');
@@ -92,24 +92,24 @@ describe('Data Source: MongoDatasource', () => {
       expect(MongoDataSource.get).to.be.a('function');
     });
 
-    it('calls the correct collection and inserts the correct record', done => {
+    it('calls the correct collection and inserts the correct record', (done) => {
       let db = MongoDataSource.getRawConnection();
       let calledCollection;
       let calledValues;
 
-      sinon.stub(db, 'collection').callsFake(collectionName => {
+      sinon.stub(db, 'collection').callsFake((collectionName) => {
         calledCollection = collectionName;
         return {
-          find: values => {
+          find: (values) => {
             calledValues = values;
-            return { toArray: callback => {
+            return { toArray: (callback) => {
               callback();
             } };
           }
         };
       });
 
-      MongoDataSource.get('test', { value: 'record' }, err => {
+      MongoDataSource.get('test', { value: 'record' }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('undefined');
@@ -140,13 +140,13 @@ describe('Data Source: MongoDatasource', () => {
       expect(MongoDataSource.get).to.be.a('function');
     });
 
-    it('calls the correct collection and inserts the correct record', done => {
+    it('calls the correct collection and inserts the correct record', (done) => {
       let db = MongoDataSource.getRawConnection();
       let calledCollection;
       let calledCriteria;
       let calledValues;
 
-      sinon.stub(db, 'collection').callsFake(collectionName => {
+      sinon.stub(db, 'collection').callsFake((collectionName) => {
         calledCollection = collectionName;
         return {
           update: (criteria, values, callback) => {
@@ -157,7 +157,7 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
-      MongoDataSource.update('test', { id: 1 }, { value: 2 }, err => {
+      MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('undefined');
@@ -168,13 +168,13 @@ describe('Data Source: MongoDatasource', () => {
       });
     });
 
-    it('calls the correct collection and inserts the correct record', done => {
+    it('calls the correct collection and inserts the correct record', (done) => {
       let db = MongoDataSource.getRawConnection();
       let calledCollection;
       let calledCriteria;
       let calledValues;
 
-      sinon.stub(db, 'collection').callsFake(collectionName => {
+      sinon.stub(db, 'collection').callsFake((collectionName) => {
         calledCollection = collectionName;
         return {
           update: (criteria, values, callback) => {
@@ -185,7 +185,7 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
-      MongoDataSource.update('test', { id: 1 }, { value: 2 }, err => {
+      MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('undefined');
@@ -196,7 +196,7 @@ describe('Data Source: MongoDatasource', () => {
       });
     });
 
-    it('reports duplicate record errors', done => {
+    it('reports duplicate record errors', (done) => {
       let db = MongoDataSource.getRawConnection();
 
       sinon.stub(db, 'collection').callsFake(() => {
@@ -209,7 +209,7 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
-      MongoDataSource.update('test', { id: 1 }, { value: 2 }, err => {
+      MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('Error');
@@ -218,7 +218,7 @@ describe('Data Source: MongoDatasource', () => {
       });
     });
 
-    it('reports general errors', done => {
+    it('reports general errors', (done) => {
       let db = MongoDataSource.getRawConnection();
 
       sinon.stub(db, 'collection').callsFake(() => {
@@ -229,7 +229,7 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
-      MongoDataSource.update('test', { id: 1 }, { value: 2 }, err => {
+      MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
 
         expect(err).to.be.a('Error');

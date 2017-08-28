@@ -21,7 +21,7 @@ const MongoDataSource = {
    */
   connect: () => {
     return MongoConnector(connectionName)
-      .then(dbConnection => {
+      .then((dbConnection) => {
         Log.notice('MongoDataSource', 'connect', 'Connected to remote data source: MongoDataSource');
         db = dbConnection;
         MongoDataSource.initializeDatabase();
@@ -79,11 +79,11 @@ const MongoDataSource = {
         Log.error('MongoDataSource', 'initializeDatabase', 'Encountered an error while fetching existing collections.', error);
         return;
       }
-      collectionNames = collections.map(item => item.s.name);
+      collectionNames = collections.map((item) => item.s.name);
 
       let actions = [];
 
-      MongoDataSourceSchema.forEach(collection => {
+      MongoDataSourceSchema.forEach((collection) => {
         // If the collection does not exist
         if (collectionNames.indexOf(collection.collectionName) < 0) {
           // The collection does not exist and needs to be created.
@@ -110,7 +110,7 @@ const MongoDataSource = {
         .then(() => {
           Log.notice('MongoDataSource', 'initializeDatabase', 'Data Source Initialization completed.');
         })
-        .catch(error => {
+        .catch((error) => {
           // Consider downgrading the error message to a warning because the error should have already been logged
           Log.error('MongoDataSource', 'initializeDatabase', 'Encountered an error during Data Source initialization.', error);
         });
@@ -127,7 +127,7 @@ const MongoDataSource = {
   update: (collectionName, criteria, updateObject, callback) => {
     updateObject.updatedAt = new Date();
     return db.collection(collectionName)
-      .update(criteria, updateObject, error => {
+      .update(criteria, updateObject, (error) => {
         if (error) {
           if (error.message.indexOf('duplicate key error collection') >= 0) {
             Log.info('MongoDataSource Connection', 'Create', `Attempt to create a duplicate entry.\n${error}`);

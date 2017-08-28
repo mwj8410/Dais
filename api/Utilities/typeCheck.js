@@ -29,7 +29,7 @@ const typeCheck = (value, typeDefinition) => {
   if (typeof patterns[typeDefinition.dataType] !== 'undefined') {
     let allPassed = true;
 
-    patterns[typeDefinition.dataType].forEach(validation => {
+    patterns[typeDefinition.dataType].forEach((validation) => {
       if (validation.pattern.test(value) === false) {
         allPassed = false;
       }

@@ -39,11 +39,11 @@ const MongoConnector = (connectionName) => {
   }
 
   return connectToMongo(dbUrl)
-    .then(dbConnection => {
+    .then((dbConnection) => {
       openConnections[connectionName] = dbConnection;
       return dbConnection;
     })
-    .catch(error => {
+    .catch((error) => {
       Log.error('MongoConnector', 'Connector', `Encountered an error while connecting to the remote resource.\n${error}`);
       return error;
     });
