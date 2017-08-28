@@ -12,7 +12,8 @@
     "express": "^4.15.2",
     "express-session": "^1.15.5",
     "moment": "^2.18.1",
-    "mongodb": "^2.2.30"
+    "mongodb": "^2.2.30",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -8,9 +8,24 @@ const UserController = require('../Controllers/User.controller');
 module.exports = {
 
   create: (req, res) => {
+    let values = params.extract(req.params, [
+      { valueName: 'loginName', dataType: 'string', required: true },
+      { valueName: 'email', dataType: 'email', required: true },
+
+      { valueName: 'firstName', dataType: 'string', required: false },
+      { valueName: 'lastNAme', dataType: 'string', required: false },
+      { valueName: 'dateOfBirth', dataType: 'date', required: false },
+
+      { valueName: 'creationMethod', dataType: 'string', required: false }
+    ]);
+
+
     UserController.create((error, newUser) => {
       if (error) {
         // check the error to see if we can decide what to tell the client
+        if (error.inernalCode && error.inernalCode === 422) {
+          return res.status(422).send(StandardResponses.malformed);
+        }
         return res.status(500).send(StandardResponses.server);
       }
       return res.status(200).send(newUser);
@@ -39,25 +54,6 @@ module.exports = {
     }
 
     return res.status(200).send();
-  },
-
-  login: (req, res) => {
-    let values = params.extract(req.body, [
-      { valueName: 'userName', dataType: 'string', required: true },
-      { valueName: 'password', dataType: 'string', required: true }
-    ]);
-
-    if (values === false) {
-      return res.status(422).send(StandardResponses.malformed);
-    }
-
-    res.status(200).send();
-  },
-
-  logout: (req, res) => {
-    req.session.destroy(() => {
-      return res.status(200).send();
-    });
   },
 
   patch: (req, res) => {

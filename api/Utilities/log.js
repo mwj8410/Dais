@@ -9,12 +9,25 @@ const levels = {
   warnings: 3,
   notice: 4,
   info: 5,
+  activity: 8,
   all: 10
 };
 
 let logLevel = 10;
 
 const Log = {
+  /**
+   * Sets the log level to Activity messages and every Log level below.
+   * @param {string} module Recognizable name for the reporting module.
+   * @param {string} method Name of the method that experienced the error.
+   * @param {string} message Short description of the error situation.
+   */
+  activity: (module, method, message) => {
+    if (logLevel >= levels.activity) {
+      process.stdout.write(`${('Information: ' + module + ' >> ' + method).blue}: ${message}\n`);
+    }
+  },
+
   /**
    * Sets the log level to Errors only.
    * This is the lowest level of Logs.

@@ -33,8 +33,6 @@ const connectToMongo = (dbUrl) => {
 const MongoConnector = (connectionName) => {
   const dbConfig = DbConfig[connectionName];
   const dbUrl = `mongodb://${dbConfig.url}:${dbConfig.port}/${dbConfig.database}`;
-  console.log(dbUrl);
-  console.log(dbConfig);
 
   if (openConnections[connectionName]) {
     return openConnections[connectionName];
