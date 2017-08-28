@@ -11,9 +11,8 @@
     "before": true,
     "define": false,
     "describe": true,
-    "it": true,
-    "React": true,
-    "ReactDOM": true
+    "module": true,
+    "it": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
@@ -21,6 +20,7 @@
   },
   "rules": {
     "array-bracket-spacing": [ "error", "always" ],
+    "arrow-parens": ["error", "always"],
     "complexity": [ "error", 10 ],
     "eol-last": "error",
     "indent": [ "error", 2, { "SwitchCase": 1 } ],

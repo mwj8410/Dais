@@ -19,16 +19,18 @@ const userFields = [
   { valueName: 'createAt', dataType: 'date', required: true, autoCreated: true },
   { valueName: 'updatedAt', dataType: 'date', required: true, autoCreated: true },
 
-  { valueName: 'loginName', dataType: 'string', required: true },
   { valueName: 'email', dataType: 'email', required: true },
 
-  { valueName: 'firstName', dataType: 'string', required: false },
-  { valueName: 'lastNAme', dataType: 'string', required: false },
+  { valueName: 'nameDisplay', dataType: 'string', required: true },
+  { valueName: 'nameFirst', dataType: 'string', required: false },
+  { valueName: 'nameLast', dataType: 'string', required: false },
+  { valueName: 'nameLogin', dataType: 'string', required: true },
+
   { valueName: 'active', dataType: 'boolean', required: false },
 
   { valueName: 'dateOfBirth', dataType: 'date', required: false },
 
-  { valueName: 'creationMethod', dataType: 'string', required: false }
+  { valueName: 'createdSource', dataType: 'string', required: false }
 ];
 
 module.exports = {
