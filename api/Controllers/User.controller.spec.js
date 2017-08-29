@@ -6,7 +6,7 @@ const sinon = require('sinon');
 const MongoDataSource = require('../Connections/Mongo.datasource');
 const UserController = require('./User.controller');
 
-describe.only('Controller: User', () => {
+describe('Controller: User', () => {
   it('exists', () => {
     expect(UserController).to.be.a('object');
   });

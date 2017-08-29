@@ -4,9 +4,9 @@ require('colors');
 
 const levels = {
   silent: 0,
-  errors: 1,
+  error: 1,
   security: 2,
-  warnings: 3,
+  warning: 3,
   notice: 4,
   info: 5,
   activity: 8,
@@ -38,7 +38,7 @@ const Log = {
    */
   error: (module, method, message, error) => {
     if (logLevel >= levels.error) {
-      process.stdout.write(`${module.red} ${method}: ${message}\n ${error}\n`);
+      process.stdout.write(`${('Error: ' + module + ' >> ' + method).red}: ${message}\n ${error}\n`);
     }
   },
 
@@ -98,7 +98,7 @@ const Log = {
    */
   warning: (module, method, message) => {
     if (logLevel >= levels.warning) {
-      process.stdout.write(`${('WARNING: ' + module + ' >> ' + method).yellow}: ${message}\n`);
+      process.stdout.write(`${('Warning: ' + module + ' >> ' + method).yellow}: ${message}\n`);
     }
   }
 };

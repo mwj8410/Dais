@@ -11,5 +11,12 @@ before(() => {
 });
 
 // Manually include each test set here
+// Utility
 require('../api/Connections/Mongo.datasource.spec');
+require('../api/Utilities/log.spec');
+
+// Controllers - Application Level Logic
 require('../api/Controllers/User.controller.spec');
+
+// Handlers - Consumer Interfaces
+require('../api/RestHandlers/Login.handler.spec');

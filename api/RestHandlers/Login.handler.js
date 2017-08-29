@@ -9,7 +9,7 @@ module.exports = {
     let values = params.extract(req.body, [
       // neither of these values refer to anything directly on the model.
       // They are tracked in the external authentication system
-      { valueName: 'userName', dataType: 'string', required: true },
+      { valueName: 'nameLogin', dataType: 'string', required: true },
       { valueName: 'password', dataType: 'string', required: true }
     ]);
 

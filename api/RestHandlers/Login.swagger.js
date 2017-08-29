@@ -1,48 +1,32 @@
 module.exports = {
   paths: {
-    '/user': {
+    '/login': {
       post: {
-        summary: 'Create a new user record',
-        operationId: 'createUser',
-        tags: [ 'user' ],
+        summary: 'Attempts to resolve a username and password to a global user id and creates a session.',
+        operationId: 'login',
+        tags: [ 'login' ],
         parameters: [
           {
-            name: 'sourceToken',
+            name: 'nameLogin',
             in: 'formData',
-            description: 'A token used to validate the sending origin.',
+            description: 'The unique login name for the account. Not the display name or email address.',
             required: true,
             type: 'string',
-            default: '1234567812345678123456781234567812345678123456781234567812345678'
+            default: 'test@email.com'
           },
           {
-            name: 'credential',
+            name: 'password',
             in: 'formData',
-            description: 'A token used to validate the sending origin.',
+            description: 'A pass code that is presumed to be associated with the provided loginName.',
             required: true,
             type: 'string',
-            default: 'user@test.com'
-          },
-          {
-            name: 'passCode',
-            in: 'formData',
-            description: 'A pass code that is presumed to be associated with the id provided.',
-            required: true,
-            type: 'string',
-            default: 'user@test.com'
+            default: 'Abc123'
           }
         ],
         responses: {
           200: {
             description: 'The information contained in the request passed authentication and resolved to a user universal id.',
-            schema: {
-              $ref: '#/definitions/PersonId'
-            }
-          },
-          401: {
-            description: 'The requesting system is not authorized to make requests with this service.',
-            schema: {
-              $ref: '#/definitions/Unauthorized'
-            }
+            // no Schema
           },
           404: {
             description: 'The credentials provided did not map to any credential on record.',
@@ -76,16 +60,33 @@ module.exports = {
           }
         }
       }
-    }
-  },
-  definitions: {
-    PersonId: {
-      required: [ 'id' ],
-      properties: {
-        id: {
-          type: 'string'
+    },
+    '/login/logout': {
+      post: {
+        summary: 'Destroys any session associated with the request.',
+        operationId: 'logout',
+        tags: [ 'login' ],
+        responses: {
+          200: {
+            description: 'All session data associated with the request is destroyed.'
+            // no Schema
+          },
+          500: {
+            description: 'There has been an internal error that cannot be resolved.',
+            schema: {
+              $ref: '#/definitions/ServerError'
+            }
+          },
+          default: {
+            description: 'unexpected error',
+            schema: {
+              $ref: '#/definitions/Error'
+            }
+          }
         }
       }
     }
+  },
+  definitions: {
   }
 };
