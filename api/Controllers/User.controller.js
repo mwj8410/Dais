@@ -3,6 +3,7 @@
 const uuidv4 = require('uuid/v4');
 
 const collectionName = 'User';
+const log = require('../Utilities/log');
 const MongoDataSource = require('../Connections/Mongo.datasource');
 const typeCheck = require('../Utilities/typeCheck');
 
@@ -39,6 +40,7 @@ module.exports = {
 
     let fieldErrors = [];
 
+    // For each required field
     userFields
     // Id is created during this process, so ignore it
       .filter((field) => field.autoCreated !== true && field.required)
@@ -53,6 +55,7 @@ module.exports = {
         }
       });
 
+    // For each optional field
     userFields
       .filter((field) => field.autoCreated !== true && field.required === false)
       .forEach((field) => {
@@ -68,6 +71,7 @@ module.exports = {
       return callback(newError);
     }
 
+    // Now map the fields into the new object
     userFields
       .filter((field) => field.autoCreated !== true)
       .forEach((field) => {
@@ -86,6 +90,7 @@ module.exports = {
     // The record should be ready to pass off to the database
     MongoDataSource.create(collectionName, newUser, (error, newRecord) => {
       if (error) {
+        log.error('UserController', 'create', 'Encountered an error in the Data Layer.', error);
         return callback(error);
       }
       // Filter out non-public values

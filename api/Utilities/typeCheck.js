@@ -5,7 +5,6 @@ const patterns = require('../../config/patterns.config');
 
 const genericTypes = [
   'boolean',
-  'date',
   'number',
   'string'
 ];
@@ -21,6 +20,10 @@ const typeCheck = (value, typeDefinition) => {
   if (genericTypes.indexOf(typeDefinition.dataType) >= 0) {
     // Then simply check it
     return typeDefinition.dataType === typeof value;
+  }
+
+  if (typeDefinition.dataType === 'date') {
+    return typeof value.getMonth === 'function';
   }
 
   // Otherwise, we need to inspect it more manually

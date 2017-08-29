@@ -35,8 +35,9 @@ const MongoDataSource = {
    * @param {function} callback Error first method to be called once the operation has completed.
    */
   create: (collectionName, values, callback) => {
-    values.createdAt = new Date();
-    db.collection(collectionName).insertOne(values, (error, response) => {
+    let newValues = Object.assign({}, values, { createdAt: new Date() });
+
+    db.collection(collectionName).insertOne(newValues, (error, response) => {
       if (error) {
         if (error.message.indexOf('duplicate key error collection') >= 0) {
           Log.warning('MongoDataSource Connection', 'Create', `Attempt to create a duplicate entry.${error}`);

@@ -18,6 +18,9 @@ module.exports = {
           case 'number':
             output[item.valueName] = Number(values[item.valueName]);
             break;
+          case 'date':
+            output[item.valueName] = new Date(values[item.valueName]);
+            break;
           default:
             output[item.valueName] = values[item.valueName];
         }

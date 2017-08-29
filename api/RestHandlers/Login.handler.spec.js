@@ -14,7 +14,7 @@ describe('Handler: Login', () => {
   describe('login', () => {
     it('fails when parameters are missing', (done) => {
       request
-        .post('/rest/login')
+        .post('/login')
         .expect(422)
         .send({
           nameLogin: 'testName'
@@ -26,7 +26,7 @@ describe('Handler: Login', () => {
 
     it('accepts credentials', (done) => {
       request
-        .post('/rest/login')
+        .post('/login')
         .expect(200)
         .send({
           nameLogin: 'testName',
@@ -41,7 +41,7 @@ describe('Handler: Login', () => {
   describe('logout', () => {
     it('processes the response', (done) => {
       request
-        .post('/rest/login/logout')
+        .post('/login/logout')
         .expect(200)
         .then(() => {
           done();

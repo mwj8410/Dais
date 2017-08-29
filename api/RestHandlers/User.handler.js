@@ -8,7 +8,7 @@ const UserController = require('../Controllers/User.controller');
 module.exports = {
 
   create: (req, res) => {
-    let values = params.extract(req.params, [
+    let values = params.extract(req.body, [
       { valueName: 'email', dataType: 'email', required: true },
 
       { valueName: 'nameDisplay', dataType: 'string', required: true },
@@ -20,6 +20,10 @@ module.exports = {
 
       { valueName: 'createdSource', dataType: 'string', required: false }
     ]);
+
+    if (values === false) {
+      return res.status(422).send(StandardResponses.malformed);
+    }
 
     UserController.create(values, (error, newUser) => {
       if (error) {
