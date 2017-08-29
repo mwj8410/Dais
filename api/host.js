@@ -88,24 +88,24 @@ module.exports = {
     routeList.forEach((route) => {
       switch (route[1]) {
         case 'GET':
-          app.get(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.get(`${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'POST':
-          app.post(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.post(`${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'PUT':
-          app.put(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.put(`${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'PATCH':
-          app.patch(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.patch(`${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         case 'DELETE':
-          app.delete(`/rest${route[0]}`, RouteSecurity(route[3], route[2]));
+          app.delete(`${route[0]}`, RouteSecurity(route[3], route[2]));
           break;
         default:
           break;
       }
-      Log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} /rest${route[0]}`);
+      Log.info('Host', 'mountRoutes', `mounted handler for: ${route[1]} ${route[0]}`);
     });
   }
 };

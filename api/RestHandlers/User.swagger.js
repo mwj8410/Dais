@@ -7,36 +7,66 @@ module.exports = {
         tags: [ 'user' ],
         parameters: [
           {
-            name: 'sourceToken',
+            name: 'email',
             in: 'formData',
-            description: 'A token used to validate the sending origin.',
-            required: true,
-            type: 'string',
-            default: '1234567812345678123456781234567812345678123456781234567812345678'
-          },
-          {
-            name: 'credential',
-            in: 'formData',
-            description: 'A token used to validate the sending origin.',
+            description: 'The email address associated with the account',
             required: true,
             type: 'string',
             default: 'user@test.com'
           },
           {
-            name: 'passCode',
+            name: 'nameDisplay',
             in: 'formData',
-            description: 'A pass code that is presumed to be associated with the id provided.',
+            description: 'The publicly visible name for the user',
             required: true,
             type: 'string',
-            default: 'user@test.com'
+            default: 'dev-public'
+          },
+          {
+            name: 'nameLogin',
+            in: 'formData',
+            description: 'The name used to identify the account.',
+            required: true,
+            type: 'string',
+            default: 'dev-private'
+          },
+          {
+            name: 'nameFirst',
+            in: 'formData',
+            description: 'The user\'s first name',
+            required: false,
+            type: 'string',
+            default: 'Developer'
+          },
+          {
+            name: 'nameLast',
+            in: 'formData',
+            description: 'The user\'s last name',
+            required: false,
+            type: 'string',
+            default: 'test'
+          },
+          {
+            name: 'dateOfBirth',
+            in: 'formData',
+            description: 'The user\'s last name',
+            required: false,
+            type: 'string',
+            format: 'date',
+            default: '1981-09-28'
+          },
+          {
+            name: 'createdSource',
+            in: 'formData',
+            description: 'The name of the system, integration, or process that is creating the record',
+            required: false,
+            type: 'string',
+            default: 'self'
           }
         ],
         responses: {
           200: {
-            description: 'The information contained in the request passed authentication and resolved to a user universal id.',
-            schema: {
-              $ref: '#/definitions/PersonId'
-            }
+            description: 'The information contained in the request passed authentication and resolved to a user universal id.'
           },
           401: {
             description: 'The requesting system is not authorized to make requests with this service.',
@@ -74,16 +104,6 @@ module.exports = {
               $ref: '#/definitions/Error'
             }
           }
-        }
-      }
-    }
-  },
-  definitions: {
-    PersonId: {
-      required: [ 'id' ],
-      properties: {
-        id: {
-          type: 'string'
         }
       }
     }

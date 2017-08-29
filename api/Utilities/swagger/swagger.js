@@ -31,15 +31,15 @@ const Swagger = {
     fileNames.forEach((definitionFileName) => {
       const definition = require(definitionFileName);
 
-      if (definition.default && definition.default.paths) {
-        Object.keys(definition.default.paths).forEach((uri) => {
+      if (definition && definition.paths) {
+        Object.keys(definition.paths).forEach((uri) => {
           // If the uri is not yet registered in the definition, register it.
           if (typeof swaggerConfig.paths[uri] === 'undefined') {
             swaggerConfig.paths[uri] = {};
           }
 
-          Object.assign(swaggerConfig.paths[uri], definition.default.paths[uri]);
-          Log.info('Swagger', 'initialize', `Mounted Swagger path '${uri}' with methods: ${Object.keys(definition.default.paths[uri])}`);
+          Object.assign(swaggerConfig.paths[uri], definition.paths[uri]);
+          Log.info('Swagger', 'initialize', `Mounted Swagger path '${uri}' with methods: ${Object.keys(definition.paths[uri])}`);
         });
       }
 

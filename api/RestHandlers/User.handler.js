@@ -21,7 +21,7 @@ module.exports = {
       { valueName: 'createdSource', dataType: 'string', required: false }
     ]);
 
-    UserController.create((error, newUser) => {
+    UserController.create(values, (error, newUser) => {
       if (error) {
         // check the error to see if we can decide what to tell the client
         if (error.inernalCode && error.inernalCode === 422) {
