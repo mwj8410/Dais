@@ -20,3 +20,4 @@ require('../api/Controllers/User.controller.spec');
 
 // Handlers - Consumer Interfaces
 require('../api/RestHandlers/Login.handler.spec');
+require('../api/RestHandlers/User.handler.spec');

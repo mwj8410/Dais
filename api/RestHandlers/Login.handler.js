@@ -13,12 +13,15 @@ module.exports = {
       { valueName: 'password', dataType: 'string', required: true }
     ]);
 
-    // ToDo: create and interact with the login controller and connection
-
     if (values === false) {
       return res.status(422).send(StandardResponses.malformed);
     }
     Log.activity('Login', 'login', `Started session for: ${values.userName}`);
+
+    // Temp action
+    req.session.user = {}; // Yes, we will want the object
+    // ToDo: create and interact with the login controller and connection
+
     res.status(200).send();
   },
 

@@ -58,7 +58,15 @@ module.exports = {
       return res.status(422).send(StandardResponses.malformed);
     }
 
-    return res.status(200).send();
+    UserController.get(values.id, false, (error, user) => {
+      if (error) {
+        if (error.inernalCode === 404) {
+          return res.status(404).send(StandardResponses.notFound);
+        }
+        return res.status(500).send(StandardResponses.server);
+      }
+      return res.status(200).send(user);
+    });
   },
 
   patch: (req, res) => {

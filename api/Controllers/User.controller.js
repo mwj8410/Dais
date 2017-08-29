@@ -2,7 +2,6 @@
 
 const uuidv4 = require('uuid/v4');
 
-const collectionName = 'User';
 const log = require('../Utilities/log');
 const MongoDataSource = require('../Connections/Mongo.datasource');
 const typeCheck = require('../Utilities/typeCheck');
@@ -33,6 +32,8 @@ const userFields = [
 
   { valueName: 'createdSource', dataType: 'string', required: false }
 ];
+
+const collectionName = 'User';
 
 module.exports = {
   create: (values, callback) => {
@@ -65,7 +66,6 @@ module.exports = {
       });
 
     if (fieldErrors.length !== 0) {
-      // ToDo: needs to notify the consumer that this should be a 422 error.
       let newError = new Error(`Field validations failed: ${fieldErrors.join(', ')}`);
       newError.internalCode = 422;
       return callback(newError);
@@ -96,6 +96,27 @@ module.exports = {
       // Filter out non-public values
       return callback(undefined, newRecord);
     });
-  }
+  },
 
+  get: (id, includeInactive, callback) => {
+    let criteria = { id: id };
+    if (includeInactive === false) {
+      criteria.active = true;
+    }
+    MongoDataSource.find(collectionName, criteria, (error, records) => {
+      if (error) {
+        return callback(error);
+      }
+
+      let contentError;
+      if (records.length === 0) {
+        log.warning('UserController', 'get', 'Attempt to fetch a record that does not exists.');
+        contentError = new Error('No matching results');
+        contentError.inernalCode = 404;
+        return callback(contentError);
+      }
+
+      return callback(undefined, records[0]);
+    });
+  }
 };

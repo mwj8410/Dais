@@ -53,7 +53,7 @@ module.exports = {
             required: false,
             type: 'string',
             format: 'date',
-            default: '1981-09-28T00:00:00.000Z'
+            default: '2024-04-08T00:00:00.000Z'
           },
           {
             name: 'createdSource',

@@ -18,6 +18,11 @@ module.exports = {
     message: 'The content of the request is malformed or invalid in some way. Please correct before trying again.'
   },
 
+  notFound: {
+    code:404,
+    message: 'The provided criteria did not match any records.'
+  },
+
   server: {
     code: 500,
     message: 'The server has experienced an irrecoverable error.'
