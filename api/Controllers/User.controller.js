@@ -4,6 +4,7 @@ const uuidv4 = require('uuid/v4');
 
 const log = require('../Utilities/log');
 const MongoDataSource = require('../Connections/Mongo.datasource');
+const EnumStatic = require('../Statics/Enum.static');
 const typeCheck = require('../Utilities/typeCheck');
 
 // In lieu of an Entity/Model framework, we'll fake it
@@ -16,6 +17,7 @@ const typeCheck = require('../Utilities/typeCheck');
 const userFields = [
   // Automatically created:
   { valueName: 'id', dataType: 'uuid4', required: true, autoCreated: true },
+  { valueName: 'userType', dataType: 'enum:UserType', required: true, autoCreated: true},
   { valueName: 'createDate', dataType: 'date', required: true, autoCreated: true },
   { valueName: 'updatedDate', dataType: 'date', required: true, autoCreated: true },
 
@@ -27,7 +29,6 @@ const userFields = [
   { valueName: 'nameLogin', dataType: 'string', required: true },
 
   { valueName: 'active', dataType: 'boolean', required: false },
-
   { valueName: 'dateOfBirth', dataType: 'date', required: false },
 
   { valueName: 'createdSource', dataType: 'string', required: false }
@@ -85,6 +86,9 @@ module.exports = {
 
     if (typeof newUser.active === 'undefined') {
       newUser.active = true;
+    }
+    if (typeof newUser.userType === 'undefined') {
+      newUser.userType = EnumStatic.userType.filter((item) => item.default)[0].value;
     }
 
     // The record should be ready to pass off to the database

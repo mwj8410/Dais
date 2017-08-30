@@ -14,6 +14,7 @@ before(() => {
 // Utility
 require('../api/Connections/Mongo.datasource.spec');
 require('../api/Utilities/log.spec');
+require('../api/Utilities/typeCheck.spec');
 
 // Controllers - Application Level Logic
 require('../api/Controllers/User.controller.spec');

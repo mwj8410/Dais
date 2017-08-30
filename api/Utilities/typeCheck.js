@@ -1,3 +1,4 @@
+const enumStatics = require('../Statics/Enum.static');
 const patterns = require('../../config/patterns.config');
 
 // Expects
@@ -24,6 +25,19 @@ const typeCheck = (value, typeDefinition) => {
 
   if (typeDefinition.dataType === 'date') {
     return typeof value.getMonth === 'function';
+  }
+
+  if (typeDefinition.dataType.indexOf('enum') >= 0) {
+    let enumType = typeDefinition.dataType.split(':')[1];
+    // Doe the enum set exist?
+    if (!enumStatics[enumType]) {
+      return false;
+    }
+    // We could test if the value is a string, and this would serve for 99% of cases.
+    // However, we would rather not make assumptions that we are not required to make.
+
+    // Test if the string value is in the enum set
+    return enumStatics[enumType].map((item) => item.value).indexOf(value) >= 0;
   }
 
   // Otherwise, we need to inspect it more manually
