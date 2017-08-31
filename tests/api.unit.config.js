@@ -17,6 +17,7 @@ require('../api/Utilities/log.spec');
 require('../api/Utilities/typeCheck.spec');
 
 // Controllers - Application Level Logic
+require('../api/Controllers/Login.controller.spec');
 require('../api/Controllers/User.controller.spec');
 
 // Handlers - Consumer Interfaces

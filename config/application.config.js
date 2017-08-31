@@ -33,7 +33,7 @@ let api = {
 // Process local values
 try {
   let localConfig = require('./local.config');
-  Object.keys(localConfig.api).forEach(configKey => {
+  Object.keys(localConfig.api).forEach((configKey) => {
     api[configKey] = Object.assign({}, api[configKey], localConfig.api[configKey]);
   });
 } catch (ex) {}

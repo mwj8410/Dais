@@ -4,6 +4,8 @@ const Log = require('../Utilities/log');
 const params = require('../Utilities/params');
 const StandardResponses = require('../Utilities/StandardResponses/standardResponses');
 
+const LoginController = require('../Controllers/Login.controller');
+
 module.exports = {
   login: (req, res) => {
     let values = params.extract(req.body, [
@@ -16,16 +18,31 @@ module.exports = {
     if (values === false) {
       return res.status(422).send(StandardResponses.malformed);
     }
-    Log.activity('Login', 'login', `Started session for: ${values.userName}`);
 
-    // Temp action
-    req.session.user = {}; // Yes, we will want the object
-    // ToDo: create and interact with the login controller and connection
+    LoginController.login(values, (error, user) => {
+      if (error) {
+        if (error.internalCode === 403) {
+          return res.status(401).send(StandardResponses.notFound);
+        }
+        if (error.internalCode === 404) {
+          return res.status(401).send(StandardResponses.notFound);
+        }
+        if (error.internalCode === 422) {
+          return res.status(422).send(StandardResponses.malformed);
+        }
+        if (error.internalCode === 500) {
+          return res.status(500).send(StandardResponses.server);
+        }
+      }
+      req.session.user = user; // Yes, we will want the object
+      Log.activity('Login', 'login', `Started session for: ${values.nameLogin}`);
 
-    res.status(200).send();
+      res.status(200).send({ id: user.id });
+    });
   },
 
   logout: (req, res) => {
+    // This route does not require interaction with a controller.
     req.session.destroy(() => {
       return res.status(200).send();
     });
