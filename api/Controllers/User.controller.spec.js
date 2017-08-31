@@ -96,6 +96,111 @@ describe('Controller: User', () => {
         done();
       });
     });
+
+  });
+
+  describe('get', () => {
+
+    it('exists', () =>{
+      expect(UserController.get).to.be.a('function');
+    });
+
+    it('handles errors in Data Layer', (done) => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        return cb(new Error);
+      });
+
+      UserController.get('anId', false, (error, resultingRecord) => {
+        MongoDataSource.get.restore();
+
+        expect(error).to.be.a('Error');
+        expect(resultingRecord).to.be.a('undefined');
+        done();
+      });
+    });
+
+    it('reports and error when no documents match', (done) => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        return cb(undefined, []);
+      });
+
+      UserController.get('anId', false, (error, resultingRecord) => {
+        MongoDataSource.get.restore();
+
+        expect(error).to.be.a('Error');
+        expect(resultingRecord).to.be.a('undefined');
+        done();
+      });
+    });
+
+    it('retrieves a record', (done) => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        return cb(undefined, [ { id: 'test' } ]);
+      });
+
+      UserController.get('anId', false, (error, resultingRecord) => {
+        MongoDataSource.get.restore();
+
+        expect(error).to.be.a('undefined');
+        expect(resultingRecord).to.be.a('object');
+        expect(resultingRecord.id).to.equal('test');
+        done();
+      });
+    });
+
+  });
+
+  describe('update', () => {
+
+    it('exists', () =>{
+      expect(UserController.update).to.be.a('function');
+    });
+
+    it('handles errors in Data Layer', (done) => {
+      sinon.stub(MongoDataSource, 'update')
+        .callsFake((collectionName, criteria, values, cb) => {
+          return cb(new Error);
+        });
+
+      UserController.update('anId', { value: 'test' }, (error, resultingRecord) => {
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('Error');
+        expect(resultingRecord).to.be.a('undefined');
+        done();
+      });
+    });
+
+    it('reports an error when no records are returned', (done) => {
+      sinon.stub(MongoDataSource, 'update')
+        .callsFake((collectionName, criteria, values, cb) => {
+          return cb(undefined, []);
+        });
+
+      UserController.update('anId', { value: 'test' }, (error, resultingRecord) => {
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('Error');
+        expect(resultingRecord).to.be.a('undefined');
+        done();
+      });
+    });
+
+    it('updates a record', (done) => {
+      sinon.stub(MongoDataSource, 'update')
+        .callsFake((collectionName, criteria, values, cb) => {
+          return cb(undefined, [ {} ]);
+        });
+
+      UserController.update('anId', { value: 'test' }, (error, resultingRecord) => {
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('undefined');
+        expect(resultingRecord).to.be.a('object');
+        done();
+      });
+    });
+
   });
 
 });

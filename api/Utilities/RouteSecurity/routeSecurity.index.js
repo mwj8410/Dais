@@ -33,6 +33,7 @@ const RouteSecurity = (profiles, handler) => {
             );
           return res.status(401).send(StandardResponses.unAuthorized);
         }
+        return handler(req, res);
       })
       .catch((error) => {
         Log.error(

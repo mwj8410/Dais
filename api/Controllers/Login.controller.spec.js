@@ -53,7 +53,7 @@ describe('Controller: Login', () => {
     it('handles multiple matching user records', (done) => {
       sinon.stub(MongoDataSource, 'get').callsFake((err, criteria, cb) => {
         expect(criteria.nameLogin).to.equal('testName');
-        return cb(undefined, [{}, {}]);
+        return cb(undefined, [ {}, {} ]);
       });
 
       LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {
@@ -68,7 +68,7 @@ describe('Controller: Login', () => {
     it('handles inactive user profiles', (done) => {
       sinon.stub(MongoDataSource, 'get').callsFake((err, criteria, cb) => {
         expect(criteria.nameLogin).to.equal('testName');
-        return cb(undefined, [{active: false}]);
+        return cb(undefined, [ { active: false } ]);
       });
 
       LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {

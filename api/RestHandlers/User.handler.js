@@ -1,5 +1,6 @@
 /* global module, require */
 
+const log = require('../Utilities/log');
 const params = require('../Utilities/params');
 const StandardResponses = require('../Utilities/StandardResponses/standardResponses');
 
@@ -39,11 +40,16 @@ module.exports = {
 
   delete: (req, res) => {
     let values = params.extract(req.params, [
-      { valueName: 'id', dataType: 'number', required: true }
+      { valueName: 'id', dataType: 'uuid4', required: true }
     ]);
 
     if (values === false) {
       return res.status(422).send(StandardResponses.malformed);
+    }
+
+    if (req.session.user.type !== 'admin' && req.session.user.id !== values.id) {
+      log.security('UserHandler', 'Get', 'Attempt by non-admin to access a restricted record.');
+      return res.status(401).send(StandardResponses.unAuthorized);
     }
 
     return res.status(200).send();
@@ -51,11 +57,16 @@ module.exports = {
 
   get: (req, res) => {
     let values = params.extract(req.params, [
-      { valueName: 'id', dataType: 'number', required: true }
+      { valueName: 'id', dataType: 'uuid4', required: true }
     ]);
 
     if (values === false) {
       return res.status(422).send(StandardResponses.malformed);
+    }
+
+    if (req.session.user.type !== 'admin' && req.session.user.id !== values.id) {
+      log.security('UserHandler', 'Get', 'Attempt by non-admin to access a restricted record.');
+      return res.status(401).send(StandardResponses.unAuthorized);
     }
 
     UserController.get(values.id, false, (error, user) => {
@@ -70,10 +81,49 @@ module.exports = {
   },
 
   patch: (req, res) => {
+    let values = params.extract(req.body, [
+      { valueName: 'email', dataType: 'email', required: true },
+      { valueName: 'nameDisplay', dataType: 'string', required: true },
+      { valueName: 'nameFirst', dataType: 'string', required: false },
+      { valueName: 'nameLast', dataType: 'string', required: false },
+      { valueName: 'dateOfBirth', dataType: 'date', required: false }
+    ]);
+
+    if (values === false) {
+      return res.status(422).send(StandardResponses.malformed);
+    }
+
+    if (Object.keys(values).length !== 1) {
+      return res.status(422).send(StandardResponses.malformed);
+    }
+
+    if (req.session.user.type !== 'admin' && req.session.user.id !== values.id) {
+      log.security('UserHandler', 'Get', 'Attempt by non-admin to access a restricted record.');
+      return res.status(401).send(StandardResponses.unAuthorized);
+    }
+
     return res.status(200).send();
   },
 
   update: (req, res) => {
+    let values = params.extract(req.body, [
+      { valueName: 'email', dataType: 'email', required: true },
+      { valueName: 'nameDisplay', dataType: 'string', required: true },
+      { valueName: 'nameFirst', dataType: 'string', required: false },
+      { valueName: 'nameLast', dataType: 'string', required: false },
+      { valueName: 'dateOfBirth', dataType: 'date', required: false }
+    ]);
+
+    if (values === false) {
+      return res.status(422).send(StandardResponses.malformed);
+    }
+
+    if (req.session.user.type !== 'admin' && req.session.user.id !== values.id) {
+      log.security('UserHandler', 'Get', 'Attempt by non-admin to access a restricted record.');
+      return res.status(401).send(StandardResponses.unAuthorized);
+    }
+
     return res.status(200).send();
   }
+
 };

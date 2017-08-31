@@ -9,7 +9,7 @@ module.exports = [
   [ '/login/logout', 'POST', Login.logout, [] ],
 
   [ '/user/:id', 'GET', User.get, [ 'loggedIn' ] ],
-  [ '/user/:id', 'DELETE', User.update, [ 'loggedIn' ] ],
+  [ '/user/:id', 'DELETE', User.delete, [ 'loggedIn' ] ],
   [ '/user/:id', 'PUT', User.update, [ 'loggedIn' ] ],
   [ '/user/', 'POST', User.create, [] ]
 

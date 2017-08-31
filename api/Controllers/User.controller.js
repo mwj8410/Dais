@@ -104,10 +104,12 @@ module.exports = {
 
   get: (id, includeInactive, callback) => {
     let criteria = { id: id };
+
     if (includeInactive === false) {
       criteria.active = true;
     }
-    MongoDataSource.find(collectionName, criteria, (error, records) => {
+
+    MongoDataSource.get(collectionName, criteria, (error, records) => {
       if (error) {
         return callback(error);
       }
@@ -115,6 +117,26 @@ module.exports = {
       let contentError;
       if (records.length === 0) {
         log.warning('UserController', 'get', 'Attempt to fetch a record that does not exists.');
+        contentError = new Error('No matching results');
+        contentError.inernalCode = 404;
+        return callback(contentError);
+      }
+
+      return callback(undefined, records[0]);
+    });
+  },
+
+  update: (id, values, callback) => {
+    let criteria = { id: id };
+
+    MongoDataSource.update(collectionName, criteria, values, (error, records) => {
+      if (error) {
+        return callback(error);
+      }
+
+      let contentError;
+      if (records.length !== 1) {
+        log.warning('UserController', 'get', 'Attempt to update a record that does not exists.');
         contentError = new Error('No matching results');
         contentError.inernalCode = 404;
         return callback(contentError);
