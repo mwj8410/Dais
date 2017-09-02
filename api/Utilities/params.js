@@ -1,3 +1,7 @@
+/* global module, require */
+
+const typeCheck = require('./typeCheck');
+
 module.exports = {
   /**
    * A utility function for extracting and type transformation of request parameters.
@@ -20,6 +24,12 @@ module.exports = {
             break;
           case 'date':
             output[item.valueName] = new Date(values[item.valueName]);
+            break;
+          case 'uuid4':
+            if (typeCheck(values[item.valueName], item) === false) {
+              error = true;
+            }
+            output[item.valueName] = values[item.valueName];
             break;
           default:
             output[item.valueName] = values[item.valueName];

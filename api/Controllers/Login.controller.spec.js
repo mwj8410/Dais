@@ -1,13 +1,16 @@
-/* global after, before, describe, it */
+/* global after, before, describe, it, require */
 
 const expect = require('chai').expect;
 const sinon = require('sinon');
 
-const AuthDataSource = require('../Connections/AuthService.datasource');
 const MongoDataSource = require('../Connections/Mongo.datasource');
 const LoginController = require('./Login.controller');
+const MandrillService = require('../Connections/Mandrill.service');
+const UserController = require('./User.controller');
+const passwordService = require('../Utilities/password');
 
 describe('Controller: Login', () => {
+
   it('exists', () => {
     expect(LoginController).to.be.a('object');
   });
@@ -27,7 +30,7 @@ describe('Controller: Login', () => {
         return cb(new Error());
       });
 
-      LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {
+      LoginController.login({ nameLogin: 'testName', authPassword: 'password' }, (err) => {
         MongoDataSource.get.restore();
 
         expect(err).to.be.a('Error');
@@ -41,7 +44,7 @@ describe('Controller: Login', () => {
         return cb(undefined, []);
       });
 
-      LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {
+      LoginController.login({nameLogin: 'testName', authPassword: 'password'}, (err) => {
         MongoDataSource.get.restore();
 
         expect(err).to.be.a('Error');
@@ -56,7 +59,7 @@ describe('Controller: Login', () => {
         return cb(undefined, [ {}, {} ]);
       });
 
-      LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {
+      LoginController.login({nameLogin: 'testName', authPassword: 'password'}, (err) => {
         MongoDataSource.get.restore();
 
         expect(err).to.be.a('Error');
@@ -71,7 +74,7 @@ describe('Controller: Login', () => {
         return cb(undefined, [ { active: false } ]);
       });
 
-      LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {
+      LoginController.login({nameLogin: 'testName', authPassword: 'password'}, (err) => {
         MongoDataSource.get.restore();
 
         expect(err).to.be.a('Error');
@@ -86,13 +89,8 @@ describe('Controller: Login', () => {
         return cb(undefined, [ { active: true } ]);
       });
 
-      sinon.stub(AuthDataSource, 'validate').callsFake((err, cb) => {
-        return cb(new Error());
-      });
-
-      LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {
+      LoginController.login({nameLogin: 'testName', authPassword: 'password'}, (err) => {
         MongoDataSource.get.restore();
-        AuthDataSource.validate.restore();
 
         expect(err).to.be.a('Error');
         done();
@@ -100,42 +98,251 @@ describe('Controller: Login', () => {
     });
 
     it('validates a user', (done) => {
+      const salt = passwordService.createSalt();
+      const password = passwordService.hashPassword('Abcd1234', salt);
+
       sinon.stub(MongoDataSource, 'get').callsFake((err, criteria, cb) => {
         expect(criteria.nameLogin).to.equal('testName');
-        return cb(undefined, [ { active: true, id: 'match' } ]);
+        return cb(undefined, [ { active: true, authPassword: password, authSalt: salt } ]);
       });
 
-      sinon.stub(AuthDataSource, 'validate').callsFake((err, cb) => {
-        return cb(undefined, { id: 'match'} );
-      });
-
-      LoginController.login({nameLogin: 'testName', password: 'password'}, (err, user) => {
+      LoginController.login({nameLogin: 'testName', authPassword: 'Abcd1234'}, (err, user) => {
         MongoDataSource.get.restore();
-        AuthDataSource.validate.restore();
 
         expect(user).to.be.a('object');
         done();
       });
     });
 
-    it('requires that both systems agree on the id', (done) => {
+    it('correctly fails when the passwords don\'t match', (done) => {
+      const salt = passwordService.createSalt();
+      const password = passwordService.hashPassword('Abcd1234', salt);
+
       sinon.stub(MongoDataSource, 'get').callsFake((err, criteria, cb) => {
-        expect(criteria.nameLogin).to.equal('testName');
-        return cb(undefined, [ { active: true, id: 'noMatch' } ]);
+        return cb(undefined, [ { active: true, authPassword: password, authSalt: salt } ]);
       });
 
-      sinon.stub(AuthDataSource, 'validate').callsFake((err, cb) => {
-        return cb(undefined, { id: 'match'} );
-      });
-
-      LoginController.login({nameLogin: 'testName', password: 'password'}, (err) => {
+      LoginController.login({nameLogin: 'noMatch', authPassword: 'noMatch'}, (err, user) => {
         MongoDataSource.get.restore();
-        AuthDataSource.validate.restore();
 
         expect(err).to.be.a('Error');
-        expect(err.internalCode).to.equal(500);
         done();
       });
+    });
+
+  });
+
+  describe('registerClaim', () => {
+
+    it('exists', () => {
+      expect(LoginController.registerClaim).to.be.a('function');
+    });
+
+    it('registers a new User', () => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, []);
+      });
+
+      sinon.stub(UserController, 'create').callsFake((values, cb) => {
+        cb(undefined, values);
+      });
+
+      sinon.stub(MandrillService, 'send').callsFake((template, email, options, cb) => {
+        cb(undefined);
+      });
+
+      sinon.stub(MongoDataSource, 'update').callsFake((collectionName, criteria, values, cb) => {
+        cb(undefined, [ { id: 'test' } ]);
+      });
+
+      LoginController.registerClaim('test@email.com', (error, user) => {
+        MongoDataSource.get.restore();
+        UserController.create.restore();
+        MandrillService.send.restore();
+        MongoDataSource.update.restore();
+
+        expect(user[0]).to.be.a('object');
+      });
+    });
+
+    it('registers an existing User', () => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, [ {} ]);
+      });
+
+      sinon.stub(UserController, 'create').callsFake((values, cb) => {
+        cb(undefined, values);
+      });
+
+      sinon.stub(MandrillService, 'send').callsFake((template, email, options, cb) => {
+        cb(undefined);
+      });
+
+      sinon.stub(MongoDataSource, 'update').callsFake((collectionName, criteria, values, cb) => {
+        cb(undefined, [ { id: 'test' } ]);
+      });
+
+      LoginController.registerClaim('test@email.com', (error, user) => {
+        MongoDataSource.get.restore();
+        UserController.create.restore();
+        MandrillService.send.restore();
+        MongoDataSource.update.restore();
+
+        expect(user[0]).to.be.a('object');
+      });
+    });
+
+    it('handles errors in MongoDataSource.get()', () => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(new Error(), []);
+      });
+
+      sinon.stub(UserController, 'create').callsFake((values, cb) => {
+        cb(undefined, values);
+      });
+
+      sinon.stub(MandrillService, 'send').callsFake((template, email, options, cb) => {
+        cb(undefined);
+      });
+
+      sinon.stub(MongoDataSource, 'update').callsFake((collectionName, criteria, values, cb) => {
+        cb(undefined, [ { id: 'test' } ]);
+      });
+
+      LoginController.registerClaim('test@email.com', (error) => {
+        MongoDataSource.get.restore();
+        UserController.create.restore();
+        MandrillService.send.restore();
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('Error');
+      });
+    });
+
+    it('handles errors in UserController.create()', () => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, []);
+      });
+
+      sinon.stub(UserController, 'create').callsFake((values, cb) => {
+        let err = new Error();
+        err.internalCode = 42;
+        cb(err, values);
+      });
+
+      sinon.stub(MandrillService, 'send').callsFake((template, email, options, cb) => {
+        cb(undefined);
+      });
+
+      sinon.stub(MongoDataSource, 'update').callsFake((collectionName, criteria, values, cb) => {
+        cb(undefined, [ { id: 'test' } ]);
+      });
+
+      LoginController.registerClaim('test@email.com', (error) => {
+        MongoDataSource.get.restore();
+        UserController.create.restore();
+        MandrillService.send.restore();
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('Error');
+      });
+    });
+
+    it('handles errors in MandrillService.send()', () => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, []);
+      });
+
+      sinon.stub(UserController, 'create').callsFake((values, cb) => {
+        cb(undefined, values);
+      });
+
+      sinon.stub(MandrillService, 'send').callsFake((template, email, options, cb) => {
+        cb(new Error());
+      });
+
+      sinon.stub(MongoDataSource, 'update').callsFake((collectionName, criteria, values, cb) => {
+        cb(undefined, [ { id: 'test' } ]);
+      });
+
+      LoginController.registerClaim('test@email.com', (error) => {
+        MongoDataSource.get.restore();
+        UserController.create.restore();
+        MandrillService.send.restore();
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('Error');
+      });
+    });
+
+    it('handles errors in MongoDataSource.update()', () => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, []);
+      });
+
+      sinon.stub(UserController, 'create').callsFake((values, cb) => {
+        cb(undefined, values);
+      });
+
+      sinon.stub(MandrillService, 'send').callsFake((template, email, options, cb) => {
+        cb(undefined);
+      });
+
+      sinon.stub(MongoDataSource, 'update').callsFake((collectionName, criteria, values, cb) => {
+        cb(new Error(), [ { id: 'test' } ]);
+      });
+
+      LoginController.registerClaim('test@email.com', (error) => {
+        MongoDataSource.get.restore();
+        UserController.create.restore();
+        MandrillService.send.restore();
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('Error');
+      });
+    });
+
+    it('reports registration of active users as being in error', () => {
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, [ { active: true } ]);
+      });
+
+      sinon.stub(UserController, 'create').callsFake((values, cb) => {
+        cb(undefined, values);
+      });
+
+      sinon.stub(MandrillService, 'send').callsFake((template, email, options, cb) => {
+        cb(undefined);
+      });
+
+      sinon.stub(MongoDataSource, 'update').callsFake((collectionName, criteria, values, cb) => {
+        cb(undefined, [ { id: 'test' } ]);
+      });
+
+      LoginController.registerClaim('test@email.com', (error, user) => {
+        MongoDataSource.get.restore();
+        UserController.create.restore();
+        MandrillService.send.restore();
+        MongoDataSource.update.restore();
+
+        expect(error).to.be.a('Error');
+      });
+    });
+
+  });
+
+  describe('registerClaimValidate', () => {
+
+    it('exists', () => {
+      expect(LoginController.registerClaimValidate).to.be.a('function');
+    });
+
+  });
+
+  describe('setPassword', () => {
+
+    it('exists', () => {
+      expect(LoginController.setPassword).to.be.a('function');
     });
 
   });

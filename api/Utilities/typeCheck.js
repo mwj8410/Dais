@@ -1,3 +1,5 @@
+/* global module, require */
+
 const enumStatics = require('../Statics/Enum.static');
 const patterns = require('../../config/patterns.config');
 

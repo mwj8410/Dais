@@ -5,6 +5,9 @@ let ConnectionSources = {
     url: process.env.AUTH_SERVICE_URL,
     apiToken: process.env.AUTH_SERVICE_API_TOKEN
   },
+  mandrill: {
+    apiToken: process.env.MANDRILL_API_TOKEN
+  },
   mongo: {
     url: process.env.MONGO_URL,
     port: process.env.MONGO_PORT,

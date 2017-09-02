@@ -1,3 +1,5 @@
+/* global module */
+
 /**
  * Defines all of the enum value sets used in the application by name.
  *
@@ -9,7 +11,7 @@ const enumerableValues = {
   userType: [
     { label: 'Administrator', value: 'admin' },
     { label: 'Contact', value: 'contact', default: true },
-    { label: 'Member', value: 'member' },
+    { label: 'Member', value: 'member' }
   ]
 };
 

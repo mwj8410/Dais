@@ -12,15 +12,8 @@ const Log = require('./Utilities/log');
 const config = require('../config/application.config');
 
 let app = express();
-let server;
 
 module.exports = {
-  /**
-   * Instructs the server to stop listening and shut down.
-   */
-  close: () => {
-    server.close();
-  },
 
   /**
    * Connects to all automatically connected data sources
@@ -41,8 +34,12 @@ module.exports = {
   initialize: () => {
     // Add Session
     let sessionSettings = {
-      cookie: {},
-      resave: false,
+      key: 'session.sid',
+      cookie: {
+        httpOnly: false,
+        maxAge: 600000
+      },
+      resave: true,
       saveUninitialized: true,
       secret: config.session.sessionSecret,
       store: new MongoStore({

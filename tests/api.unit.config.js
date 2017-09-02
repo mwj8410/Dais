@@ -12,8 +12,11 @@ before(() => {
 
 // Manually include each test set here
 // Utility
+require('../api/Connections/Mandrill.service.spec');
 require('../api/Connections/Mongo.datasource.spec');
 require('../api/Utilities/log.spec');
+require('../api/Utilities/model.helpers.spec');
+require('../api/Utilities/password.spec');
 require('../api/Utilities/typeCheck.spec');
 
 // Controllers - Application Level Logic

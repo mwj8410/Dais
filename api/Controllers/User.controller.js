@@ -14,25 +14,7 @@ const typeCheck = require('../Utilities/typeCheck');
 // We are reusing the pattern used in RestHandler parameter validation, but expressing what is required
 // of the record, not the specific operation being performed
 
-const userFields = [
-  // Automatically created:
-  { valueName: 'id', dataType: 'uuid4', required: true, autoCreated: true },
-  { valueName: 'userType', dataType: 'enum:UserType', required: true, autoCreated: true},
-  { valueName: 'createDate', dataType: 'date', required: true, autoCreated: true },
-  { valueName: 'updatedDate', dataType: 'date', required: true, autoCreated: true },
-
-  { valueName: 'email', dataType: 'email', required: true },
-
-  { valueName: 'nameDisplay', dataType: 'string', required: true },
-  { valueName: 'nameFirst', dataType: 'string', required: false },
-  { valueName: 'nameLast', dataType: 'string', required: false },
-  { valueName: 'nameLogin', dataType: 'string', required: true },
-
-  { valueName: 'active', dataType: 'boolean', required: false },
-  { valueName: 'dateOfBirth', dataType: 'date', required: false },
-
-  { valueName: 'createdSource', dataType: 'string', required: false }
-];
+const userFields = require('../Models/User.model');
 
 const collectionName = 'User';
 
@@ -128,6 +110,7 @@ module.exports = {
 
   update: (id, values, callback) => {
     let criteria = { id: id };
+    values.updatedDate = new Date();
 
     MongoDataSource.update(collectionName, criteria, values, (error, records) => {
       if (error) {

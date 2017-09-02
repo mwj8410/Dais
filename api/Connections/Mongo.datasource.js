@@ -1,8 +1,8 @@
+/* global module */
+
 /**
  * Provides a connection into a specific data source using a specified connector.
  */
-
-// ToDo: full unit testing
 
 const Log = require('../Utilities/log');
 const MongoConnector = require('../Utilities/Connectors/Mongo.connector');
@@ -22,7 +22,7 @@ const MongoDataSource = {
   connect: () => {
     return MongoConnector(connectionName)
       .then((dbConnection) => {
-        Log.notice('MongoDataSource', 'connect', 'Connected to remote data source: MongoDataSource');
+        Log.notice('MongoDataSource', 'connect', 'Connected to remote data source: Mongo');
         db = dbConnection;
         MongoDataSource.initializeDatabase();
       });
@@ -137,8 +137,13 @@ const MongoDataSource = {
           Log.error('MongoDataSource Connection', 'Create', 'Encountered an error creating a record.', error);
           return callback(error);
         }
-
-        callback(undefined);
+        MongoDataSource.get(collectionName, criteria, (error, records) => {
+          if (error) {
+            // Error is logged in the get operation
+            return callback(error);
+          }
+          callback(undefined, records);
+        });
       });
   }
 

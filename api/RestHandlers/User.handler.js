@@ -64,7 +64,7 @@ module.exports = {
       return res.status(422).send(StandardResponses.malformed);
     }
 
-    if (req.session.user.type !== 'admin' && req.session.user.id !== values.id) {
+    if (req.session.user.id !== values.id && req.session.user.type !== 'admin') {
       log.security('UserHandler', 'Get', 'Attempt by non-admin to access a restricted record.');
       return res.status(401).send(StandardResponses.unAuthorized);
     }
@@ -106,6 +106,9 @@ module.exports = {
   },
 
   update: (req, res) => {
+    let id = params.extract(req.params, [
+      { valueName: 'id', dataType: 'uuid4', required: true }
+    ]).id;
     let values = params.extract(req.body, [
       { valueName: 'email', dataType: 'email', required: true },
       { valueName: 'nameDisplay', dataType: 'string', required: true },
@@ -114,14 +117,16 @@ module.exports = {
       { valueName: 'dateOfBirth', dataType: 'date', required: false }
     ]);
 
-    if (values === false) {
+    if (values === false || id === false) {
       return res.status(422).send(StandardResponses.malformed);
     }
 
-    if (req.session.user.type !== 'admin' && req.session.user.id !== values.id) {
+    if (req.session.user.id !== id && req.session.user.type !== 'admin') {
       log.security('UserHandler', 'Get', 'Attempt by non-admin to access a restricted record.');
       return res.status(401).send(StandardResponses.unAuthorized);
     }
+
+    // ToDo: Connect into the user controller update
 
     return res.status(200).send();
   }

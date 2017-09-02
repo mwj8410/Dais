@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const MongoDataSource = require('./Mongo.datasource');
 
-describe('Data Source: MongoDatasource', () => {
+describe('Data Source: Mongo', () => {
 
   before((done) => {
     MongoDataSource.connect().then(() => {
@@ -88,6 +88,7 @@ describe('Data Source: MongoDatasource', () => {
   });
 
   describe('get', () => {
+
     it('exists', () => {
       expect(MongoDataSource.get).to.be.a('function');
     });
@@ -135,6 +136,78 @@ describe('Data Source: MongoDatasource', () => {
     });
   });
 
+  describe('initializeDatabase', () => {
+
+    it('exists', () => {
+      expect(MongoDataSource.initializeDatabase).to.be.a('function');
+    });
+
+    it('handles errors in collections', () => {
+      let db = MongoDataSource.getRawConnection();
+      let collectionsCalled = false;
+
+      sinon.stub(db, 'collections').callsFake((callback) => {
+        collectionsCalled = true;
+        callback(new Error());
+      });
+
+      MongoDataSource.initializeDatabase();
+
+      db.collections.restore();
+
+      expect(collectionsCalled).to.equal(true);
+    });
+
+    it('creates collections', () => {
+      let db = MongoDataSource.getRawConnection();
+      let collectionsCalled = false;
+      let timesCreateCalled = 0;
+
+      sinon.stub(db, 'collections').callsFake((callback) => {
+        collectionsCalled = true;
+        callback(undefined, []);
+      });
+
+      sinon.stub(db, 'createCollection').callsFake((collectionName, callback) => {
+        timesCreateCalled += 1;
+        callback(undefined, 'fakeName');
+      });
+
+      MongoDataSource.initializeDatabase();
+
+      db.collections.restore();
+      db.createCollection.restore();
+
+      expect(timesCreateCalled).to.equal(1);
+      expect(collectionsCalled).to.equal(true);
+    });
+
+    it('handles errors in collection create', () => {
+      let db = MongoDataSource.getRawConnection();
+      let collectionsCalled = false;
+      let timesCreateCalled = 0;
+
+      sinon.stub(db, 'collections').callsFake((callback) => {
+        collectionsCalled = true;
+        callback(undefined, []);
+      });
+
+      sinon.stub(db, 'createCollection').callsFake((collectionName, callback) => {
+        timesCreateCalled += 1;
+        callback(new Error());
+      });
+
+      MongoDataSource.initializeDatabase();
+
+      db.collections.restore();
+      db.createCollection.restore();
+
+      expect(timesCreateCalled).to.equal(1);
+      expect(collectionsCalled).to.equal(true);
+    });
+
+  });
+
   describe('update', () => {
     it('exists', () => {
       expect(MongoDataSource.get).to.be.a('function');
@@ -157,8 +230,13 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, [ { id: '1' } ]);
+      });
+
       MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
+        MongoDataSource.get.restore();
 
         expect(err).to.be.a('undefined');
         expect(calledCollection).to.be.equal('test');
@@ -185,8 +263,13 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, [ { id: '1' } ]);
+      });
+
       MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
+        MongoDataSource.get.restore();
 
         expect(err).to.be.a('undefined');
         expect(calledCollection).to.be.equal('test');
@@ -209,8 +292,13 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, [ { id: '1' } ]);
+      });
+
       MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
+        MongoDataSource.get.restore();
 
         expect(err).to.be.a('Error');
         expect(err.message).to.be.equal('duplicate key error collection');
@@ -229,8 +317,37 @@ describe('Data Source: MongoDatasource', () => {
         };
       });
 
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(undefined, [ { id: '1' } ]);
+      });
+
       MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
         db.collection.restore();
+        MongoDataSource.get.restore();
+
+        expect(err).to.be.a('Error');
+        done();
+      });
+    });
+
+    it('handles errors in peer methods', (done) => {
+      let db = MongoDataSource.getRawConnection();
+
+      sinon.stub(db, 'collection').callsFake(() => {
+        return {
+          update: (criteria, values, callback) => {
+            callback(new Error());
+          }
+        };
+      });
+
+      sinon.stub(MongoDataSource, 'get').callsFake((collectionName, criteria, cb) => {
+        cb(new Error(), [ { id: '1' } ]);
+      });
+
+      MongoDataSource.update('test', { id: 1 }, { value: 2 }, (err) => {
+        db.collection.restore();
+        MongoDataSource.get.restore();
 
         expect(err).to.be.a('Error');
         done();

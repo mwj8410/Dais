@@ -1,9 +1,11 @@
+/* global module, require */
+
 const MongoDb = require('mongodb');
 const DbConfig = require('../../../config/connectionSources.config');
 const Log = require('../log');
 
 let MongoClient = MongoDb.MongoClient;
-let openConnections = {};
+// let openConnections = {};
 
 /**
  * Used internally to establish the actual connection to MongoDatasource
@@ -12,10 +14,10 @@ let openConnections = {};
  */
 const connectToMongo = (dbUrl) => {
   return new Promise((resolve, reject) => {
-    MongoClient.connect(dbUrl, (err, dbInstance) => {
-      if (err) {
-        Log.error('MongoDatasource', 'Client Startup', `Encountered an error while connecting to the remote resource.\n${err}`);
-        return reject(err);
+    MongoClient.connect(dbUrl, (error, dbInstance) => {
+      if (error) {
+        Log.error('MongoDatasource', 'Client Startup', 'Encountered an error while connecting to the remote resource.', error);
+        return reject(error);
       }
       Log.info('MongoDatasource', 'Client Startup', 'Connected to remote resource.');
       return resolve(dbInstance);
@@ -34,17 +36,9 @@ const MongoConnector = (connectionName) => {
   const dbConfig = DbConfig[connectionName];
   const dbUrl = `mongodb://${dbConfig.url}:${dbConfig.port}/${dbConfig.database}`;
 
-  if (openConnections[connectionName]) {
-    return openConnections[connectionName];
-  }
-
   return connectToMongo(dbUrl)
-    .then((dbConnection) => {
-      openConnections[connectionName] = dbConnection;
-      return dbConnection;
-    })
     .catch((error) => {
-      Log.error('MongoConnector', 'Connector', `Encountered an error while connecting to the remote resource.\n${error}`);
+      Log.error('MongoConnector', 'Connector', 'Encountered an error while connecting to the remote resource.', error);
       return error;
     });
 };
