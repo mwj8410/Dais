@@ -21,7 +21,7 @@ It is assumed that any project using this code as a seed project will remove or 
 ### Data Sources ###
 At first glance, and perhaps for a while, this may seem synonymous with a database. The scope of this project does not permit a full demonstration of the difference, but leveraging this concept can greatly simplify some projects.
  
-First, don't think of a database as a database. Instead, think of it as a data source.
+First, don't think of a database as a database. Instead, think of it as a source of data. If you apply that description further, 
 
 ToDo: Complete this section
 
