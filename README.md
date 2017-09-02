@@ -18,103 +18,38 @@ It is assumed that any project using this code as a seed project will remove or 
 5. Joy.
 
 ## Concepts ##
-### Data Sources ###
-At first glance, and perhaps for a while, this may seem synonymous with a database. The scope of this project does not permit a full demonstration of the difference, but leveraging this concept can greatly simplify some projects.
- 
-First, don't think of a database as a database. Instead, think of it as a source of data. If you apply that description further, 
+### Connections ###
+This is the Data Access Layer as well as External Service Access Layer.
 
-ToDo: Complete this section
+For this project, a connection is anything external to this that provides data or service. This includes databases as well as 3rd party API integrations. It should not extend to incoming webhooks.
 
-### Configuration ###
+The name of these Connections should match an entry in the `./config/connectionSources.congif.js` file. Although the name provided in this project happens to match a technology name, this should not be considered expected. Each connection can leverage a separate instance of a given technology or service. When developing these connections, the possibility of using multiple instances should be considered and, if likely, the technology should be wrapped in an accessor in `./api/Utilities/Connectors/`.
+
+### Controllers ###
+This is the primary application logic layer.
+
+A Controller is a collection of similar logic. Although these often interact with Connections and Rest Handlers, this should not be thought to be a requirement. A controller may only exist to provide needed peer functionality required by other Controllers.
+
+Also, the mistake of thinking of a one-to-one relationship between Connections (databases) and Controllers should be avoided. It may be that the best design to have multiple controllers that interact with one Connection if there are multiple logic sets to be done with the same data. The most obvious of these situations is business reporting on data pertinent to web-service operations.  
+
+### Models ###
+This express the application pertinent data structures.
+
+There is still alot of work to be done on model features, but a model, although related to a database, should be considered map directly to a database structure (Mongo Schema or SQL table).
+
+### Rest Handlers ###
+Serves as the View Layer.
+
+Handlers should be limited to interfacing the Express request and response objects with associated controllers. 
+
+### Static ###
+Expresses internal static value sets. These exists in lieu of SQL style lookup tables, and should be thought of in a similar way.
+
+When constructing these, it is advised to consider how the values are going to be used by external systems, and structure accordingly.
+
+### Utilities ###
 
 
-## Features ##
-### API or Server-Side logic ###
-`./api/*`
-
-This provides a lightweight pattern on top of express for expressing routes associated with Controllers, interfacing with Entities, and interacting with a Data Access Layer.
-
-Built in Database access (will) includes:
-* Redis
-* MongoDB
-
-Initial routes and controllers (will be) in place for `/user/` with methods for:
-* Create, Read, and Update operations (update is limited to self).
-* Password Reset
-* Get Session
-* Login
-* Logout
-
-An additional set of routes will be available that expresses socket based connections for a chat server.
-
-### Static File Server ###
-This is intended only for local development, and should not be considered for production uses. 
-
-### React Front-End ###
-`./ui/*`
-
-Being build ... .sad face :(
-
-### Scss Front-End Framework ###
-```
-./ui/style/mixins/*
-./ui/style/utils/*
-```
-
-This provides all the basic tooling for a standard grid system as well as some good ideas for code organization for rules that are commonly used together as in the case of complex typography.
-
-### Server-Side Rendering with ejs ###
-Intended to provide a way to serve complete views for rapid consumption on the client side when a Single Page Application is inappropriate for one reason or another. A good example of this is when SEO is highly important.
-
-### Static Artifact Pipeline ###
-Using a webpack process, this is designed to build out configured Single Page Applications as modules that can then be uploaded to a remote file hosting solution.
-
-### Tests ###
-All code provided in fully tested with unit tests, end-to-end tests, and code quality inspection.
-
-* Mocha
-* Newman
-* Selenium
-
-### Additional Tooling ###
-* Swagger API documentation
-
-* CircleCI build process with example static file deply
-* Docker container build process with repo deploy
-* Code Type specific code inspection
-
-* Development only Hot Module swapping
-
-What this does not include that I would have liked to get in is:
-
-- [ ] Remove Static file server
-- [ ] Remove All Non EJS UI
-- [ ] Trim all UI requirements down to assume that a UI heavy project will provide those itself.
-
-- [ ] Break Existing UI out into a different project
-- [ ] Move this project into Phaesynthe ownership
-
-- [x] Swagger Documentation engine
-- [ ] Full unit tests
-- [x] Newman Tests
-- [ ] Docker config
-- [ ] CI process
-- [ ] Redis Session storage
-- [ ] MongoDB connection
-- [x] Static module generation
-- [x] Server rendered views
-- [x] Newman Testing
-
-### Local Run
-`npm install` or `yarn install`
-
-Then, after that is complete:
-
-```
-npm run build
-npm start
-```
-
-Then navigate a web browser to `http://localhost:24601/`.
-
-The incomplete set of unit tests can be run with `npm test`.
+## Anatomy of an HTTP Request ##
+HTTP -> Express Route -> Route Security -> Rest Handler -> Controller -> Connection -> Database
+HTTP <- Rest Handler <- Controller <- Connection
