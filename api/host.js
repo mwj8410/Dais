@@ -37,13 +37,13 @@ module.exports = {
       key: 'session.sid',
       cookie: {
         httpOnly: false,
-        maxAge: 600000
+        maxAge: 7 * 24 * 3600 * 1000 // Week long cookie
       },
       resave: true,
       saveUninitialized: true,
       secret: config.session.sessionSecret,
       store: new MongoStore({
-        url: `mongodb://${config.session.url}/?authSource=${config.session.database}&w=1`
+        url: `mongodb://${config.session.url}/${config.session.database}`
       })
     };
 
@@ -58,8 +58,11 @@ module.exports = {
     app.use(bodyParser.json());
     app.use(bodyParser.text());
     app.use((req, res, next) => {
-      // These need to be made available in configuration
-      res.header('Access-Control-Allow-Origin', config.host.origins);
+      // CORS - Send only the origin that matches the request
+      let origin = req.headers.origin;
+      if (config.host.origins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+      }
       res.header('Access-Control-Allow-Methods', 'GET,PATCH,PUT,POST,DELETE');
       res.header('Access-Control-Allow-Headers', 'Content-Type');
       next();
@@ -71,7 +74,7 @@ module.exports = {
    */
   listen: () => {
     // Retain a reference to the started application, so it can be closed later.
-    server = app.listen(config.host.port, () => {
+    app.listen(config.host.port, () => {
       Log.notice('Host', 'listen', `listening on port: ${config.host.port}.`);
     });
   },

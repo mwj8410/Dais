@@ -5,10 +5,11 @@ let api = {
     // Used in Cors configuration
     origins: process.env.NODE_ENV === 'production' ?
       process.env.CORS_ORIGINS :
-      `${process.env.CORS_ORIGINS},${
+      `${
         [
           'http://localhost',
-          'https://localhost'
+          'https://localhost',
+          'http://localhost:8080'
         ].join(',')
         }`
     ,
