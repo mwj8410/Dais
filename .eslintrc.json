@@ -43,7 +43,7 @@
     "no-void": "error",
     "radix": "error",
     "quotes": [ "error", "single" ],
-    "semi": [ "error", "always" ],
+    "semi": [ "error", "never" ],
     "space-before-function-paren": "error",
     "spaced-comment": [ "error", "always" ],
     "vars-on-top": "error"
