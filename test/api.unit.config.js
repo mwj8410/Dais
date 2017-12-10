@@ -1,5 +1,5 @@
 /* global after, before, require */
-const Log = require('../lib/Log/Log');
+const Log = require('../lib/Log/Log')
 Log.setLevel('silent'); // Doing this first
 
 // const host = require('../api/host');
@@ -11,5 +11,4 @@ before(() => {
 });
 
 // Manually include each test set here
-// ./lib
-require('../lib/Log/Log.spec');
+require('./unit/lib/package.utility.spec')

@@ -11,17 +11,14 @@
   "main": "./src/main.js",
   "keywords": [],
   "dependencies": {
+    "@phaesynthe/object-helpers": "git+https://github.com/Phaesynthe/object-helpers.git",
     "async": "^2.5.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "colors": "^1.1.2",
-    "connect-mongo": "^1.3.2",
     "express": "^4.15.2",
     "express-session": "^1.15.5",
-    "machinepack-mandrill": "^1.2.0",
-    "moment": "^2.18.1",
-    "mongodb": "^2.2.30",
-    "@phaesynthe/object-helpers": "git+https://github.com/Phaesynthe/object-helpers.git",
+    "tosource": "^1.0.0",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

@@ -67,14 +67,11 @@ const Host = {
   },
 
   _mountRoutes: () => {
-    // console.log('hit')
-    // console.log(
     FileAccumulator(process.cwd() + '/app/routeHandlers/')
     .filter((filePath) => /\.js$/.test(filePath))
     .forEach((handlerPath) => {
       const handler = require(handlerPath)
       // ToDo: Apply precondition validators
-      // console.log(handler)
 
       switch (handler.method) {
         case 'GET':

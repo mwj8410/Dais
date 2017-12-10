@@ -10,25 +10,25 @@ const Log = require('../lib/Log/Log') // ToDo: move to external module
 const host = require('./host')
 const PsConfig = require('../lib/Config/Config')
 const GeneratorIndex = require('./generators/generatorIndex')
+const Validator = require('../lib/Validator/Validator')
 
 // Values
 const config = new PsConfig(`${__dirname}/config`)
 config.appendDir(`${process.cwd()}/config`)
-
-// const configPath = 'config/app.config'
-// const resourcesPath = 'resources'
-// const routePathDefault = ''
 
 // let routeDefPath
 let routOutPath = [ 'app', 'generated', 'routeHandlers' ].join('/')
 // let testOutPath
 
 const Plinth = {
+
+  /**
+   * Initiates the process of scanning a consuming project and producing the specified file types.
+   */
   generate: () => {
     Log.info('Plinth', 'generate', 'Project generation process staring.')
 
     // Get the consuming project root folder
-    // ToDo: validate that this works correctly
     const rootPath = process.cwd() // process.mainModule.paths[0].split('node_modules')[0].slice(0, -1)
     Log.info('Plinth', 'generate', `Using '${rootPath}' as the project root.`)
 
@@ -51,7 +51,9 @@ const Plinth = {
     Log.activity('Plinth', 'start', 'Beginning startup process.')
     host.initialize(config.get('host'))
     host.listen()
-  }
+  },
+
+  validator: new Validator()
 
 }
 
