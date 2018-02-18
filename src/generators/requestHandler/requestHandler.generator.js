@@ -1,49 +1,21 @@
 'use strict'
 
+// Core Modules
+const path = require('path')
+
 // External packages
 const toSource = require('tosource')
 
 // Internal Modules
 const packageUtil = require('../../../lib/Package/package.utility')
 
-// Helpers
-const getParameterSnippet = (params, name) => {
-  let parameterSnippet = `const ${name} = [\n`
+// Runtime Values
+const rootPath = process.cwd()
 
-  let paramBlock = []
-  params.map((param) => {
-    return {
-      type: param.type,
-      path: param.path,
-      pattern: param.pattern,
-      required: param.required
-    }
-  }).forEach((param) => {
-    paramBlock.push(toSource(param).replace('\n', '')) // ToDo: need a replaceAll()
-  })
-  parameterSnippet += paramBlock.join(',\n')
+module.exports = generateRequestHandler
 
-  parameterSnippet += `
-    ]\n`
-
-  return parameterSnippet
-}
-
-const getFileHeading = (context) => {
-  return `'use strict'
-/**
- * This file was generated ${(new Date()).toISOString()} by Plinth ${packageUtil.getVersion()}.
- **/
-
-const Plinth = require('${packageUtil.getName()}')
-
-const controller = require('${process.cwd()}/app/controllers/${context.controller}').${context.functionName}
-
-`
-}
-
-const generateRouteHandler = function (context) {
-  let generatedHandler = getFileHeading(context)
+function generateRequestHandler (context, config) {
+  let generatedHandler = _getFileHeading(context, config)
 
   generatedHandler += 'module.exports = {\n'
 
@@ -60,9 +32,9 @@ const generateRouteHandler = function (context) {
   handler: async function handler (req, res) {
     const session = req.session
     ${ context.routeParams && context.routeParams.length > 0 ?
-      getParameterSnippet(context.routeParams, 'routeParamsModel') : ''
+      _getParameterSnippet(context.routeParams, 'routeParamsModel') : ''
     }
-    ${ context.query && context.query.length > 0 ? getParameterSnippet(context.query, 'queryModel') : '' }
+    ${ context.query && context.query.length > 0 ? _getParameterSnippet(context.query, 'queryModel') : '' }
 
     let accumulatedErrors = []
     let body
@@ -111,4 +83,39 @@ const generateRouteHandler = function (context) {
   return generatedHandler
 }
 
-module.exports = generateRouteHandler
+// Helpers
+function _getParameterSnippet (params, name) {
+  let parameterSnippet = `const ${name} = [\n`
+
+  let paramBlock = []
+  params.map((param) => {
+    return {
+      type: param.type,
+      path: param.path,
+      pattern: param.pattern,
+      required: param.required
+    }
+  }).forEach((param) => {
+    paramBlock.push(toSource(param).replace('\n', ''))
+  })
+  parameterSnippet += paramBlock.join(',\n')
+
+  parameterSnippet += `
+    ]\n`
+
+  return parameterSnippet
+}
+
+function _getFileHeading (context, config) {
+  const controllerPath = [ rootPath, config.get('app').paths.controllers ].join(path.sep)
+  return `'use strict'
+/**
+ * This file was generated ${(new Date()).toISOString()} by Plinth ${packageUtil.getVersion()}.
+ **/
+
+const Plinth = require('${packageUtil.getName()}')
+
+const { ${context.functionName}: controller } = require('${controllerPath}/${context.controller}')
+
+`
+}

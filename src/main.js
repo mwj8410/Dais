@@ -1,7 +1,7 @@
 /* global module */
 
 // Core Modules
-// const path = require('path')
+const path = require('path')
 
 // Packages
 const Log = require('../lib/Log/Log') // ToDo: move to external module
@@ -16,9 +16,10 @@ const Validator = require('../lib/Validator/Validator')
 const config = new PsConfig(`${__dirname}/config`)
 config.appendDir(`${process.cwd()}/config`)
 
-// let routeDefPath
-let routOutPath = [ 'app', 'generated', 'routeHandlers' ].join('/')
-// let testOutPath
+const rootPath = process.cwd()
+const routeDefinitionPath = [ rootPath, config.get('app').paths.routeDef ].join(path.sep)
+const requestHandlerPath = [ rootPath, config.get('app').paths.requestHandlers ].join(path.sep)
+const unitTestPath = [ rootPath, config.get('app').paths.unitTests ].join(path.sep)
 
 const Plinth = {
 
@@ -31,26 +32,20 @@ const Plinth = {
     Log.info('Plinth', 'generate', 'Project generation process staring.')
 
     // Get the consuming project root folder
-    const rootPath = process.cwd() // process.mainModule.paths[0].split('node_modules')[0].slice(0, -1)
     Log.info('Plinth', 'generate', `Using '${rootPath}' as the project root.`)
 
-    let generateConfig = config.get('generate')
+    const generateConfig = config.get('generate')
 
-    const definitions = GeneratorIndex.getDefinitions([ rootPath, 'app', 'routeDefs' ].join('/'))
+    const definitions = GeneratorIndex.getDefinitions(routeDefinitionPath)
 
     if (generateConfig.routeHandlers) {
-      if (typeof generateConfig.routeHandlers === 'string') {
-        // ToDo: support custom paths
-        routOutPath = generateConfig.routeHandlers
-      }
-
-      Log.info('Plinth', 'generate', `Generating route handlers and outputing into '.${'/' + routOutPath}'.`)
+      Log.info('Plinth', 'generate', `Generating route handlers and outputing into '${requestHandlerPath}'`)
       // now scan the directory...
-      GeneratorIndex.generateRestHandlers(definitions, [ rootPath, 'app' ].join('/'))
+      GeneratorIndex.generateRestHandlers(definitions, requestHandlerPath, config)
     }
 
     if (generateConfig.tests) {
-      GeneratorIndex.generateTests(definitions, [ rootPath, 'test' ].join('/'))
+      GeneratorIndex.generateTests(definitions, unitTestPath)
     }
   },
 
