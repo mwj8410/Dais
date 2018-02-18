@@ -13,6 +13,7 @@ const Log = require('../lib/Log/Log') // ToDo: move to external module
 
 // Values
 const app = express()
+let server
 let config
 
 const Host = {
@@ -89,11 +90,26 @@ const Host = {
    * Instructs the express application to begin listening. Functionally, starts the server.
    */
   listen: () => {
-    // Retain a reference to the started application, so it can be closed later.
-    app.listen(config.port, () => {
+    // ToDo: add swagger hosting and generation
+    // Initialize swagger if the API process is not started in production mode.
+    // if (process.env.NODE_ENV !== 'production') {
+    //   swagger.initialize(__dirname);
+    //   swagger.host(host.getAppInstance());
+    // }
+    server = app.listen(config.port, () => {
       Log.notice('Host', 'listen', `listening on port: ${config.port}.`)
     })
   },
+
+  stop: () => {
+    try {
+      server.close(() => {
+        Log.notice('Host', 'stop', 'server is shut down.')
+      })
+    } catch (e) {
+      // ToDo: log error
+    }
+  }
 }
 
 module.exports = Host;

@@ -22,6 +22,8 @@ let routOutPath = [ 'app', 'generated', 'routeHandlers' ].join('/')
 
 const Plinth = {
 
+  config,
+
   /**
    * Initiates the process of scanning a consuming project and producing the specified file types.
    */
@@ -32,18 +34,23 @@ const Plinth = {
     const rootPath = process.cwd() // process.mainModule.paths[0].split('node_modules')[0].slice(0, -1)
     Log.info('Plinth', 'generate', `Using '${rootPath}' as the project root.`)
 
-    let getrateConfig = config.get('generate')
+    let generateConfig = config.get('generate')
 
-    if (getrateConfig.routeHandlers) {
-      if (typeof getrateConfig.routeHandlers === 'string') {
+    const definitions = GeneratorIndex.getDefinitions([ rootPath, 'app', 'routeDefs' ].join('/'))
+
+    if (generateConfig.routeHandlers) {
+      if (typeof generateConfig.routeHandlers === 'string') {
         // ToDo: support custom paths
-        routOutPath = getrateConfig.routeHandlers
+        routOutPath = generateConfig.routeHandlers
       }
 
       Log.info('Plinth', 'generate', `Generating route handlers and outputing into '.${'/' + routOutPath}'.`)
       // now scan the directory...
-      GeneratorIndex.generateRestHandlers([ rootPath, 'app', 'routeDefs' ].join('/'))
+      GeneratorIndex.generateRestHandlers(definitions, [ rootPath, 'app' ].join('/'))
+    }
 
+    if (generateConfig.tests) {
+      GeneratorIndex.generateTests(definitions, [ rootPath, 'test' ].join('/'))
     }
   },
 
@@ -51,6 +58,10 @@ const Plinth = {
     Log.activity('Plinth', 'start', 'Beginning startup process.')
     host.initialize(config.get('host'))
     host.listen()
+  },
+
+  stop: () => {
+    host.stop()
   },
 
   validator: new Validator()

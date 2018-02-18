@@ -6,16 +6,19 @@ const path = require('path')
 
 // Internal Modules
 const FileAccumulator = require('../../lib/FileAccumulator/FileAccumulator')
-const FileHelper = require('../../lib/FileHelper/FileHelper.js')
+// const FileHelper = require('../../lib/FileHelper/FileHelper.js')
 const GeneratorRequestHandler = require('./requestHandler/requestHandler.generator')
+const GeneratorTest = require('./test/test.geenrator')
 const Log = require('../../lib/Log/Log')
 
 // Runtime Variables
 const generatedPathPart = 'generated'
 const restHandlerPathPart = 'routeHandlers'
+const testPart = 'unit'
 
 const GenerateorIndex = {
-  generateRestHandlers: (routeHandlerDefinitionPath) => {
+
+  getDefinitions: (routeHandlerDefinitionPath) => {
     const routeDefinitionFiles = FileAccumulator(routeHandlerDefinitionPath)
       .filter((fileName) => /.js$/.test(fileName))
     const routeDefinitions = {}
@@ -29,11 +32,13 @@ const GenerateorIndex = {
         routeDefinitions[handlerKey] =  eval(fs.readFileSync(file, 'utf8')) // eslint-disable-line no-eval
       })
     } catch (e) {
+      // ToDo: construct PhErr error
       console.log(e)
     }
+    return routeDefinitions
+  },
 
-    let workingPath =FileHelper.pathUp(routeHandlerDefinitionPath)
-
+  generateRestHandlers: (routeDefinitions, workingPath) => {
     if (!fs.existsSync([ workingPath, restHandlerPathPart ].join(path.sep))) {
       fs.mkdirSync([ workingPath, restHandlerPathPart ].join(path.sep))
     }
@@ -46,6 +51,23 @@ const GenerateorIndex = {
       let contents = GeneratorRequestHandler(routeDefinitions[key])
       fs.writeFileSync(workingPath + '/routeHandlers/generated/' + key + '.js', contents)
       Log.notice('Plinth', 'Route Handler Generator', `Outputting handler ${key}.`)
+    })
+  },
+
+  generateTests: (routeDefinitions, workingPath) => {
+    if (!fs.existsSync([ workingPath, testPart, generatedPathPart ].join(path.sep))) {
+      fs.mkdirSync([ workingPath, testPart, generatedPathPart ].join(path.sep))
+    }
+
+    if (!fs.existsSync([ workingPath, testPart, generatedPathPart ].join(path.sep))) {
+      fs.mkdirSync([ workingPath, testPart, generatedPathPart ].join(path.sep))
+    }
+
+    // Now we need to output the files
+    Object.keys(routeDefinitions).forEach((key) => {
+      let contents = GeneratorTest(routeDefinitions[key])
+      fs.writeFileSync(workingPath + '/unit/generated/' + key + '.spec.js', contents)
+      Log.notice('Plinth', 'Test Generator', `Outputting test ${key}.`)
     })
   }
 }

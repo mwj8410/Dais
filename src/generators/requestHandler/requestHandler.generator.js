@@ -38,7 +38,6 @@ const getFileHeading = (context) => {
 const Plinth = require('${packageUtil.getName()}')
 
 const controller = require('${process.cwd()}/app/controllers/${context.controller}').${context.functionName}
-// ToDo: add controller path and require by controller name and method
 
 `
 }
@@ -64,7 +63,7 @@ const generateRouteHandler = function (context) {
       getParameterSnippet(context.routeParams, 'routeParamsModel') : ''
     }
     ${ context.query && context.query.length > 0 ? getParameterSnippet(context.query, 'queryModel') : '' }
-    
+
     let accumulatedErrors = []
     let body
     let queryParams
@@ -76,7 +75,7 @@ const generateRouteHandler = function (context) {
     } catch (err) {
       accumulatedErrors = accumulatedErrors.concat(err.failures)
     }` : ''}
-    
+
     ${ context.routeParams && context.routeParams.length > 0 ?
     `try {
       queryParams = Plinth.validator.parameters(queryModel, req.query, accumulatedErrors)
@@ -87,12 +86,12 @@ const generateRouteHandler = function (context) {
     // capture all failed validations
     if (accumulatedErrors.length > 0) {
       // ToDo: Log the errors some how
-      return res.status(422).send({
+      return res.status(400).send({
         ok: false,
         errors: accumulatedErrors
       })
     }
-    
+
     let response
     try {
      response = await controller(session, routeParams, queryParams, body)

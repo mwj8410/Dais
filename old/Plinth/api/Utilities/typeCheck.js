@@ -57,7 +57,7 @@ const typeCheck = (value, typeDefinition) => {
     // We don't really care why it failed
     return allPassed;
   }
-  // We cannot test, if we have no tests
+  // We cannot test, if we have no test
   return true;
 
 };
