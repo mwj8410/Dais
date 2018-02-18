@@ -51,7 +51,7 @@ const Plinth = {
 
   start: () => {
     Log.activity('Plinth', 'start', 'Beginning startup process.')
-    host.initialize(config.get('host'))
+    host.initialize(config)
     host.listen()
   },
 
@@ -60,7 +60,6 @@ const Plinth = {
   },
 
   validator: new Validator()
-
 }
 
 module.exports = Plinth

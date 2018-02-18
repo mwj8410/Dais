@@ -1,6 +1,7 @@
 /* global module */
 
 // Core Modules
+const path = require('path')
 
 // Packages
 const bodyParser = require('body-parser')
@@ -14,7 +15,7 @@ const Log = require('../lib/Log/Log') // ToDo: move to external module
 // Values
 const app = express()
 let server
-let config
+let hostConfig
 
 const Host = {
   /**
@@ -26,8 +27,8 @@ const Host = {
   /**
    * Prepares the Express application instance to host the service.
    */
-  initialize: (configuration) => {
-    config = configuration
+  initialize: (config) => {
+    hostConfig = config.get('host')
     // Add Session
     // let sessionSettings = {
     //   key: 'session.sid',
@@ -37,9 +38,9 @@ const Host = {
     //   },
     //   resave: true,
     //   saveUninitialized: true,
-    //   secret: config.session.sessionSecret,
+    //   secret: hostConfig.session.sessionSecret,
     //   store: new MongoStore({
-    //     url: `mongodb://${config.session.url}/${config.session.database}`
+    //     url: `mongodb://${hostConfig.session.url}/${hostConfig.session.database}`
     //   })
     // }
 
@@ -56,7 +57,7 @@ const Host = {
     app.use((req, res, next) => {
       // CORS - Send only the origin that matches the request
       let origin = req.headers.origin
-      // if (config.host.origins.includes(origin)) {
+      // if (hostConfig.host.origins.includes(origin)) {
       //   res.header('Access-Control-Allow-Origin', origin)
       // }
       res.header('Access-Control-Allow-Methods', 'GET,PATCH,PUT,POST,DELETE')
@@ -64,11 +65,11 @@ const Host = {
       next()
     })
 
-    Host._mountRoutes()
+    Host._mountRoutes(config)
   },
 
-  _mountRoutes: () => {
-    FileAccumulator(process.cwd() + '/app/routeHandlers/')
+  _mountRoutes: (config) => {
+    FileAccumulator([ process.cwd(), config.get('app').paths.requestHandlers].join(path.sep))
     .filter((filePath) => /\.js$/.test(filePath))
     .forEach((handlerPath) => {
       const handler = require(handlerPath)
@@ -96,8 +97,8 @@ const Host = {
     //   swagger.initialize(__dirname);
     //   swagger.host(host.getAppInstance());
     // }
-    server = app.listen(config.port, () => {
-      Log.notice('Host', 'listen', `listening on port: ${config.port}.`)
+    server = app.listen(hostConfig.port, () => {
+      Log.notice('Host', 'listen', `listening on port: ${hostConfig.port}.`)
     })
   },
 
