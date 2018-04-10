@@ -94,8 +94,8 @@ const Host = {
     // ToDo: add swagger hosting and generation
     // Initialize swagger if the API process is not started in production mode.
     // if (process.env.NODE_ENV !== 'production') {
-    //   swagger.initialize(__dirname);
-    //   swagger.host(host.getAppInstance());
+    //   swagger.initialize(__dirname)
+    //   swagger.host(host.getAppInstance())
     // }
     server = app.listen(hostConfig.port, () => {
       Log.notice('Host', 'listen', `listening on port: ${hostConfig.port}.`)
@@ -113,4 +113,4 @@ const Host = {
   }
 }
 
-module.exports = Host;
+module.exports = Host

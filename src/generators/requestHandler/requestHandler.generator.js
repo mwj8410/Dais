@@ -48,7 +48,7 @@ function generateRequestHandler (context, config) {
       accumulatedErrors = accumulatedErrors.concat(err.failures)
     }` : ''}
 
-    ${ context.routeParams && context.routeParams.length > 0 ?
+    ${ context.query && context.query.length > 0 ?
     `try {
       queryParams = Plinth.validator.parameters(queryModel, req.query, accumulatedErrors)
     } catch (err) {
